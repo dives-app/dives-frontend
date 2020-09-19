@@ -9,6 +9,10 @@ First, go into your "projects" directory.
 Secondly, clone this repo:
 ```shell
 git clone https://github.com/srflp/dives-frontend.git
+# or if you use SSH key
+git clone git@github.com:srflp/dives-frontend.git
+# or GH CLI
+gh repo clone srflp/dives-frontend
 ```
 Now you can run the NextJS development server:
 ```bash
