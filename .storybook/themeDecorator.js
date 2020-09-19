@@ -1,5 +1,5 @@
 import React from "react";
-import ThemeProvider from "../components/AppThemeProvider";
+import ThemeProvider from "../components/ThemeProvider";
 
 const ThemeDecorator = (storyFn) => <ThemeProvider>{storyFn()}</ThemeProvider>;
 

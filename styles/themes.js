@@ -1,4 +1,11 @@
-export const themes = {
+const globals = {
+  inter:
+    '"Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  comfortaa:
+    '"Comfortaa", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+};
+
+const themes = {
   light: {
     name: "light",
     green: "#4bbf85",
@@ -7,9 +14,8 @@ export const themes = {
   },
 };
 
-export const globals = {
-  inter:
-    '"Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-  comfortaa:
-    '"Comfortaa", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+const getTheme = (themeName) => {
+  return { ...globals, ...themes[themeName] };
 };
+
+export default getTheme;
