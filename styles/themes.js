@@ -1,16 +1,26 @@
 const globals = {
-  inter:
-    '"Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-  comfortaa:
-    '"Comfortaa", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  fonts: {
+    inter:
+      '"Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    comfortaa:
+      '"Comfortaa", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  },
 };
 
 const themes = {
   light: {
     name: "light",
-    green: "#4bbf85",
-    lightGreen: "#70cc9e",
-    white: "#fff",
+    colors: {
+      green: "#4bbf85",
+      lightGreen: "#70cc9e",
+      darkGreen: "#3f9f70",
+      gray: "#EDEDED",
+      lightGray: "#F5F6F7",
+      darkGray: "#C4C4C4",
+      darkerGray: "#A6A6A6",
+      white: "#fff",
+      buttonOutline: "rgba(66, 153, 225, 0.6)",
+    },
   },
 };
 
