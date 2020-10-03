@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 
 const FormGroup = styled.div`
   position: relative;
+  margin-top: 30px;
 `;
 
 const Label = styled.label(
@@ -15,15 +16,17 @@ const Label = styled.label(
     transition: transform 150ms ease-out, font-size 150ms ease-out,
       color 150ms ease-out;
     font-family: ${theme.fonts.inter};
+    cursor: text;
 
     ${isFocused
       ? css`
           transform: translateY(-125%);
           color: ${theme.colors.black};
-          font-size: 0.75em;
+          font-size: 0.875rem;
         `
       : css`
           color: ${theme.colors.darkerGray};
+          font-size: 1.5rem;
         `}
   `
 );
@@ -36,6 +39,7 @@ const StyledInput = styled.input`
   border: 0;
   box-shadow: 0 1px 0 0 black;
   transition: box-shadow 150ms ease-out;
+  font-size: 1.5rem;
 `;
 
 export const Input = ({ id, label, ...props }) => {
