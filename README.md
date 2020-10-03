@@ -3,7 +3,6 @@
 </h1>
 
 ## Getting Started
-
 First, go into your "projects" directory.
 
 Secondly, clone this repo:
@@ -21,7 +20,6 @@ yarn dev
 
 Open [http://localhost:5000](http://localhost:5000) with your browser to see the app.
 
-
 ## Storybook
 Launch Storybook:
 ```shell
@@ -29,8 +27,10 @@ yarn storybook
 ```
 Open [http://localhost:5001](http://localhost:5001) with your browser to see the Storybook.
 
-## Knowledge base
+## CI/CD
+Each push to main triggers build and deploy on Google Cloud Run and the website becomes available at [dives-txvot44owa-ez.a.run.app/](https://dives-txvot44owa-ez.a.run.app/) (unfortunately until we have a custom domain we're unable to change the address)
 
+## Knowledge base
 Next.js:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
