@@ -12,7 +12,7 @@ export default function Home() {
       <main className={styles.main}>
         <img src="/logo.svg" alt="Dives Logo" className={styles.logo} />
         <p className={styles.wipText}>work in progress</p>
-        <Button label="Sample Button 2" primary={true} />
+        <Button label="Sample Button 3" primary={true} />
         <p>🚧 🚧 🚧</p>
       </main>
     </div>
