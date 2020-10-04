@@ -49,7 +49,7 @@ export default function Signup() {
             <Input id="email" label="Adres e-mail" />
             <Input id="password" label="Hasło" type="password" />
             <p>tu bedzie checkbox</p>
-            <Button label="Zarejestruj się" primary />
+            <Button label="Zarejestruj się" primary style={{ width: "100%" }} />
             <p>Zaloguj z Google</p>
             <p>Masz już konto? Zaloguj się</p>
           </RegisterForm>

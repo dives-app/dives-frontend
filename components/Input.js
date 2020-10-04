@@ -2,43 +2,43 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-const FormGroup = styled.div`
+const Wrapper = styled.div`
   position: relative;
-  margin-top: 30px;
+  margin-top: 0.75rem;
 `;
 
 const Label = styled.label(
   ({ theme, isFocused }) => css`
     position: absolute;
     left: 0;
-    top: 10px;
+    top: 0.75rem;
     z-index: 10;
     transition: transform 150ms ease-out, font-size 150ms ease-out,
       color 150ms ease-out;
     font-family: ${theme.fonts.inter};
     cursor: text;
 
-    ${isFocused
-      ? css`
-          transform: translateY(-125%);
-          color: ${theme.colors.black};
-          font-size: 0.875rem;
-        `
-      : css`
-          color: ${theme.colors.darkerGray};
-          font-size: 1.5rem;
-        `}
+    color: ${theme.colors.darkerGray};
+    font-size: 1.5rem;
+
+    ${isFocused &&
+    css`
+      transform: translateY(-125%);
+      color: ${theme.colors.black};
+      font-size: 0.875rem;
+    `}
   `
 );
 
 const StyledInput = styled.input`
   position: relative;
-  padding: 12px 0 5px 0;
+  padding: 0.75rem 0 0.375rem 0;
   width: 100%;
   outline: 0;
   border: 0;
   box-shadow: 0 1px 0 0 black;
   transition: box-shadow 150ms ease-out;
+  font-family: ${({ theme }) => theme.fonts.inter};
   font-size: 1.5rem;
 `;
 
@@ -61,7 +61,7 @@ export const Input = ({ id, label, ...props }) => {
   };
 
   return (
-    <FormGroup>
+    <Wrapper>
       <Label htmlFor={id} isFocused={isFocused}>
         {label}
       </Label>
@@ -73,7 +73,7 @@ export const Input = ({ id, label, ...props }) => {
         onBlur={handleBlur}
         {...props}
       />
-    </FormGroup>
+    </Wrapper>
   );
 };
 
