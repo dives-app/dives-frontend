@@ -37,7 +37,7 @@ const BoxGreen = styled.div`
   flex: 2 0;
   background: linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
 `;
