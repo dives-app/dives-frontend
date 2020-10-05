@@ -12,9 +12,10 @@ const Wrapper = styled.main`
 
 const BoxWhite = styled.section`
   flex: 1 0;
-  margin: 10px;
+  padding: 10px;
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
+  overflow: auto;
 `;
 
 const Title = styled.h1`
