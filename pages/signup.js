@@ -15,22 +15,51 @@ const BoxWhite = styled.section`
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   overflow: auto;
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.xl}) {
+    flex: 2 0;
+  }
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex: 3 0;
+  }
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    justify-content: center;
+  }
 `;
 
 const Title = styled.h1`
   margin-top: 6rem;
   margin-bottom: 4.3rem;
   font-size: 3.2rem;
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    display: none;
+  }
 `;
 
 const InputGroup = styled.div`
   & > *:not(:first-child) {
     margin-top: 4.3rem;
   }
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    & > *:first-child {
+      margin-top: 5rem;
+    }
+  }
 `;
 
 const RegisterForm = styled.div`
   margin: 70px 85px;
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin: 40px 35px;
+  }
 `;
 
 const BoxGreen = styled.div`
@@ -51,7 +80,9 @@ export default function Signup() {
       <Wrapper>
         <BoxWhite>
           <RegisterForm>
-            <img src="/logo-horizontal.svg" alt="Dives Logo" />
+            <LogoContainer>
+              <img src="/logo-horizontal.svg" alt="Dives Logo" />
+            </LogoContainer>
             <Title>Zarejestruj się</Title>
             <InputGroup>
               <Input id="name" label="Imię" />
