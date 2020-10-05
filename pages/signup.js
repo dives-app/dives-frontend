@@ -19,7 +19,7 @@ const BoxWhite = styled.section`
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 3.2rem;
 `;
 
 const RegisterForm = styled.div`

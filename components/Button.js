@@ -8,12 +8,12 @@ const StyledButton = styled.button(
     color: ${primary ? theme.colors.white : theme.colors.green};
     font-family: ${theme.fonts.inter};
     border: 0;
-    border-radius: 1.25rem;
+    border-radius: 2.1rem;
     cursor: pointer;
     display: inline-block;
     line-height: 1;
-    font-size: 1.125rem;
-    padding: 0.625rem 1.125rem 0.625rem 1.125rem;
+    font-size: 1.8rem;
+    padding: 1rem 1.8rem 1rem 1.8rem;
     transition: box-shadow 250ms ease, background-color 250ms ease;
     outline: none;
     &:hover {
