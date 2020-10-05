@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Button } from "../components/Button";
 import styled from "styled-components";
 import { Input } from "../components/Input";
+import Link from "next/link";
 
 const Wrapper = styled.main`
   display: flex;
@@ -24,7 +25,7 @@ const BoxWhite = styled.section`
   }
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(Link)`
   display: flex;
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -64,6 +65,10 @@ const RegisterForm = styled.div`
 
 const BoxGreen = styled.div`
   flex: 2 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  overflow: hidden;
   background: linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff;
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -80,8 +85,14 @@ export default function Signup() {
       <Wrapper>
         <BoxWhite>
           <RegisterForm>
-            <LogoContainer>
-              <img src="/logo-horizontal.svg" alt="Dives Logo" />
+            <LogoContainer href="/">
+              <a>
+                <img
+                  src="/logo-horizontal.svg"
+                  alt="Dives Logo"
+                  draggable={false}
+                />
+              </a>
             </LogoContainer>
             <Title>Zarejestruj się</Title>
             <InputGroup>
@@ -95,7 +106,13 @@ export default function Signup() {
             <p>Masz już konto? Zaloguj się</p>
           </RegisterForm>
         </BoxWhite>
-        <BoxGreen />
+        <BoxGreen>
+          <img
+            src="/calc-and-calendar.svg"
+            alt="Calc and calendar"
+            draggable={false}
+          />
+        </BoxGreen>
       </Wrapper>
     </>
   );
