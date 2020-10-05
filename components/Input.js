@@ -4,7 +4,6 @@ import styled, { css } from "styled-components";
 
 const Wrapper = styled.div`
   position: relative;
-  margin-top: 2rem;
 `;
 
 const Label = styled.label(
@@ -31,7 +30,7 @@ const Label = styled.label(
 
 const StyledInput = styled.input`
   position: relative;
-  padding: 0 0 0.6rem 0.2rem;
+  padding: 0 0.2rem 0.6rem 0.2rem;
   width: 100%;
   outline: 0;
   border: 0;

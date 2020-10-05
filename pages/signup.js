@@ -12,14 +12,21 @@ const Wrapper = styled.main`
 
 const BoxWhite = styled.section`
   flex: 1 0;
-  padding: 10px;
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   overflow: auto;
 `;
 
 const Title = styled.h1`
+  margin-top: 6rem;
+  margin-bottom: 4.3rem;
   font-size: 3.2rem;
+`;
+
+const InputGroup = styled.div`
+  & > *:not(:first-child) {
+    margin-top: 4.3rem;
+  }
 `;
 
 const RegisterForm = styled.div`
@@ -46,9 +53,11 @@ export default function Signup() {
           <RegisterForm>
             <img src="/logo-horizontal.svg" alt="Dives Logo" />
             <Title>Zarejestruj się</Title>
-            <Input id="name" label="Imię" />
-            <Input id="email" label="Adres e-mail" />
-            <Input id="password" label="Hasło" type="password" />
+            <InputGroup>
+              <Input id="name" label="Imię" />
+              <Input id="email" label="Adres e-mail" />
+              <Input id="password" label="Hasło" type="password" />
+            </InputGroup>
             <p>tu bedzie checkbox</p>
             <Button label="Zarejestruj się" primary style={{ width: "100%" }} />
             <p>Zaloguj z Google</p>
