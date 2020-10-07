@@ -101,7 +101,12 @@ export default function Signup() {
               <Input id="password" label="Hasło" type="password" />
             </InputGroup>
             <p>tu bedzie checkbox</p>
-            <Button label="Zarejestruj się" primary style={{ width: "100%" }} />
+            <Button
+              label="Zarejestruj się"
+              primary
+              size="lg"
+              style={{ width: "100%" }}
+            />
             <p>Zaloguj z Google</p>
             <p>Masz już konto? Zaloguj się</p>
           </RegisterForm>

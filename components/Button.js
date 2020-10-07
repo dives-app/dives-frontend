@@ -2,18 +2,41 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
+const buttonSizes = {
+  sm: {
+    borderRadius: "1rem",
+    fontSize: "1.2rem",
+    padding: "0.3rem 1rem",
+  },
+  md: {
+    borderRadius: "2.1rem",
+    fontSize: "1.4rem",
+    padding: "0.8rem 1.2rem",
+  },
+  lg: {
+    borderRadius: "2.1rem",
+    fontSize: "1.8rem",
+    padding: "1rem 1.8rem",
+  },
+  xl: {
+    borderRadius: "2.4rem",
+    fontSize: "2rem",
+    padding: "1rem 1.8rem",
+  },
+};
+
 const StyledButton = styled.button(
-  ({ primary, theme }) => css`
+  ({ primary, size, theme }) => css`
     background-color: ${primary ? theme.colors.green : theme.colors.white};
     color: ${primary ? theme.colors.white : theme.colors.green};
     font-family: ${theme.fonts.inter};
     border: 0;
-    border-radius: 2.1rem;
+    border-radius: ${buttonSizes[size].borderRadius};
     cursor: pointer;
     display: inline-block;
     line-height: 1;
-    font-size: 1.8rem;
-    padding: 1rem 1.8rem 1rem 1.8rem;
+    font-size: ${buttonSizes[size].fontSize};
+    padding: ${buttonSizes[size].padding};
     transition: box-shadow 250ms ease, background-color 250ms ease;
     outline: none;
     &:hover {
@@ -42,4 +65,9 @@ export const Button = ({ label, ...props }) => {
 
 Button.propTypes = {
   label: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(["sm", "md", "lg", "xl"]),
+};
+
+Button.defaultProps = {
+  size: "md",
 };
