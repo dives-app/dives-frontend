@@ -25,32 +25,63 @@ const buttonSizes = {
   },
 };
 
-const StyledButton = styled.button(
-  ({ primary, size, theme }) => css`
-    background-color: ${primary ? theme.colors.green : theme.colors.white};
-    color: ${primary ? theme.colors.white : theme.colors.green};
-    font-family: ${theme.fonts.inter};
+const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
+  const base = {
+    boxShadow: `inset 0 0`,
+  };
+  const secondary = {
+    backgroundColor: theme.colors.white,
+    backgroundColorHover: theme.colors.lightGray,
+    backgroundColorActive: theme.colors.darkGray,
+    color: theme.colors.green,
+  };
+  const colors = {
+    primary: {
+      backgroundColor: theme.colors.green,
+      backgroundColorHover: theme.colors.lightGreen,
+      backgroundColorActive: theme.colors.darkGreen,
+      color: theme.colors.white,
+    },
+    secondary,
+    secondaryOutlined: {
+      ...secondary,
+      color: theme.colors.darkerGray,
+      boxShadow: `inset 0 0 0 1px ${theme.colors.darkGray}`,
+    },
+  };
+  return {
+    ...base,
+    ...colors[appearance],
+    theme,
+    ...props,
+  };
+})(
+  ({ size, theme, ...props }) => css`
+    outline: none;
     border: 0;
-    border-radius: ${buttonSizes[size].borderRadius};
     cursor: pointer;
     display: inline-block;
-    line-height: 1;
-    font-size: ${buttonSizes[size].fontSize};
-    padding: ${buttonSizes[size].padding};
+
+    background-color: ${props.backgroundColor};
+    color: ${props.color};
+    box-shadow: ${props.boxShadow}, 0 0;
     transition: box-shadow 250ms ease, background-color 250ms ease;
-    outline: none;
+
+    border-radius: ${buttonSizes[size].borderRadius};
+    padding: ${buttonSizes[size].padding};
+
+    font-family: ${theme.fonts.inter};
+    font-size: ${buttonSizes[size].fontSize};
+    line-height: 1;
+
     &:hover {
-      background-color: ${primary
-        ? theme.colors.lightGreen
-        : theme.colors.lightGray};
+      background-color: ${props.backgroundColorHover};
     }
     &:active {
-      background-color: ${primary
-        ? theme.colors.darkGreen
-        : theme.colors.darkGray};
+      background-color: ${props.backgroundColorActive};
     }
     &:focus {
-      box-shadow: 0 0 0 3px ${theme.colors.buttonOutline};
+      box-shadow: ${props.boxShadow}, 0 0 0 3px ${theme.colors.buttonOutline};
     }
   `
 );
@@ -64,10 +95,15 @@ export const Button = ({ label, ...props }) => {
 };
 
 Button.propTypes = {
-  label: PropTypes.string.isRequired,
+  appearance: PropTypes.oneOf(["primary", "secondary", "secondaryOutlined"]),
+  label: PropTypes.string,
   size: PropTypes.oneOf(["sm", "md", "lg", "xl"]),
+  fullWidth: PropTypes.bool,
 };
 
 Button.defaultProps = {
+  appearance: "secondary",
+  label: "Button",
   size: "md",
+  fullWidth: false,
 };

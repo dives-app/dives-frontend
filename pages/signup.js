@@ -103,7 +103,13 @@ export default function Signup() {
             <p>tu bedzie checkbox</p>
             <Button
               label="Zarejestruj się"
-              primary
+              appearance="primary"
+              size="lg"
+              style={{ width: "100%" }}
+            />
+            <Button
+              label="Zaloguj z Google"
+              appearance="secondaryOutlined"
               size="lg"
               style={{ width: "100%" }}
             />

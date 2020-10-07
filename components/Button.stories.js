@@ -10,12 +10,15 @@ const Template = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  primary: true,
-  label: "Button",
+  appearance: "primary",
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  primary: false,
-  label: "Button",
+  appearance: "secondary",
+};
+
+export const SecondaryOutlined = Template.bind({});
+SecondaryOutlined.args = {
+  appearance: "secondaryOutlined",
 };
