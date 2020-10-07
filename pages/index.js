@@ -22,12 +22,12 @@ export default function Home() {
           <Link href="login">
             <Button
               label="Log in"
-              primary={true}
+              appearance="primary"
               style={{ marginRight: "0.5rem" }}
             />
           </Link>
           <Link href="signup">
-            <Button label="Sign up" primary={true} />
+            <Button label="Sign up" appearance="primary" />
           </Link>
         </Flex>
         <p>🚧 🚧 🚧</p>

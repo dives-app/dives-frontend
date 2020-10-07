@@ -3,6 +3,7 @@ import { Button } from "../components/Button";
 import styled from "styled-components";
 import { Input } from "../components/Input";
 import Link from "next/link";
+import React from "react";
 
 const Wrapper = styled.main`
   display: flex;
@@ -105,15 +106,21 @@ export default function Signup() {
               label="Zarejestruj się"
               appearance="primary"
               size="lg"
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "1rem" }}
             />
             <Button
               label="Zaloguj z Google"
               appearance="secondaryOutlined"
               size="lg"
+              iconLeft={
+                <img
+                  src="google-icon.svg"
+                  alt="Google Icon"
+                  draggable={false}
+                />
+              }
               style={{ width: "100%" }}
             />
-            <p>Zaloguj z Google</p>
             <p>Masz już konto? Zaloguj się</p>
           </RegisterForm>
         </BoxWhite>

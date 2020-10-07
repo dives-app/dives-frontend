@@ -6,22 +6,26 @@ const buttonSizes = {
   sm: {
     borderRadius: "1rem",
     fontSize: "1.2rem",
-    padding: "0.3rem 1rem",
+    height: "2.1rem",
+    padding: "0 1rem",
   },
   md: {
     borderRadius: "2.1rem",
     fontSize: "1.4rem",
-    padding: "0.8rem 1.2rem",
+    height: "3.3rem",
+    padding: "0 1.2rem",
   },
   lg: {
     borderRadius: "2.1rem",
     fontSize: "1.8rem",
-    padding: "1rem 1.8rem",
+    height: "4.2rem",
+    padding: "0 1.8rem",
   },
   xl: {
     borderRadius: "2.4rem",
     fontSize: "2rem",
-    padding: "1rem 1.8rem",
+    height: "4.4rem",
+    padding: "0 1.8rem",
   },
 };
 
@@ -60,14 +64,17 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
     outline: none;
     border: 0;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background-color: ${props.backgroundColor};
     color: ${props.color};
-    box-shadow: ${props.boxShadow}, 0 0;
+    box-shadow: ${props.boxShadow}, 0 0 transparent;
     transition: box-shadow 250ms ease, background-color 250ms ease;
 
     border-radius: ${buttonSizes[size].borderRadius};
+    height: ${buttonSizes[size].height};
     padding: ${buttonSizes[size].padding};
 
     font-family: ${theme.fonts.inter};
@@ -83,13 +90,23 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
     &:focus {
       box-shadow: ${props.boxShadow}, 0 0 0 3px ${theme.colors.buttonOutline};
     }
+
+    // icon margins
+    & > p:not(:first-child) {
+      margin-left: 0.4rem;
+    }
+    & > p:not(:last-child) {
+      margin-right: 0.4rem;
+    }
   `
 );
 
-export const Button = ({ label, ...props }) => {
+export const Button = ({ label, iconLeft, iconRight, ...props }) => {
   return (
     <StyledButton type="button" {...props}>
-      {label}
+      {iconLeft}
+      <p>{label}</p>
+      {iconRight}
     </StyledButton>
   );
 };
@@ -99,6 +116,8 @@ Button.propTypes = {
   label: PropTypes.string,
   size: PropTypes.oneOf(["sm", "md", "lg", "xl"]),
   fullWidth: PropTypes.bool,
+  iconLeft: PropTypes.element,
+  iconRight: PropTypes.element,
 };
 
 Button.defaultProps = {
