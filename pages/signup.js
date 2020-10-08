@@ -6,27 +6,29 @@ import Link from "next/link";
 import React from "react";
 
 const Wrapper = styled.main`
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(500px, max-content) auto;
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: auto;
+  }
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
 `;
 
 const BoxWhite = styled.section`
-  flex: 1 0;
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   overflow: auto;
 
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.xl}) {
-    flex: 2 0;
-  }
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    flex: 3 0;
+  padding: 70px 85px;
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 40px 35px;
   }
 `;
 
-const LogoContainer = styled(Link)`
+const LogoA = styled.a`
   display: flex;
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -56,16 +58,7 @@ const InputGroup = styled.div`
   }
 `;
 
-const RegisterForm = styled.div`
-  margin: 70px 85px;
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    margin: 40px 35px;
-  }
-`;
-
 const BoxGreen = styled.div`
-  flex: 2 0;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -85,44 +78,38 @@ export default function Signup() {
       </Head>
       <Wrapper>
         <BoxWhite>
-          <RegisterForm>
-            <LogoContainer href="/">
-              <a>
-                <img
-                  src="/logo-horizontal.svg"
-                  alt="Dives Logo"
-                  draggable={false}
-                />
-              </a>
-            </LogoContainer>
-            <Title>Zarejestruj się</Title>
-            <InputGroup>
-              <Input id="name" label="Imię" />
-              <Input id="email" label="Adres e-mail" />
-              <Input id="password" label="Hasło" type="password" />
-            </InputGroup>
-            <p>tu bedzie checkbox</p>
-            <Button
-              label="Zarejestruj się"
-              appearance="primary"
-              size="lg"
-              style={{ width: "100%", marginBottom: "1rem" }}
-            />
-            <Button
-              label="Zaloguj z Google"
-              appearance="secondaryOutlined"
-              size="lg"
-              iconLeft={
-                <img
-                  src="google-icon.svg"
-                  alt="Google Icon"
-                  draggable={false}
-                />
-              }
-              style={{ width: "100%" }}
-            />
-            <p>Masz już konto? Zaloguj się</p>
-          </RegisterForm>
+          <Link href="/">
+            <LogoA>
+              <img
+                src="/logo-horizontal.svg"
+                alt="Dives Logo"
+                draggable={false}
+              />
+            </LogoA>
+          </Link>
+          <Title>Zarejestruj się</Title>
+          <InputGroup>
+            <Input id="name" label="Imię" />
+            <Input id="email" label="Adres e-mail" />
+            <Input id="password" label="Hasło" type="password" />
+          </InputGroup>
+          <p>tu bedzie checkbox</p>
+          <Button
+            label="Zarejestruj się"
+            appearance="primary"
+            size="lg"
+            style={{ width: "100%", marginBottom: "1rem" }}
+          />
+          <Button
+            label="Zaloguj z Google"
+            appearance="secondaryOutlined"
+            size="lg"
+            iconLeft={
+              <img src="google-icon.svg" alt="Google Icon" draggable={false} />
+            }
+            style={{ width: "100%" }}
+          />
+          <p>Masz już konto? Zaloguj się</p>
         </BoxWhite>
         <BoxGreen>
           <img
