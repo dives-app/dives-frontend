@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Input } from "../components/Input";
 import Link from "next/link";
 import React from "react";
+import { Checkbox } from "../components/Checkbox";
 
 const Wrapper = styled.main`
   display: grid;
@@ -93,7 +94,10 @@ export default function Signup() {
             <Input id="email" label="Adres e-mail" />
             <Input id="password" label="Hasło" type="password" />
           </InputGroup>
-          <p>tu bedzie checkbox</p>
+          <Checkbox
+            label="Zapoznałem się i akceptuję Regulamin oraz Politykę prywatności"
+            style={{ margin: "2rem 0" }}
+          />
           <Button
             label="Zarejestruj się"
             appearance="primary"
