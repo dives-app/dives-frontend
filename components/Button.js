@@ -106,6 +106,7 @@ export const Button = React.forwardRef(
   ({ children, as, leftIcon, rightIcon, ...props }, ref) => {
     return (
       <StyledButton
+        as={as}
         type={as === "button" ? "button" : undefined}
         ref={ref}
         {...props}
