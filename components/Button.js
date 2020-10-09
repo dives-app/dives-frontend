@@ -105,7 +105,11 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
 export const Button = React.forwardRef(
   ({ children, as, leftIcon, rightIcon, ...props }, ref) => {
     return (
-      <StyledButton type={as === "button" && "button"} ref={ref} {...props}>
+      <StyledButton
+        type={as === "button" ? "button" : undefined}
+        ref={ref}
+        {...props}
+      >
         {leftIcon}
         {children}
         {rightIcon}
