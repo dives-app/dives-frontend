@@ -8,7 +8,7 @@ import { Checkbox } from "../components/Checkbox";
 
 const Wrapper = styled.main`
   display: grid;
-  grid-template-columns: minmax(500px, max-content) auto;
+  grid-template-columns: minmax(500px, min-content) auto;
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: auto;
   }
