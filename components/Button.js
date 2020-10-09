@@ -60,7 +60,7 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
     ...props,
   };
 })(
-  ({ size, theme, ...props }) => css`
+  ({ size, theme, fullWidth, ...props }) => css`
     outline: none;
     border: 0;
     cursor: pointer;
@@ -74,6 +74,7 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
     transition: box-shadow 250ms ease, background-color 250ms ease;
 
     border-radius: ${buttonSizes[size].borderRadius};
+    width: ${fullWidth ? "100%" : "auto"};
     height: ${buttonSizes[size].height};
     padding: ${buttonSizes[size].padding};
 
@@ -92,37 +93,56 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
     }
 
     // icon margins
-    & > p:not(:first-child) {
-      margin-left: 0.4rem;
-    }
-    & > p:not(:last-child) {
+    & > img:first-child {
       margin-right: 0.4rem;
+    }
+    & > img:last-child {
+      margin-left: 0.4rem;
     }
   `
 );
 
-export const Button = ({ label, iconLeft, iconRight, ...props }) => {
-  return (
-    <StyledButton type="button" {...props}>
-      {iconLeft}
-      <p>{label}</p>
-      {iconRight}
-    </StyledButton>
-  );
-};
+export const Button = React.forwardRef(
+  ({ children, as, leftIcon, rightIcon, ...props }, ref) => {
+    return (
+      <StyledButton type={as === "button" && "button"} ref={ref} {...props}>
+        {leftIcon}
+        {children}
+        {rightIcon}
+      </StyledButton>
+    );
+  }
+);
 
 Button.propTypes = {
+  /**
+   * Appearance of a button
+   */
   appearance: PropTypes.oneOf(["primary", "secondary", "secondaryOutlined"]),
-  label: PropTypes.string,
+  /**
+   * If button is wrapped in a `Link`, this prop allows to make it an `a` element.
+   */
+  as: PropTypes.oneOf(["button", "a"]),
+  /**
+   * Label
+   */
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   size: PropTypes.oneOf(["sm", "md", "lg", "xl"]),
   fullWidth: PropTypes.bool,
-  iconLeft: PropTypes.element,
-  iconRight: PropTypes.element,
+  /**
+   * Passed icon element should be an `img` tag
+   */
+  leftIcon: PropTypes.element,
+  /**
+   * Passed icon element should be an `img` tag
+   */
+  rightIcon: PropTypes.element,
 };
 
 Button.defaultProps = {
   appearance: "secondary",
-  label: "Button",
+  as: "button",
+  children: "Button",
   size: "md",
   fullWidth: false,
 };

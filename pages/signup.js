@@ -79,7 +79,7 @@ export default function Signup() {
       </Head>
       <Wrapper>
         <BoxWhite>
-          <Link href="/">
+          <Link href="/" passHref>
             <LogoA>
               <img
                 src="/logo-horizontal.svg"
@@ -99,20 +99,23 @@ export default function Signup() {
             style={{ margin: "2rem 0" }}
           />
           <Button
-            label="Zarejestruj się"
             appearance="primary"
             size="lg"
-            style={{ width: "100%", marginBottom: "1rem" }}
-          />
+            style={{ marginBottom: "1rem" }}
+            fullWidth
+          >
+            Zarejestruj się
+          </Button>
           <Button
-            label="Zaloguj z Google"
             appearance="secondaryOutlined"
             size="lg"
-            iconLeft={
+            leftIcon={
               <img src="google-icon.svg" alt="Google Icon" draggable={false} />
             }
-            style={{ width: "100%" }}
-          />
+            fullWidth
+          >
+            Zaloguj z Google
+          </Button>
           <p>Masz już konto? Zaloguj się</p>
         </BoxWhite>
         <BoxGreen>

@@ -19,15 +19,19 @@ export default function Home() {
         <img src="/logo.svg" alt="Dives Logo" className={styles.logo} />
         <p className={styles.wipText}>work in progress</p>
         <Flex>
-          <Link href="login">
+          <Link href="login" passHref>
             <Button
-              label="Log in"
+              as="a"
               appearance="primary"
               style={{ marginRight: "0.5rem" }}
-            />
+            >
+              Log in
+            </Button>
           </Link>
-          <Link href="signup">
-            <Button label="Sign up" appearance="primary" />
+          <Link href="signup" passHref>
+            <Button as="a" appearance="primary">
+              Sign up
+            </Button>
           </Link>
         </Flex>
         <p>🚧 🚧 🚧</p>
