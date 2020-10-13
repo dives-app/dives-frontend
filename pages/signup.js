@@ -72,6 +72,12 @@ const BoxGreen = styled.div`
   }
 `;
 
+const QuestionBottom = styled.p`
+  text-align: center;
+  margin: 1.2rem 0;
+  font-size: 1.4rem;
+`;
+
 export default function Signup() {
   return (
     <>
@@ -118,9 +124,9 @@ export default function Signup() {
           >
             Zaloguj z Google
           </Button>
-          <p>
+          <QuestionBottom>
             Masz już konto? <GreenLink href="login">Zaloguj się</GreenLink>
-          </p>
+          </QuestionBottom>
         </BoxWhite>
         <BoxGreen>
           <img
