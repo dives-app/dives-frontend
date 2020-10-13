@@ -1,9 +1,13 @@
 const globals = {
   fonts: {
-    inter:
-      '"Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-    comfortaa:
-      '"Comfortaa", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    work:
+      '"Work Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    source:
+      '"Source Sans Pro", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    // inter:
+    //   '"Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    // comfortaa:
+    //   '"Comfortaa", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
   },
   breakpoints: {
     sm: "30em", // 480px
@@ -25,6 +29,7 @@ const themes = {
       lightGray: "#F5F6F7",
       darkGray: "#C4C4C4",
       darkerGray: "#A6A6A6",
+      brightBlack: "#383838",
       black: "#000",
       buttonOutline: "rgba(66, 153, 225, 0.6)",
     },

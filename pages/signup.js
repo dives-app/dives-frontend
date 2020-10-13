@@ -5,6 +5,7 @@ import { Input } from "../components/Input";
 import Link from "next/link";
 import React from "react";
 import { Checkbox } from "../components/Checkbox";
+import { GreenLink } from "../components/GreenLink";
 
 const Wrapper = styled.main`
   display: grid;
@@ -40,7 +41,9 @@ const LogoA = styled.a`
 const Title = styled.h1`
   margin-top: 6rem;
   margin-bottom: 4.3rem;
+  font-family: ${({ theme }) => theme.fonts.work};
   font-size: 3.2rem;
+  color: ${({ theme }) => theme.colors.brightBlack};
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
@@ -71,6 +74,12 @@ const BoxGreen = styled.div`
   }
 `;
 
+const QuestionBottom = styled.p`
+  text-align: center;
+  margin: 1.2rem 0;
+  font-size: 1.4rem;
+`;
+
 export default function Signup() {
   return (
     <>
@@ -94,10 +103,11 @@ export default function Signup() {
             <Input id="email" label="Adres e-mail" />
             <Input id="password" label="Hasło" type="password" />
           </InputGroup>
-          <Checkbox
-            label="Zapoznałem się i akceptuję Regulamin oraz Politykę prywatności"
-            style={{ margin: "2rem 0" }}
-          />
+          <Checkbox id="tos" style={{ margin: "2rem 0" }}>
+            Zapoznałem się i akceptuję{" "}
+            <GreenLink href="tos">Regulamin</GreenLink> oraz{" "}
+            <GreenLink href="privacy">Politykę prywatności</GreenLink>
+          </Checkbox>
           <Button
             appearance="primary"
             size="lg"
@@ -116,7 +126,9 @@ export default function Signup() {
           >
             Zaloguj z Google
           </Button>
-          <p>Masz już konto? Zaloguj się</p>
+          <QuestionBottom>
+            Masz już konto? <GreenLink href="login">Zaloguj się</GreenLink>
+          </QuestionBottom>
         </BoxWhite>
         <BoxGreen>
           <img

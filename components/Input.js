@@ -13,7 +13,6 @@ const Label = styled.label(
     z-index: 10;
     transition: transform 150ms ease-out, font-size 150ms ease-out,
       color 150ms ease-out;
-    font-family: ${theme.fonts.inter};
     cursor: text;
 
     color: ${theme.colors.darkerGray};
@@ -36,7 +35,6 @@ const StyledInput = styled.input`
   border: 0;
   box-shadow: 0 1px 0 0 black;
   transition: box-shadow 150ms ease-out;
-  font-family: ${({ theme }) => theme.fonts.inter};
   font-size: 2.4rem;
 `;
 
