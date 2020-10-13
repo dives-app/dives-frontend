@@ -95,6 +95,7 @@ export default function Signup() {
             <Input id="password" label="Hasło" type="password" />
           </InputGroup>
           <Checkbox
+            id="tos"
             label="Zapoznałem się i akceptuję Regulamin oraz Politykę prywatności"
             style={{ margin: "2rem 0" }}
           />

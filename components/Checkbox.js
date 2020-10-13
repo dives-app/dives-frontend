@@ -2,17 +2,63 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Label = styled.label`
-  font-family: ${({ theme }) => theme.fonts.inter};
-  font-weight: 600;
+const Input =  styled.input`
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  appearance: none;
+  outline: none;
+  border: 1px solid ${({theme}) => theme.colors.brightBlack};
+  border-radius: 0.3rem;
+  margin: 0.3rem;
+  box-shadow: 0 0;
+  transition: box-shadow 250ms;
+  
+  & + span::before {
+    opacity: 0;
+  }
+  
+  &:checked + span::before {
+    transition: all 1s;
+    opacity: 1;
+    content: "\\2713";
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 1.8rem;
+    color: ${({theme}) => theme.colors.green};
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 2px ${({theme}) => theme.colors.buttonOutline};
+  }
 `;
 
-export const Checkbox = ({ label, style, ...props }) => {
+const Wrapper = styled.label`
+  display: flex;
+  position: relative;
+  cursor: pointer;
+`
+
+const Label = styled.span`
+  font-family: ${({ theme }) => theme.fonts.inter};
+  font-weight: 600;
+  
+  margin-left: 0.8rem;
+  
+  user-select: none;
+`;
+
+export const Checkbox = ({ id, label, style }) => {
   return (
-    <div style={style}>
-      <input type="checkbox" id="???" name="???" value="on" />
-      <Label htmlFor="???">{label}</Label>
-    </div>
+    <Wrapper style={style}>
+      <Input type="checkbox" id={id} value="on" />
+      <Label>{label}</Label>
+    </Wrapper>
   );
 };
 

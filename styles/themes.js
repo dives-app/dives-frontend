@@ -25,6 +25,7 @@ const themes = {
       lightGray: "#F5F6F7",
       darkGray: "#C4C4C4",
       darkerGray: "#A6A6A6",
+      brightBlack: "#383838",
       black: "#000",
       buttonOutline: "rgba(66, 153, 225, 0.6)",
     },
