@@ -23,7 +23,8 @@ const Input =  styled.input`
     opacity: 1;
     content: "\\2713";
     position: absolute;
-    top: 0.3rem;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0.3rem;
     width: 2rem;
     height: 2rem;
@@ -41,6 +42,7 @@ const Input =  styled.input`
 const Wrapper = styled.label`
   display: flex;
   position: relative;
+  align-items: center;
   cursor: pointer;
 `
 
