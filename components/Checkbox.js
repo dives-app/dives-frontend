@@ -2,22 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Input =  styled.input`
+const Input = styled.input`
   flex-shrink: 0;
   width: 2rem;
   height: 2rem;
   appearance: none;
   outline: none;
-  border: 1px solid ${({theme}) => theme.colors.brightBlack};
+  border: 1px solid ${({ theme }) => theme.colors.brightBlack};
   border-radius: 0.3rem;
   margin: 0.3rem;
   box-shadow: 0 0;
   transition: box-shadow 250ms;
-  
+
   & + span::before {
     opacity: 0;
   }
-  
+
   &:checked + span::before {
     transition: all 1s;
     opacity: 1;
@@ -31,11 +31,11 @@ const Input =  styled.input`
     line-height: 2rem;
     text-align: center;
     font-size: 1.8rem;
-    color: ${({theme}) => theme.colors.green};
+    color: ${({ theme }) => theme.colors.green};
   }
-  
+
   &:focus {
-    box-shadow: 0 0 0 2px ${({theme}) => theme.colors.buttonOutline};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.buttonOutline};
   }
 `;
 
@@ -44,14 +44,11 @@ const Wrapper = styled.label`
   position: relative;
   align-items: center;
   cursor: pointer;
-`
+`;
 
 const Label = styled.span`
-  font-family: ${({ theme }) => theme.fonts.inter};
   font-weight: 600;
-  
   margin-left: 0.8rem;
-  
   user-select: none;
 `;
 

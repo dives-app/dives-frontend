@@ -78,7 +78,6 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
     height: ${buttonSizes[size].height};
     padding: ${buttonSizes[size].padding};
 
-    font-family: ${theme.fonts.inter};
     font-size: ${buttonSizes[size].fontSize};
     line-height: 1;
 

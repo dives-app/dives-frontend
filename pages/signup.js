@@ -41,7 +41,9 @@ const LogoA = styled.a`
 const Title = styled.h1`
   margin-top: 6rem;
   margin-bottom: 4.3rem;
+  font-family: ${({ theme }) => theme.fonts.work};
   font-size: 3.2rem;
+  color: ${({ theme }) => theme.colors.brightBlack};
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
