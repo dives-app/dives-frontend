@@ -5,6 +5,7 @@ import { Input } from "../components/Input";
 import Link from "next/link";
 import React from "react";
 import { Checkbox } from "../components/Checkbox";
+import { GreenLink } from "../components/GreenLink";
 
 const Wrapper = styled.main`
   display: grid;
@@ -94,11 +95,11 @@ export default function Signup() {
             <Input id="email" label="Adres e-mail" />
             <Input id="password" label="Hasło" type="password" />
           </InputGroup>
-          <Checkbox
-            id="tos"
-            label="Zapoznałem się i akceptuję Regulamin oraz Politykę prywatności"
-            style={{ margin: "2rem 0" }}
-          />
+          <Checkbox id="tos" style={{ margin: "2rem 0" }}>
+            Zapoznałem się i akceptuję{" "}
+            <GreenLink href="tos">Regulamin</GreenLink> oraz{" "}
+            <GreenLink href="privacy">Politykę prywatności</GreenLink>
+          </Checkbox>
           <Button
             appearance="primary"
             size="lg"
@@ -117,7 +118,9 @@ export default function Signup() {
           >
             Zaloguj z Google
           </Button>
-          <p>Masz już konto? Zaloguj się</p>
+          <p>
+            Masz już konto? <GreenLink href="login">Zaloguj się</GreenLink>
+          </p>
         </BoxWhite>
         <BoxGreen>
           <img

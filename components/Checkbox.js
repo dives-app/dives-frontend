@@ -55,19 +55,19 @@ const Label = styled.span`
   user-select: none;
 `;
 
-export const Checkbox = ({ id, label, style }) => {
+export const Checkbox = ({ children, id, style }) => {
   return (
     <Wrapper style={style}>
       <Input type="checkbox" id={id} value="on" />
-      <Label>{label}</Label>
+      <Label>{children}</Label>
     </Wrapper>
   );
 };
 
 Checkbox.propTypes = {
-  label: PropTypes.string,
+  children: PropTypes.string,
 };
 
 Checkbox.defaultProps = {
-  label: "Checkbox",
+  children: "Checkbox",
 };
