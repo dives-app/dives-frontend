@@ -14,12 +14,7 @@ const Input = styled.input`
   box-shadow: 0 0;
   transition: box-shadow 250ms;
 
-  & + span::before {
-    opacity: 0;
-  }
-
   &:checked + span::before {
-    transition: all 1s;
     opacity: 1;
     content: "\\2713";
     position: absolute;
@@ -32,6 +27,7 @@ const Input = styled.input`
     text-align: center;
     font-size: 1.8rem;
     color: ${({ theme }) => theme.colors.green};
+    pointer-events: none;
   }
 
   &:focus {
