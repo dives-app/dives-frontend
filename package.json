@@ -23,6 +23,7 @@
     "@storybook/addon-links": "^6.0.26",
     "@storybook/react": "^6.0.26",
     "babel-loader": "^8.1.0",
+    "babel-plugin-styled-components": "^1.11.1",
     "prettier": "2.1.2",
     "react-is": "^16.13.1"
   }
