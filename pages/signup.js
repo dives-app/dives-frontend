@@ -91,6 +91,8 @@ export default function Signup() {
           <Link href="/" passHref>
             <LogoA>
               <img
+                width="169"
+                height="77"
                 src="/logo-horizontal.svg"
                 alt="Dives Logo"
                 draggable={false}
