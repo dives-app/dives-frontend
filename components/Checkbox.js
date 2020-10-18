@@ -58,7 +58,10 @@ export const Checkbox = ({ children, id, style }) => {
 };
 
 Checkbox.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 Checkbox.defaultProps = {
