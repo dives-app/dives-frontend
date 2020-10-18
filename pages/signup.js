@@ -93,7 +93,7 @@ export default function Signup() {
               <img
                 width="169"
                 height="77"
-                src="/logo-horizontal.svg"
+                src={require("public/logo-horizontal.svg")}
                 alt="Dives Logo"
                 draggable={false}
               />
@@ -134,7 +134,7 @@ export default function Signup() {
         </BoxWhite>
         <BoxGreen>
           <img
-            src="/calc-and-calendar.svg"
+            src={require("public/calc-and-calendar.svg")}
             alt="Calc and calendar"
             draggable={false}
           />
