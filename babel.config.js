@@ -3,7 +3,7 @@ module.exports = {
   plugins: [
     "babel-plugin-styled-components",
     [
-      "module-resolver",
+      require.resolve("babel-plugin-module-resolver"),
       {
         root: ["./"],
       },
