@@ -3,7 +3,6 @@ import Head from "next/head";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import Link from "next/link";
-import { Checkbox } from "../components/Checkbox";
 import { GreenLink } from "../components/GreenLink";
 import {
   InputGroup,
@@ -12,11 +11,11 @@ import {
   Title,
 } from "../layouts/AuthLayout";
 
-export default function Signup() {
+export default function Login() {
   return (
     <>
       <Head>
-        <title>Załóż konto w Dives</title>
+        <title>Zaloguj się – Dives</title>
       </Head>
       <Link href="/" passHref>
         <LogoA>
@@ -29,23 +28,18 @@ export default function Signup() {
           />
         </LogoA>
       </Link>
-      <Title>Zarejestruj się</Title>
+      <Title>Zaloguj się</Title>
       <InputGroup>
-        <Input id="name" label="Imię" />
         <Input id="email" label="Adres e-mail" />
         <Input id="password" label="Hasło" type="password" />
       </InputGroup>
-      <Checkbox id="tos" style={{ marginTop: "2rem" }}>
-        Zapoznałem się i akceptuję <GreenLink href="tos">Regulamin</GreenLink>{" "}
-        oraz <GreenLink href="privacy">Politykę prywatności</GreenLink>
-      </Checkbox>
       <Button
         appearance="primary"
         size="lg"
-        style={{ marginTop: "2rem", marginBottom: "1rem" }}
+        style={{ marginTop: "3.3rem", marginBottom: "1rem" }}
         fullWidth
       >
-        Zarejestruj się
+        Zaloguj się
       </Button>
       <Button
         appearance="secondaryOutlined"
@@ -58,7 +52,7 @@ export default function Signup() {
         Zaloguj z Google
       </Button>
       <QuestionBottom>
-        Masz już konto? <GreenLink href="login">Zaloguj się</GreenLink>
+        Nie masz konta? <GreenLink href="signup">Zarejestruj się</GreenLink>
       </QuestionBottom>
     </>
   );
