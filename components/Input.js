@@ -38,32 +38,36 @@ const StyledInput = styled.input`
   font-size: 2.4rem;
 `;
 
-export const Input = ({ id, label, ...props }) => {
-  const [value, setValue] = useState("");
+const Input = ({ name, label, onChange, onBlur, onFocus, value, ...props }) => {
+  const [localValue, setValue] = useState("");
   const [isFocused, setFocused] = useState(false);
 
   const handleChange = (e) => {
+    onChange && onChange(e.target.value);
     setValue(e.target.value);
   };
 
   const handleFocus = () => {
+    // onFocus && onFocus();
     setFocused(true);
   };
 
   const handleBlur = () => {
-    if (value === "") {
+    onBlur && onBlur();
+    if (localValue === "") {
       setFocused(false);
     }
   };
 
   return (
     <Wrapper>
-      <Label htmlFor={id} isFocused={isFocused}>
+      <Label htmlFor={name} isFocused={isFocused}>
         {label}
       </Label>
       <StyledInput
-        id={id}
-        value={value}
+        id={name}
+        name={name}
+        value={localValue}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -75,8 +79,10 @@ export const Input = ({ id, label, ...props }) => {
 
 Input.propTypes = {
   /**
-   * It's passed to label's "for" attribute and input's "id" attribute.
+   * It's passed to label's "for" attribute and input's "id" and "name" attribute.
    */
-  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };
+
+export default Input;
