@@ -10,10 +10,10 @@ import {
   QuestionBottom,
   Title,
 } from "../layouts/AuthLayout";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
-  const { handleSubmit, control, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -35,29 +35,27 @@ export default function Login() {
       <Title>Zaloguj się</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputGroup>
-          <Controller
-            as={<Input name="email" label="Adres e-mail" />}
+          <Input
             name="email"
-            defaultValue=""
-            rules={{
+            label="Adres e-mail"
+            inputRef={register({
               required: "Adres e-mail jest wymagany",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: "Nieprawidłowy adres e-mail",
               },
-            }}
-            control={control}
+            })}
+            errors={errors.email}
           />
-          {errors.email && <span>{errors.email.message}</span>}
-          <Controller
+          <Input
             name="password"
-            as={<Input name="password" label="Hasło" />}
+            label="Hasło"
             type="password"
-            defaultValue=""
-            rules={{ required: true }}
-            control={control}
+            inputRef={register({
+              required: "Hasło jest wymagane",
+            })}
+            errors={errors.password}
           />
-          {errors.password && <span>This field is required</span>}
         </InputGroup>
         <Button
           type="submit"

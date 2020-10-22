@@ -38,23 +38,15 @@ const StyledInput = styled.input`
   font-size: 2.4rem;
 `;
 
-const Input = ({ name, label, onChange, onBlur, onFocus, value, ...props }) => {
-  const [localValue, setValue] = useState("");
+const Input = ({ name, label, inputRef, errors, ...props }) => {
   const [isFocused, setFocused] = useState(false);
 
-  const handleChange = (e) => {
-    onChange && onChange(e.target.value);
-    setValue(e.target.value);
-  };
-
   const handleFocus = () => {
-    // onFocus && onFocus();
     setFocused(true);
   };
 
-  const handleBlur = () => {
-    onBlur && onBlur();
-    if (localValue === "") {
+  const handleBlur = (e) => {
+    if (e.target.value === "") {
       setFocused(false);
     }
   };
@@ -67,12 +59,12 @@ const Input = ({ name, label, onChange, onBlur, onFocus, value, ...props }) => {
       <StyledInput
         id={name}
         name={name}
-        value={localValue}
-        onChange={handleChange}
+        ref={inputRef}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
       />
+      {errors && <span>{errors.message}</span>}
     </Wrapper>
   );
 };
