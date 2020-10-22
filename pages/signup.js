@@ -12,9 +12,25 @@ import {
   Title,
 } from "../layouts/AuthLayout";
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  name: yup.string().required("Imię jest wymagane"),
+  email: yup
+    .string()
+    .required("Adres e-mail jest wymagany")
+    .email("Nieprawidłowy adres e-mail"),
+  password: yup.string().required("Hasło jest wymagane"),
+  tos: yup
+    .bool()
+    .oneOf([true], "Musisz zaakceptować Regulamin i Politykę prywatności"),
+});
 
 export default function Signup() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -39,39 +55,27 @@ export default function Signup() {
           <Input
             name="name"
             label="Imię"
-            inputRef={register({
-              required: "Imię jest wymagane",
-            })}
+            inputRef={register}
             errors={errors.name}
           />
           <Input
             name="email"
             label="Adres e-mail"
-            inputRef={register({
-              required: "Adres e-mail jest wymagany",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Nieprawidłowy adres e-mail",
-              },
-            })}
+            inputRef={register}
             errors={errors.email}
           />
           <Input
             name="password"
             label="Hasło"
             type="password"
-            inputRef={register({
-              required: "Hasło jest wymagane",
-            })}
+            inputRef={register}
             errors={errors.password}
           />
         </InputGroup>
         <Checkbox
           name="tos"
           style={{ marginTop: "2rem" }}
-          inputRef={register({
-            required: "Musisz zaakceptować Regulamin i Politykę prywatności",
-          })}
+          inputRef={register}
           errors={errors.tos}
         >
           Zapoznałem się i akceptuję <GreenLink href="tos">Regulamin</GreenLink>{" "}
