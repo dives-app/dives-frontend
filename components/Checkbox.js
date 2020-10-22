@@ -48,12 +48,15 @@ const Label = styled.span`
   user-select: none;
 `;
 
-export const Checkbox = ({ children, id, style }) => {
+export const Checkbox = ({ children, name, style, inputRef, errors }) => {
   return (
-    <Wrapper style={style}>
-      <Input type="checkbox" id={id} value="on" />
-      <Label>{children}</Label>
-    </Wrapper>
+    <>
+      <Wrapper style={style}>
+        <Input type="checkbox" name={name} ref={inputRef} />
+        <Label>{children}</Label>
+      </Wrapper>
+      {errors && <span>{errors.message}</span>}
+    </>
   );
 };
 

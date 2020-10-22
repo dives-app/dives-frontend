@@ -102,14 +102,9 @@ const StyledButton = styled.button.attrs(({ appearance, theme, ...props }) => {
 );
 
 export const Button = React.forwardRef(
-  ({ children, as, leftIcon, rightIcon, ...props }, ref) => {
+  ({ children, as, type, leftIcon, rightIcon, ...props }, ref) => {
     return (
-      <StyledButton
-        as={as}
-        type={as === "button" ? "button" : undefined}
-        ref={ref}
-        {...props}
-      >
+      <StyledButton as={as} type={type} ref={ref} {...props}>
         {leftIcon}
         {children}
         {rightIcon}
@@ -127,6 +122,7 @@ Button.propTypes = {
    * If button is wrapped in a `Link`, this prop allows to make it an `a` element.
    */
   as: PropTypes.oneOf(["button", "a"]),
+  type: PropTypes.oneOf(["submit", "button"]),
   /**
    * Label
    */

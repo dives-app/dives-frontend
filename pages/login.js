@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { Button } from "../components/Button";
-import { Input } from "../components/Input";
+import Input from "../components/Input";
 import Link from "next/link";
 import { GreenLink } from "../components/GreenLink";
 import {
@@ -10,8 +10,24 @@ import {
   QuestionBottom,
   Title,
 } from "../layouts/AuthLayout";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Adres e-mail jest wymagany")
+    .email("Nieprawidłowy adres e-mail"),
+  password: yup.string().required("Hasło jest wymagane"),
+});
 
 export default function Login() {
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = (data) => console.log(data);
+
   return (
     <>
       <Head>
@@ -29,18 +45,32 @@ export default function Login() {
         </LogoA>
       </Link>
       <Title>Zaloguj się</Title>
-      <InputGroup>
-        <Input id="email" label="Adres e-mail" />
-        <Input id="password" label="Hasło" type="password" />
-      </InputGroup>
-      <Button
-        appearance="primary"
-        size="lg"
-        style={{ marginTop: "3.3rem", marginBottom: "1rem" }}
-        fullWidth
-      >
-        Zaloguj się
-      </Button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <InputGroup>
+          <Input
+            name="email"
+            label="Adres e-mail"
+            inputRef={register}
+            errors={errors.email}
+          />
+          <Input
+            name="password"
+            label="Hasło"
+            type="password"
+            inputRef={register}
+            errors={errors.password}
+          />
+        </InputGroup>
+        <Button
+          type="submit"
+          appearance="primary"
+          size="lg"
+          style={{ marginTop: "3.3rem", marginBottom: "1rem" }}
+          fullWidth
+        >
+          Zaloguj się
+        </Button>
+      </form>
       <Button
         appearance="secondaryOutlined"
         size="lg"

@@ -38,45 +38,43 @@ const StyledInput = styled.input`
   font-size: 2.4rem;
 `;
 
-export const Input = ({ id, label, ...props }) => {
-  const [value, setValue] = useState("");
+const Input = ({ name, label, inputRef, errors, ...props }) => {
   const [isFocused, setFocused] = useState(false);
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
 
   const handleFocus = () => {
     setFocused(true);
   };
 
-  const handleBlur = () => {
-    if (value === "") {
+  const handleBlur = (e) => {
+    if (e.target.value === "") {
       setFocused(false);
     }
   };
 
   return (
     <Wrapper>
-      <Label htmlFor={id} isFocused={isFocused}>
+      <Label htmlFor={name} isFocused={isFocused}>
         {label}
       </Label>
       <StyledInput
-        id={id}
-        value={value}
-        onChange={handleChange}
+        id={name}
+        name={name}
+        ref={inputRef}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
       />
+      {errors && <span>{errors.message}</span>}
     </Wrapper>
   );
 };
 
 Input.propTypes = {
   /**
-   * It's passed to label's "for" attribute and input's "id" attribute.
+   * It's passed to label's "for" attribute and input's "id" and "name" attribute.
    */
-  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };
+
+export default Input;

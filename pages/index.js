@@ -16,7 +16,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/logo.svg" alt="Dives Logo" className={styles.logo} />
+        <img
+          src={require("public/logo.svg")}
+          draggable="false"
+          alt="Dives Logo"
+          className={styles.logo}
+        />
         <p className={styles.wipText}>work in progress</p>
         <Flex>
           <Link href="login" passHref>
