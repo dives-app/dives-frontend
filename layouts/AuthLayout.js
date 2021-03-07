@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import Image from "next/image";
 
 const Wrapper = styled.main`
   display: grid;
@@ -80,9 +81,11 @@ export default function AuthLayout({ children }) {
       <Wrapper>
         <BoxWhite>{children}</BoxWhite>
         <BoxGreen>
-          <img
-            src={require("public/calc-and-calendar.svg")}
+          <Image
+            src="/calc-and-calendar.svg"
             alt="Calc and calendar"
+            width="500"
+            height="500"
             draggable={false}
           />
         </BoxGreen>

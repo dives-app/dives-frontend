@@ -1,9 +1,9 @@
-// import "../styles/globals.css";
 import ThemeProvider from "../components/ThemeProvider";
 import GlobalStyle from "../styles/GlobalStyle";
 import AuthLayout from "../layouts/AuthLayout";
+import { AppProps } from "next/app";
 
-function MyApp({ Component, pageProps, router }) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   if (
     router.pathname.startsWith("/signup") ||
     router.pathname.startsWith("/login")

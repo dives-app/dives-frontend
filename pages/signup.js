@@ -14,6 +14,7 @@ import {
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 
 const schema = yup.object().shape({
   name: yup.string().required("Imię jest wymagane"),
@@ -40,10 +41,10 @@ export default function Signup() {
       </Head>
       <Link href="/" passHref>
         <LogoA>
-          <img
+          <Image
             width="169"
             height="77"
-            src={require("public/logo-horizontal.svg")}
+            src="/logo-horizontal.svg"
             alt="Dives Logo"
             draggable={false}
           />

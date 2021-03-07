@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.css";
 import { Button } from "../components/Button";
 import Link from "next/link";
 import styled from "styled-components";
+import Image from "next/image";
 
 const Flex = styled.div`
   display: flex;
@@ -16,10 +17,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <img
-          src={require("public/logo.svg")}
+        <Image
+          src="/logo.svg"
           draggable="false"
           alt="Dives Logo"
+          width={100}
+          height={128}
           className={styles.logo}
         />
         <p className={styles.wipText}>work in progress</p>
