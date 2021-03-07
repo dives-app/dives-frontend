@@ -1,5 +1,5 @@
 import React from "react";
-import getTheme from "../styles/themes";
+import getTheme from "../theme/themes-old";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 const ThemeProvider = ({ children }) => {

@@ -1,38 +1,47 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import { Link, Flex } from "@chakra-ui/react";
+import { Flex, Button, VStack, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>🚧 Dives</title>
       </Head>
-
-      <main className={styles.main}>
-        <Image
-          src="/logo.svg"
-          draggable="false"
-          alt="Dives Logo"
-          width={100}
-          height={128}
-          className={styles.logo}
-        />
-        <p className={styles.wipText}>work in progress</p>
-        <Flex>
-          <NextLink href="login" passHref>
-            <Link mr="1rem" color="white">
-              Log in
-            </Link>
-          </NextLink>
-          <NextLink href="login" passHref>
-            <Link color="white">Sign up</Link>
-          </NextLink>
-        </Flex>
-        <p>🚧 🚧 🚧</p>
-      </main>
-    </div>
+      <Flex
+        backgroundColor="green"
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+      >
+        <VStack>
+          <Image
+            src="/logo.svg"
+            draggable="false"
+            alt="Dives Logo"
+            width={100}
+            height={128}
+          />
+          <Text fontSize="lg" color="white">
+            work in progress
+          </Text>
+          <Flex>
+            <NextLink href="/login" passHref>
+              <Button as="a" variant="primary" mr="1rem" color="white">
+                Log in
+              </Button>
+            </NextLink>
+            <NextLink href="/signup" passHref>
+              <Button as="a" variant="primary" color="white">
+                Sign up
+              </Button>
+            </NextLink>
+          </Flex>
+          <Text>🚧 🚧 🚧</Text>
+        </VStack>
+      </Flex>
+    </>
   );
 }

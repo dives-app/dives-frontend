@@ -1,38 +1,43 @@
 import React from "react";
 import Head from "next/head";
-import Input from "../components/Input";
+import { Button } from "@chakra-ui/react";
+import Input from "../src/components/Input";
 import Link from "next/link";
-import { GreenLink } from "../components/GreenLink";
+import { Checkbox } from "../src/components/Checkbox";
+import { GreenLink } from "../src/components/GreenLink";
 import {
   InputGroup,
   LogoA,
   QuestionBottom,
   Title,
-} from "../layouts/AuthLayout";
+} from "../src/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
-import { Button } from "@chakra-ui/react";
 
 const schema = yup.object().shape({
+  name: yup.string().required("Imię jest wymagane"),
   email: yup
     .string()
     .required("Adres e-mail jest wymagany")
     .email("Nieprawidłowy adres e-mail"),
   password: yup.string().required("Hasło jest wymagane"),
+  tos: yup
+    .bool()
+    .oneOf([true], "Musisz zaakceptować Regulamin i Politykę prywatności"),
 });
 
-export default function Login() {
+export default function Signup() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <>
       <Head>
-        <title>Zaloguj się – Dives</title>
+        <title>Załóż konto w Dives</title>
       </Head>
       <Link href="/" passHref>
         <LogoA>
@@ -45,9 +50,15 @@ export default function Login() {
           />
         </LogoA>
       </Link>
-      <Title>Zaloguj się</Title>
+      <Title>Zarejestruj się</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputGroup>
+          <Input
+            name="name"
+            label="Imię"
+            inputRef={register}
+            errors={errors.name}
+          />
           <Input
             name="email"
             label="Adres e-mail"
@@ -62,29 +73,38 @@ export default function Login() {
             errors={errors.password}
           />
         </InputGroup>
+        <Checkbox
+          name="tos"
+          style={{ marginTop: "2rem" }}
+          inputRef={register}
+          errors={errors.tos}
+        >
+          Zapoznałem się i akceptuję <GreenLink href="tos">Regulamin</GreenLink>{" "}
+          oraz <GreenLink href="privacy">Politykę prywatności</GreenLink>
+        </Checkbox>
         <Button
           type="submit"
           variant="primary"
           size="lg"
-          width="100%"
-          mt="3.3rem"
+          mt="2rem"
           mb="1rem"
+          width="100%"
         >
-          Zaloguj się
+          Zarejestruj się
         </Button>
       </form>
       <Button
         variant="secondaryOutlined"
         size="lg"
-        width="100%"
         leftIcon={
           <img src="google-icon.svg" alt="Google Icon" draggable={false} />
         }
+        width="100%"
       >
         Zaloguj z Google
       </Button>
       <QuestionBottom>
-        Nie masz konta? <GreenLink href="signup">Zarejestruj się</GreenLink>
+        Masz już konto? <GreenLink href="login">Zaloguj się</GreenLink>
       </QuestionBottom>
     </>
   );

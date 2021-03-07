@@ -1,6 +1,5 @@
-import ThemeProvider from "../components/ThemeProvider";
-import GlobalStyle from "../styles/GlobalStyle";
-import AuthLayout from "../layouts/AuthLayout";
+import ThemeProvider from "../src/components/ThemeProvider";
+import AuthLayout from "../src/layouts/AuthLayout";
 import { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "../src/theme";
@@ -13,7 +12,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     return (
       <ChakraProvider theme={theme}>
         <ThemeProvider>
-          <GlobalStyle />
           <AuthLayout>
             <Component {...pageProps} />
           </AuthLayout>
@@ -23,10 +21,11 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   }
 
   return (
-    <ThemeProvider>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <ChakraProvider theme={theme}>
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </ChakraProvider>
   );
 }
 
