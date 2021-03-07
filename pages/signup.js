@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { Button } from "../components/Button";
+import { Button } from "@chakra-ui/react";
 import Input from "../components/Input";
 import Link from "next/link";
 import { Checkbox } from "../components/Checkbox";
@@ -84,21 +84,22 @@ export default function Signup() {
         </Checkbox>
         <Button
           type="submit"
-          appearance="primary"
+          variant="primary"
           size="lg"
-          style={{ marginTop: "2rem", marginBottom: "1rem" }}
-          fullWidth
+          mt="2rem"
+          mb="1rem"
+          width="100%"
         >
           Zarejestruj się
         </Button>
       </form>
       <Button
-        appearance="secondaryOutlined"
+        variant="secondaryOutlined"
         size="lg"
         leftIcon={
           <img src="google-icon.svg" alt="Google Icon" draggable={false} />
         }
-        fullWidth
+        width="100%"
       >
         Zaloguj z Google
       </Button>

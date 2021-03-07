@@ -1,13 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Button } from "../components/Button";
-import Link from "next/link";
-import styled from "styled-components";
+import { Link, Flex } from "@chakra-ui/react";
+import NextLink from "next/link";
 import Image from "next/image";
-
-const Flex = styled.div`
-  display: flex;
-`;
 
 export default function Home() {
   return (
@@ -27,20 +22,14 @@ export default function Home() {
         />
         <p className={styles.wipText}>work in progress</p>
         <Flex>
-          <Link href="login" passHref>
-            <Button
-              as="a"
-              appearance="primary"
-              style={{ marginRight: "0.5rem" }}
-            >
+          <NextLink href="login" passHref>
+            <Link mr="1rem" color="white">
               Log in
-            </Button>
-          </Link>
-          <Link href="signup" passHref>
-            <Button as="a" appearance="primary">
-              Sign up
-            </Button>
-          </Link>
+            </Link>
+          </NextLink>
+          <NextLink href="login" passHref>
+            <Link color="white">Sign up</Link>
+          </NextLink>
         </Flex>
         <p>🚧 🚧 🚧</p>
       </main>

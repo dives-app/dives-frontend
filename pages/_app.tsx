@@ -2,6 +2,8 @@ import ThemeProvider from "../components/ThemeProvider";
 import GlobalStyle from "../styles/GlobalStyle";
 import AuthLayout from "../layouts/AuthLayout";
 import { AppProps } from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "../src/theme";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   if (
@@ -9,12 +11,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     router.pathname.startsWith("/login")
   ) {
     return (
-      <ThemeProvider>
-        <GlobalStyle />
-        <AuthLayout>
-          <Component {...pageProps} />
-        </AuthLayout>
-      </ThemeProvider>
+      <ChakraProvider theme={theme}>
+        <ThemeProvider>
+          <GlobalStyle />
+          <AuthLayout>
+            <Component {...pageProps} />
+          </AuthLayout>
+        </ThemeProvider>
+      </ChakraProvider>
     );
   }
 
