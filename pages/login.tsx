@@ -1,18 +1,19 @@
 import React from "react";
 import Head from "next/head";
-import { Button } from "../components/Button";
-import Input from "../components/Input";
+import Input from "../src/components/Input";
 import Link from "next/link";
-import { GreenLink } from "../components/GreenLink";
+import { GreenLink } from "../src/components/GreenLink";
 import {
   InputGroup,
   LogoA,
   QuestionBottom,
   Title,
-} from "../layouts/AuthLayout";
+} from "../src/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
+import { Button } from "@chakra-ui/react";
 
 const schema = yup.object().shape({
   email: yup
@@ -26,7 +27,7 @@ export default function Login() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <>
@@ -35,10 +36,10 @@ export default function Login() {
       </Head>
       <Link href="/" passHref>
         <LogoA>
-          <img
+          <Image
             width="169"
             height="77"
-            src={require("public/logo-horizontal.svg")}
+            src="/logo-horizontal.svg"
             alt="Dives Logo"
             draggable={false}
           />
@@ -63,21 +64,22 @@ export default function Login() {
         </InputGroup>
         <Button
           type="submit"
-          appearance="primary"
+          variant="primary"
           size="lg"
-          style={{ marginTop: "3.3rem", marginBottom: "1rem" }}
-          fullWidth
+          width="100%"
+          mt="3.3rem"
+          mb="1rem"
         >
           Zaloguj się
         </Button>
       </form>
       <Button
-        appearance="secondaryOutlined"
+        variant="secondaryOutlined"
         size="lg"
+        width="100%"
         leftIcon={
           <img src="google-icon.svg" alt="Google Icon" draggable={false} />
         }
-        fullWidth
       >
         Zaloguj z Google
       </Button>

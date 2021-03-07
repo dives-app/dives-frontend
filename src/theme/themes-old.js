@@ -32,6 +32,7 @@ const themes = {
       brightBlack: "#383838",
       black: "#000",
       buttonOutline: "rgba(66, 153, 225, 0.6)",
+      errorRed: "#ff3d00",
     },
   },
 };

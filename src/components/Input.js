@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
+import InputErrorMessage from "./InputErrorMessage";
 
 const Wrapper = styled.div`
   position: relative;
@@ -33,7 +34,9 @@ const StyledInput = styled.input`
   width: 100%;
   outline: 0;
   border: 0;
-  box-shadow: 0 1px 0 0 black;
+  box-shadow: 0 1px 0 0
+    ${({ errors, theme }) =>
+      errors ? theme.colors.errorRed : theme.colors.black};
   transition: box-shadow 150ms ease-out;
   font-size: 2.4rem;
 `;
@@ -62,9 +65,10 @@ const Input = ({ name, label, inputRef, errors, ...props }) => {
         ref={inputRef}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        errors={errors}
         {...props}
       />
-      {errors && <span>{errors.message}</span>}
+      {errors && <InputErrorMessage>{errors.message}</InputErrorMessage>}
     </Wrapper>
   );
 };

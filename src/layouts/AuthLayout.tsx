@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from "react";
+import Image from "next/image";
+import { Text } from "@chakra-ui/react";
 
 const Wrapper = styled.main`
   display: grid;
@@ -68,21 +70,23 @@ export const InputGroup = styled.div`
   }
 `;
 
-export const QuestionBottom = styled.p`
-  text-align: center;
-  margin: 1.2rem 0;
-  font-size: 1.4rem;
-`;
+export const QuestionBottom = ({ children }: React.PropsWithChildren<{}>) => (
+  <Text textAlign="center" my="1.2rem" fontSize="1.4rem">
+    {children}
+  </Text>
+);
 
-export default function AuthLayout({ children }) {
+export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
   return (
     <>
       <Wrapper>
         <BoxWhite>{children}</BoxWhite>
         <BoxGreen>
-          <img
-            src={require("public/calc-and-calendar.svg")}
+          <Image
+            src="/calc-and-calendar.svg"
             alt="Calc and calendar"
+            width="500"
+            height="500"
             draggable={false}
           />
         </BoxGreen>

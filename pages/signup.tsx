@@ -1,19 +1,20 @@
 import React from "react";
 import Head from "next/head";
-import { Button } from "../components/Button";
-import Input from "../components/Input";
+import { Button } from "@chakra-ui/react";
+import Input from "../src/components/Input";
 import Link from "next/link";
-import { Checkbox } from "../components/Checkbox";
-import { GreenLink } from "../components/GreenLink";
+import { Checkbox } from "../src/components/Checkbox";
+import { GreenLink } from "../src/components/GreenLink";
 import {
   InputGroup,
   LogoA,
   QuestionBottom,
   Title,
-} from "../layouts/AuthLayout";
+} from "../src/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 
 const schema = yup.object().shape({
   name: yup.string().required("Imię jest wymagane"),
@@ -31,7 +32,7 @@ export default function Signup() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <>
@@ -40,10 +41,10 @@ export default function Signup() {
       </Head>
       <Link href="/" passHref>
         <LogoA>
-          <img
+          <Image
             width="169"
             height="77"
-            src={require("public/logo-horizontal.svg")}
+            src="/logo-horizontal.svg"
             alt="Dives Logo"
             draggable={false}
           />
@@ -83,21 +84,22 @@ export default function Signup() {
         </Checkbox>
         <Button
           type="submit"
-          appearance="primary"
+          variant="primary"
           size="lg"
-          style={{ marginTop: "2rem", marginBottom: "1rem" }}
-          fullWidth
+          mt="2rem"
+          mb="1rem"
+          width="100%"
         >
           Zarejestruj się
         </Button>
       </form>
       <Button
-        appearance="secondaryOutlined"
+        variant="secondaryOutlined"
         size="lg"
         leftIcon={
           <img src="google-icon.svg" alt="Google Icon" draggable={false} />
         }
-        fullWidth
+        width="100%"
       >
         Zaloguj z Google
       </Button>
