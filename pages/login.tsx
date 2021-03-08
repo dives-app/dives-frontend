@@ -1,19 +1,19 @@
 import React from "react";
 import Head from "next/head";
-import Input from "../src/components/Input";
-import Link from "next/link";
 import { GreenLink } from "../src/components/GreenLink";
-import {
-  InputGroup,
-  LogoA,
-  QuestionBottom,
-  Title,
-} from "../src/layouts/AuthLayout";
+import { QuestionBottom } from "../src/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Image from "next/image";
-import { Button } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  VStack,
+  Heading,
+} from "@chakra-ui/react";
 
 const schema = yup.object().shape({
   email: yup
@@ -32,59 +32,54 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Zaloguj się – Dives</title>
+        <title>Zaloguj się do Dives</title>
       </Head>
-      <Link href="/" passHref>
-        <LogoA>
-          <Image
-            width="169"
-            height="77"
-            src="/logo-horizontal.svg"
-            alt="Dives Logo"
-            draggable={false}
-          />
-        </LogoA>
-      </Link>
-      <Title>Zaloguj się</Title>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputGroup>
-          <Input
-            name="email"
-            label="Adres e-mail"
-            inputRef={register}
-            errors={errors.email}
-          />
-          <Input
-            name="password"
-            label="Hasło"
-            type="password"
-            inputRef={register}
-            errors={errors.password}
-          />
-        </InputGroup>
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          width="100%"
-          mt="2rem"
-          mb="0.625rem"
-        >
-          Zaloguj się
-        </Button>
-      </form>
-      <Button
-        variant="secondaryOutlined"
-        size="lg"
-        width="100%"
-        leftIcon={
-          <img src="google-icon.svg" alt="Google Icon" draggable={false} />
-        }
-      >
-        Zaloguj z Google
-      </Button>
+      <Heading size="lg" fontWeight="normal" mb="4">
+        Zaloguj się
+      </Heading>
+      <VStack as={"form"} onSubmit={handleSubmit(onSubmit)} spacing="6">
+        <VStack width="100%" spacing="4">
+          <FormControl id="email" isInvalid={!!errors.email} isRequired>
+            <FormLabel>Adres e-mail</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              placeholder="jan.kowalski@example.com"
+              ref={register}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl id="password" isInvalid={!!errors.password} isRequired>
+            <FormLabel>Hasło</FormLabel>
+            <Input
+              type="password"
+              name="password"
+              placeholder="********"
+              ref={register}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+          </FormControl>
+        </VStack>
+        <VStack width="100%" spacing="3">
+          <Button type="submit" variant="primary" size="lg" width="100%">
+            Zaloguj się
+          </Button>
+          <Button
+            variant="secondaryOutlined"
+            size="lg"
+            width="100%"
+            leftIcon={
+              <img src="google-icon.svg" alt="Google Icon" draggable={false} />
+            }
+          >
+            Zaloguj z Google
+          </Button>
+        </VStack>
+      </VStack>
       <QuestionBottom>
-        Nie masz konta? <GreenLink href="signup">Zarejestruj się</GreenLink>
+        Nie masz konta? <GreenLink href="/signup">Zarejestruj się</GreenLink>
       </QuestionBottom>
     </>
   );

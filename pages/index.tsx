@@ -10,7 +10,7 @@ export default function Home() {
         <title>🚧 Dives</title>
       </Head>
       <Flex
-        backgroundColor="green"
+        backgroundColor="dives.green"
         direction="column"
         justifyContent="center"
         alignItems="center"

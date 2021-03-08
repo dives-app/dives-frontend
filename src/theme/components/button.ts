@@ -30,18 +30,18 @@ export default {
   },
   variants: {
     primary: {
-      bg: "green",
+      bg: "dives.green",
       color: "white",
       _hover: {
-        bg: "lightGreen",
+        bg: "dives.lightGreen",
       },
       _active: {
-        bg: "darkGreen",
+        bg: "dives.darkGreen",
       },
     },
     secondary: {
       bg: "white",
-      color: "green",
+      color: "dives.green",
       _hover: {
         bg: "lightGray",
       },

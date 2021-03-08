@@ -1,77 +1,24 @@
-import styled from "styled-components";
 import React from "react";
 import Image from "next/image";
-import { Text } from "@chakra-ui/react";
+import { Grid, Flex, Text } from "@chakra-ui/react";
+import Link from "next/link";
 
-const Wrapper = styled.main`
-  display: grid;
-  grid-template-columns: minmax(500px, min-content) auto;
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-template-columns: auto;
-  }
-  box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const BoxWhite = styled.section`
-  background-color: ${({ theme }) => theme.colors.white};
-  box-sizing: border-box;
-  overflow: auto;
-
-  padding: 70px 85px;
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: 40px 35px;
-  }
-`;
-
-const BoxGreen = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  overflow: hidden;
-  background: linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff;
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: none;
-  }
-`;
-
-export const LogoA = styled.a`
-  display: flex;
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    justify-content: center;
-  }
-`;
-
-export const Title = styled.h1`
-  margin-top: 3.75rem;
-  margin-bottom: 2.7rem;
-  font-family: ${({ theme }) => theme.fonts.work};
-  font-size: 2rem;
-  color: ${({ theme }) => theme.colors.brightBlack};
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    display: none;
-  }
-`;
-
-export const InputGroup = styled.div`
-  & > *:not(:first-child) {
-    margin-top: 2.7rem;
-  }
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    & > *:first-child {
-      margin-top: 3.1rem;
-    }
-  }
-`;
+export const DivesHomeButtonLogo = () => (
+  <Link href="/" passHref>
+    <Flex justifyContent={{ base: "center", sm: "left" }} mb="8">
+      <Image
+        width="169"
+        height="77"
+        src="/logo-horizontal.svg"
+        alt="Dives Logo"
+        draggable={false}
+      />
+    </Flex>
+  </Link>
+);
 
 export const QuestionBottom = ({ children }: React.PropsWithChildren<{}>) => (
-  <Text textAlign="center" my="0.75rem" fontSize="0.875rem">
+  <Text align="center" my="3" fontSize="sm">
     {children}
   </Text>
 );
@@ -79,9 +26,32 @@ export const QuestionBottom = ({ children }: React.PropsWithChildren<{}>) => (
 export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
   return (
     <>
-      <Wrapper>
-        <BoxWhite>{children}</BoxWhite>
-        <BoxGreen>
+      <Grid
+        templateColumns={{
+          base: "auto",
+          md: "minmax(500px, min-content) auto",
+        }}
+        width="100vw"
+        height="100vh"
+        boxSizing="border-box"
+      >
+        <Flex
+          as="main"
+          direction="column"
+          boxSizing="border-box"
+          overflow="auto"
+          p={["40px 35px", "55px 70px"]}
+        >
+          <DivesHomeButtonLogo />
+          {children}
+        </Flex>
+        <Flex
+          justifyContent="center"
+          alignContent="center"
+          overflow="hidden"
+          bg="linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff"
+          display={{ base: "none", md: "flex" }}
+        >
           <Image
             src="/calc-and-calendar.svg"
             alt="Calc and calendar"
@@ -89,8 +59,8 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
             height="500"
             draggable={false}
           />
-        </BoxGreen>
-      </Wrapper>
+        </Flex>
+      </Grid>
     </>
   );
 }

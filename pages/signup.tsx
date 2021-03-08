@@ -1,20 +1,20 @@
 import React from "react";
 import Head from "next/head";
-import { Button } from "@chakra-ui/react";
-import Input from "../src/components/Input";
-import Link from "next/link";
-import { Checkbox } from "../src/components/Checkbox";
-import { GreenLink } from "../src/components/GreenLink";
 import {
-  InputGroup,
-  LogoA,
-  QuestionBottom,
-  Title,
-} from "../src/layouts/AuthLayout";
+  Button,
+  Checkbox,
+  FormControl,
+  Input,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  VStack,
+} from "@chakra-ui/react";
+import { GreenLink } from "../src/components/GreenLink";
+import { QuestionBottom } from "../src/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Image from "next/image";
 
 const schema = yup.object().shape({
   name: yup.string().required("Imię jest wymagane"),
@@ -39,72 +39,73 @@ export default function Signup() {
       <Head>
         <title>Załóż konto w Dives</title>
       </Head>
-      <Link href="/" passHref>
-        <LogoA>
-          <Image
-            width="169"
-            height="77"
-            src="/logo-horizontal.svg"
-            alt="Dives Logo"
-            draggable={false}
-          />
-        </LogoA>
-      </Link>
-      <Title>Zarejestruj się</Title>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputGroup>
-          <Input
-            name="name"
-            label="Imię"
-            inputRef={register}
-            errors={errors.name}
-          />
-          <Input
-            name="email"
-            label="Adres e-mail"
-            inputRef={register}
-            errors={errors.email}
-          />
-          <Input
-            name="password"
-            label="Hasło"
-            type="password"
-            inputRef={register}
-            errors={errors.password}
-          />
-        </InputGroup>
+      <Heading size="lg" fontWeight="normal" mb="4">
+        Zarejestruj się
+      </Heading>
+      <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
+        <VStack width="100%" spacing="4">
+          <FormControl id="name" isInvalid={!!errors.name} isRequired>
+            <FormLabel>Imię</FormLabel>
+            <Input
+              name="name"
+              placeholder="Jan"
+              ref={register}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl id="email" isInvalid={!!errors.email} isRequired>
+            <FormLabel>Adres e-mail</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              placeholder="jan.kowalski@example.com"
+              ref={register}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl id="password" isInvalid={!!errors.password} isRequired>
+            <FormLabel>Hasło</FormLabel>
+            <Input
+              type="password"
+              name="password"
+              placeholder="********"
+              ref={register}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+          </FormControl>
+        </VStack>
         <Checkbox
           name="tos"
-          style={{ marginTop: "1.25rem" }}
-          inputRef={register}
+          ref={register}
           errors={errors.tos}
+          isInvalid={!!errors.tos}
+          isRequired
         >
-          Zapoznałem się i akceptuję <GreenLink href="tos">Regulamin</GreenLink>{" "}
-          oraz <GreenLink href="privacy">Politykę prywatności</GreenLink>
+          Zapoznałem się i akceptuję{" "}
+          <GreenLink href="/tos">Regulamin</GreenLink> oraz{" "}
+          <GreenLink href="/privacy">Politykę prywatności</GreenLink>
         </Checkbox>
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          mt="1.25rem"
-          mb="0.625rem"
-          width="100%"
-        >
-          Zarejestruj się
-        </Button>
-      </form>
-      <Button
-        variant="secondaryOutlined"
-        size="lg"
-        leftIcon={
-          <img src="google-icon.svg" alt="Google Icon" draggable={false} />
-        }
-        width="100%"
-      >
-        Zaloguj z Google
-      </Button>
+        <VStack width="100%" spacing="3">
+          <Button type="submit" variant="primary" size="lg" width="100%">
+            Zarejestruj się
+          </Button>
+          <Button
+            variant="secondaryOutlined"
+            size="lg"
+            leftIcon={
+              <img src="google-icon.svg" alt="Google Icon" draggable={false} />
+            }
+            width="100%"
+          >
+            Zaloguj z Google
+          </Button>
+        </VStack>
+      </VStack>
       <QuestionBottom>
-        Masz już konto? <GreenLink href="login">Zaloguj się</GreenLink>
+        Masz już konto? <GreenLink href="/login">Zaloguj się</GreenLink>
       </QuestionBottom>
     </>
   );

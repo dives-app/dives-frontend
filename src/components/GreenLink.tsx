@@ -8,7 +8,9 @@ export const GreenLink = ({
 }: React.PropsWithChildren<{ href: string }>) => {
   return (
     <NextLink href={href} passHref>
-      <Link color="green">{children}</Link>
+      <Link color="dives.green" fontWeight="semibold">
+        {children}
+      </Link>
     </NextLink>
   );
 };
