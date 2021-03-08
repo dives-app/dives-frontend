@@ -5,15 +5,15 @@ import InputErrorMessage from "./InputErrorMessage";
 
 const Input = styled.input`
   flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
+  width: 1.25rem;
+  height: 1.25rem;
   appearance: none;
   outline: none;
   border: 1px solid
     ${({ theme, errors }) =>
       errors ? theme.colors.errorRed : theme.colors.brightBlack};
-  border-radius: 0.3rem;
-  margin: 0.3rem;
+  border-radius: 0.2rem;
+  margin: 0.2rem;
   box-shadow: 0 0;
   transition: box-shadow 250ms;
 
@@ -23,12 +23,12 @@ const Input = styled.input`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 0.3rem;
-    width: 2rem;
-    height: 2rem;
-    line-height: 2rem;
+    left: 0.2rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    line-height: 1.25rem;
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.125rem;
     color: ${({ theme }) => theme.colors.green};
     pointer-events: none;
   }
@@ -47,7 +47,7 @@ const Wrapper = styled.label`
 
 const Label = styled.span`
   font-weight: 600;
-  margin-left: 0.8rem;
+  margin-left: 0.5rem;
   user-select: none;
 `;
 

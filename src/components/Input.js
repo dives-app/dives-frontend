@@ -17,20 +17,20 @@ const Label = styled.label(
     cursor: text;
 
     color: ${theme.colors.darkerGray};
-    font-size: 2.4rem;
+    font-size: 1.5rem;
 
     ${isFocused &&
     css`
       transform: translateY(-125%);
       color: ${theme.colors.black};
-      font-size: 1.4rem;
+      font-size: 0.875rem;
     `}
   `
 );
 
 const StyledInput = styled.input`
   position: relative;
-  padding: 0 0.2rem 0.6rem 0.2rem;
+  padding: 0 0.125rem 0.375rem 0.125rem;
   width: 100%;
   outline: 0;
   border: 0;
@@ -38,7 +38,7 @@ const StyledInput = styled.input`
     ${({ errors, theme }) =>
       errors ? theme.colors.errorRed : theme.colors.black};
   transition: box-shadow 150ms ease-out;
-  font-size: 2.4rem;
+  font-size: 1.5rem;
 `;
 
 const Input = ({ name, label, inputRef, errors, ...props }) => {

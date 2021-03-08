@@ -67,8 +67,8 @@ export default function Login() {
           variant="primary"
           size="lg"
           width="100%"
-          mt="3.3rem"
-          mb="1rem"
+          mt="2rem"
+          mb="0.625rem"
         >
           Zaloguj się
         </Button>

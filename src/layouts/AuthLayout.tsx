@@ -47,10 +47,10 @@ export const LogoA = styled.a`
 `;
 
 export const Title = styled.h1`
-  margin-top: 6rem;
-  margin-bottom: 4.3rem;
+  margin-top: 3.75rem;
+  margin-bottom: 2.7rem;
   font-family: ${({ theme }) => theme.fonts.work};
-  font-size: 3.2rem;
+  font-size: 2rem;
   color: ${({ theme }) => theme.colors.brightBlack};
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -60,18 +60,18 @@ export const Title = styled.h1`
 
 export const InputGroup = styled.div`
   & > *:not(:first-child) {
-    margin-top: 4.3rem;
+    margin-top: 2.7rem;
   }
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     & > *:first-child {
-      margin-top: 5rem;
+      margin-top: 3.1rem;
     }
   }
 `;
 
 export const QuestionBottom = ({ children }: React.PropsWithChildren<{}>) => (
-  <Text textAlign="center" my="1.2rem" fontSize="1.4rem">
+  <Text textAlign="center" my="0.75rem" fontSize="0.875rem">
     {children}
   </Text>
 );

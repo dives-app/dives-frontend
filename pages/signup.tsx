@@ -75,7 +75,7 @@ export default function Signup() {
         </InputGroup>
         <Checkbox
           name="tos"
-          style={{ marginTop: "2rem" }}
+          style={{ marginTop: "1.25rem" }}
           inputRef={register}
           errors={errors.tos}
         >
@@ -86,8 +86,8 @@ export default function Signup() {
           type="submit"
           variant="primary"
           size="lg"
-          mt="2rem"
-          mb="1rem"
+          mt="1.25rem"
+          mb="0.625rem"
           width="100%"
         >
           Zarejestruj się

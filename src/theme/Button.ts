@@ -1,34 +1,31 @@
 export default {
   baseStyle: {
     fontWeight: "normal",
+    borderRadius: "full",
   },
   defaultProps: {
     variant: "secondary",
   },
   sizes: {
     sm: {
-      borderRadius: "1rem",
-      fontSize: "1.2rem",
-      h: "2.1rem",
-      px: "1rem",
+      fontSize: "sm",
+      h: "5",
+      px: "2.5",
     },
     md: {
-      borderRadius: "2.1rem",
-      fontSize: "1.4rem",
-      h: "3.3rem",
-      px: "1.2rem",
+      fontSize: "md",
+      h: "8",
+      px: "4",
     },
     lg: {
-      borderRadius: "2.1rem",
-      fontSize: "1.8rem",
-      h: "4.2rem",
-      px: "1.8rem",
+      fontSize: "lg",
+      h: "10",
+      px: "5",
     },
     xl: {
-      borderRadius: "1rem",
-      fontSize: "2rem",
-      h: "4.4rem",
-      px: "1.8rem",
+      fontSize: "xl",
+      h: "12",
+      px: "6",
     },
   },
   variants: {
