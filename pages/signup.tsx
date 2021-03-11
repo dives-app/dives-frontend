@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import {
+  useToast,
   Button,
   Checkbox,
   FormControl,
@@ -18,6 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaOf } from "yup";
 import { useRegisterMutation } from "../src/generated/graphql";
 import { useRouter } from "next/router";
+import { connectionErrorToast } from "../src/toast";
 
 interface RegisterOptions {
   email: string;
@@ -54,6 +56,7 @@ export default function Signup() {
     resolver: yupResolver(schema),
   });
 
+  const toast = useToast();
   const [, register] = useRegisterMutation();
   const router = useRouter();
 
@@ -66,7 +69,11 @@ export default function Signup() {
         birthDate: "2000-01-03",
       },
     });
-    if (response.error) {
+    if (response.error?.networkError) {
+      console.error(response.error.message);
+      toast(connectionErrorToast);
+    }
+    if (response.error?.graphQLErrors?.length) {
       const errorCode = response.error.graphQLErrors[0].extensions?.code;
       switch (errorCode) {
         case "EMAIL_ALREADY_IN_USE":

@@ -13,10 +13,12 @@ import {
   Input,
   VStack,
   Heading,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { client } from "../src/urqlClient";
 import { LoginDocument } from "../src/generated/graphql";
+import { connectionErrorToast } from "../src/toast";
 
 interface LoginFields {
   email: string;
@@ -43,6 +45,7 @@ export default function Login() {
   });
 
   const router = useRouter();
+  const toast = useToast();
 
   const onSubmit: SubmitHandler<LoginFields> = async (data) => {
     const response = await client
@@ -53,7 +56,11 @@ export default function Login() {
         },
       })
       .toPromise();
-    if (response.error) {
+    if (response.error?.networkError) {
+      console.error(response.error.message);
+      toast(connectionErrorToast);
+    }
+    if (response.error?.graphQLErrors?.length) {
       const errorMessage = response.error.graphQLErrors[0].message;
       switch (errorMessage) {
         case "No account with provided email":
