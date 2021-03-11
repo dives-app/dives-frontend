@@ -11,7 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { GreenLink } from "../src/components/GreenLink";
-import { QuestionBottom } from "../src/layouts/AuthLayout";
+import AuthLayout, { QuestionBottom } from "../src/layouts/AuthLayout";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -90,80 +90,86 @@ export default function Signup() {
       <Head>
         <title>Załóż konto w Dives</title>
       </Head>
-      <Heading size="lg" fontWeight="normal" mb="4">
-        Zarejestruj się
-      </Heading>
-      <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
-        <VStack width="100%" spacing="4">
-          <FormControl id="name" isInvalid={!!errors.name} isRequired>
-            <FormLabel>Imię</FormLabel>
-            <Input
-              name="name"
-              placeholder="Jan"
-              ref={registerInput}
-              variant="flushed"
-            />
-            <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
-          </FormControl>
-          <FormControl id="email" isInvalid={!!errors.email} isRequired>
-            <FormLabel>Adres e-mail</FormLabel>
-            <Input
-              type="email"
-              name="email"
-              placeholder="jan.kowalski@example.com"
-              ref={registerInput}
-              variant="flushed"
-            />
-            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-          </FormControl>
-          <FormControl id="password" isInvalid={!!errors.password} isRequired>
-            <FormLabel>Hasło</FormLabel>
-            <Input
-              type="password"
-              name="password"
-              placeholder="********"
-              ref={registerInput}
-              variant="flushed"
-            />
-            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-          </FormControl>
-        </VStack>
-        <Checkbox
-          name="tos"
-          ref={registerInput}
-          errors={errors.tos}
-          isInvalid={!!errors.tos}
-          isRequired
-        >
-          Zapoznałem się i akceptuję{" "}
-          <GreenLink href="/tos">Regulamin</GreenLink> oraz{" "}
-          <GreenLink href="/privacy">Politykę prywatności</GreenLink>
-        </Checkbox>
-        <VStack width="100%" spacing="3">
-          <Button
-            type="submit"
-            variant="primary"
-            size="lg"
-            width="100%"
-            isLoading={isSubmitting}
+      <AuthLayout>
+        <Heading size="lg" fontWeight="normal" mb="4">
+          Zarejestruj się
+        </Heading>
+        <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
+          <VStack width="100%" spacing="4">
+            <FormControl id="name" isInvalid={!!errors.name} isRequired>
+              <FormLabel>Imię</FormLabel>
+              <Input
+                name="name"
+                placeholder="Jan"
+                ref={registerInput}
+                variant="flushed"
+              />
+              <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl id="email" isInvalid={!!errors.email} isRequired>
+              <FormLabel>Adres e-mail</FormLabel>
+              <Input
+                type="email"
+                name="email"
+                placeholder="jan.kowalski@example.com"
+                ref={registerInput}
+                variant="flushed"
+              />
+              <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+            </FormControl>
+            <FormControl id="password" isInvalid={!!errors.password} isRequired>
+              <FormLabel>Hasło</FormLabel>
+              <Input
+                type="password"
+                name="password"
+                placeholder="********"
+                ref={registerInput}
+                variant="flushed"
+              />
+              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+            </FormControl>
+          </VStack>
+          <Checkbox
+            name="tos"
+            ref={registerInput}
+            errors={errors.tos}
+            isInvalid={!!errors.tos}
+            isRequired
           >
-            Zarejestruj się
-          </Button>
-          <Button
-            variant="secondaryOutlined"
-            size="lg"
-            leftIcon={
-              <img src="google-icon.svg" alt="Google Icon" draggable={false} />
-            }
-            width="100%"
-          >
-            Zaloguj z Google
-          </Button>
+            Zapoznałem się i akceptuję{" "}
+            <GreenLink href="/tos">Regulamin</GreenLink> oraz{" "}
+            <GreenLink href="/privacy">Politykę prywatności</GreenLink>
+          </Checkbox>
+          <VStack width="100%" spacing="3">
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              width="100%"
+              isLoading={isSubmitting}
+            >
+              Zarejestruj się
+            </Button>
+            <Button
+              variant="secondaryOutlined"
+              size="lg"
+              leftIcon={
+                <img
+                  src="google-icon.svg"
+                  alt="Google Icon"
+                  draggable={false}
+                />
+              }
+              width="100%"
+            >
+              Zaloguj z Google
+            </Button>
+          </VStack>
         </VStack>
-      </VStack>
-      <QuestionBottom>
-        Masz już konto? <GreenLink href="/login">Zaloguj się</GreenLink>
-      </QuestionBottom>
+        <QuestionBottom>
+          Masz już konto? <GreenLink href="/login">Zaloguj się</GreenLink>
+        </QuestionBottom>
+      </AuthLayout>
     </>
   );
 }

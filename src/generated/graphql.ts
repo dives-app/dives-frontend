@@ -657,6 +657,14 @@ export type UpdatePurchaseInput = {
   planId?: Maybe<Scalars['String']>;
 };
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'revokeToken'>
+);
+
 export type RegisterMutationVariables = Exact<{
   options: UsernamePasswordInput;
 }>;
@@ -670,7 +678,40 @@ export type RegisterMutation = (
   ) }
 );
 
+export type LoginQueryVariables = Exact<{
+  options: UserInput;
+}>;
 
+
+export type LoginQuery = (
+  { __typename?: 'Query' }
+  & { login: (
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+  ) }
+);
+
+export type UserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserQuery = (
+  { __typename?: 'Query' }
+  & { user: (
+    { __typename?: 'User' }
+    & Pick<User, 'name' | 'email'>
+  ) }
+);
+
+
+export const LogoutDocument = gql`
+    mutation Logout {
+  revokeToken
+}
+    `;
+
+export function useLogoutMutation() {
+  return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
+};
 export const RegisterDocument = gql`
     mutation Register($options: UsernamePasswordInput!) {
   register(options: $options) {
@@ -681,4 +722,27 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const LoginDocument = gql`
+    query Login($options: UserInput!) {
+  login(options: $options) {
+    id
+  }
+}
+    `;
+
+export function useLoginQuery(options: Omit<Urql.UseQueryArgs<LoginQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<LoginQuery>({ query: LoginDocument, ...options });
+};
+export const UserDocument = gql`
+    query User {
+  user {
+    name
+    email
+  }
+}
+    `;
+
+export function useUserQuery(options: Omit<Urql.UseQueryArgs<UserQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<UserQuery>({ query: UserDocument, ...options });
 };
