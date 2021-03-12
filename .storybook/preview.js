@@ -1,16 +1,16 @@
-import React from "react";
-import ThemeProvider from "../components/ThemeProvider";
-import GlobalStyle from "../styles/GlobalStyle";
+import React from 'react';
+import ThemeProvider from '../components/ThemeProvider';
+import GlobalStyle from '../styles/GlobalStyle';
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
 };
 
 export const decorators = [
-  (Story) => (
+  Story => (
     <ThemeProvider>
       <GlobalStyle />
-      <div style={{ padding: "1.6rem" }}>
+      <div style={{ padding: '1.6rem' }}>
         <Story />
       </div>
     </ThemeProvider>

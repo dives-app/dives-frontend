@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
+
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -29,51 +30,41 @@ export type Query = {
   purchase: Purchase;
 };
 
-
 export type QueryLoginArgs = {
   options: UserInput;
 };
-
 
 export type QueryBudgetArgs = {
   options: BudgetInput;
 };
 
-
 export type QueryTransactionArgs = {
   options: TransactionInput;
 };
-
 
 export type QueryCategoryArgs = {
   options: CategoryInput;
 };
 
-
 export type QueryDebtArgs = {
   options: DebtInput;
 };
-
 
 export type QueryAccountArgs = {
   options: AccountInput;
 };
 
-
 export type QueryCycleTransactionArgs = {
   options: CycleTransactionInput;
 };
-
 
 export type QueryMerchantArgs = {
   options: MerchantInput;
 };
 
-
 export type QueryNotificationArgs = {
   options: NotificationInput;
 };
-
 
 export type QueryPurchaseArgs = {
   options: PurchaseInput;
@@ -311,156 +302,125 @@ export type Mutation = {
   deletePurchase: Purchase;
 };
 
-
 export type MutationRegisterArgs = {
   options: UsernamePasswordInput;
 };
-
 
 export type MutationUpdateUserArgs = {
   options: UpdateUserInput;
 };
 
-
 export type MutationCreateBudgetArgs = {
   options: NewBudgetInput;
 };
-
 
 export type MutationUpdateBudgetArgs = {
   options: UpdateBudgetInput;
 };
 
-
 export type MutationDeleteBudgetArgs = {
   options: BudgetInput;
 };
-
 
 export type MutationAddBudgetMemberArgs = {
   options: AddBudgetMemberInput;
 };
 
-
 export type MutationRemoveBudgetMemberArgs = {
   options: RemoveBudgetMemberInput;
 };
-
 
 export type MutationCreateTransactionArgs = {
   options: NewTransactionInput;
 };
 
-
 export type MutationUpdateTransactionArgs = {
   options: UpdateTransactionInput;
 };
-
 
 export type MutationDeleteTransactionArgs = {
   options: TransactionInput;
 };
 
-
 export type MutationCreateCategoryArgs = {
   options: NewCategoryInput;
 };
-
 
 export type MutationUpdateCategoryArgs = {
   options: UpdateCategoryInput;
 };
 
-
 export type MutationDeleteCategoryArgs = {
   options: CategoryInput;
 };
-
 
 export type MutationCreateDebtArgs = {
   options: NewDebtInput;
 };
 
-
 export type MutationUpdateDebtArgs = {
   options: UpdateDebtInput;
 };
-
 
 export type MutationDeleteDebtArgs = {
   options: DebtInput;
 };
 
-
 export type MutationCreateAccountArgs = {
   options: NewAccountInput;
 };
-
 
 export type MutationUpdateAccountArgs = {
   options: UpdateAccountInput;
 };
 
-
 export type MutationDeleteAccountArgs = {
   options: AccountInput;
 };
-
 
 export type MutationCreateCycleTransactionArgs = {
   options: NewCycleTransactionInput;
 };
 
-
 export type MutationUpdateCycleTransactionArgs = {
   options: UpdateCycleTransactionInput;
 };
-
 
 export type MutationDeleteCycleTransactionArgs = {
   options: CycleTransactionInput;
 };
 
-
 export type MutationCreateMerchantArgs = {
   options: NewMerchantInput;
 };
-
 
 export type MutationUpdateMerchantArgs = {
   options: UpdateMerchantInput;
 };
 
-
 export type MutationDeleteMerchantArgs = {
   options: MerchantInput;
 };
-
 
 export type MutationCreateNotificationArgs = {
   options: NewNotificationInput;
 };
 
-
 export type MutationUpdateNotificationArgs = {
   options: UpdateNotificationInput;
 };
-
 
 export type MutationDeleteNotificationArgs = {
   options: NotificationInput;
 };
 
-
 export type MutationCreatePurchaseArgs = {
   options: NewPurchaseInput;
 };
 
-
 export type MutationUpdatePurchaseArgs = {
   options: UpdatePurchaseInput;
 };
-
 
 export type MutationDeletePurchaseArgs = {
   options: PurchaseInput;
@@ -657,92 +617,72 @@ export type UpdatePurchaseInput = {
   planId?: Maybe<Scalars['String']>;
 };
 
-export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+export type LogoutMutationVariables = Exact<{ [key: string]: never }>;
 
-
-export type LogoutMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'revokeToken'>
-);
+export type LogoutMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'revokeToken'>;
 
 export type RegisterMutationVariables = Exact<{
   options: UsernamePasswordInput;
 }>;
 
-
-export type RegisterMutation = (
-  { __typename?: 'Mutation' }
-  & { register: (
-    { __typename?: 'User' }
-    & Pick<User, 'id'>
-  ) }
-);
+export type RegisterMutation = { __typename?: 'Mutation' } & {
+  register: { __typename?: 'User' } & Pick<User, 'id'>;
+};
 
 export type LoginQueryVariables = Exact<{
   options: UserInput;
 }>;
 
+export type LoginQuery = { __typename?: 'Query' } & {
+  login: { __typename?: 'User' } & Pick<User, 'id'>;
+};
 
-export type LoginQuery = (
-  { __typename?: 'Query' }
-  & { login: (
-    { __typename?: 'User' }
-    & Pick<User, 'id'>
-  ) }
-);
+export type UserQueryVariables = Exact<{ [key: string]: never }>;
 
-export type UserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type UserQuery = (
-  { __typename?: 'Query' }
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'email'>
-  ) }
-);
-
+export type UserQuery = { __typename?: 'Query' } & {
+  user: { __typename?: 'User' } & Pick<User, 'name' | 'email'>;
+};
 
 export const LogoutDocument = gql`
-    mutation Logout {
-  revokeToken
-}
-    `;
+  mutation Logout {
+    revokeToken
+  }
+`;
 
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
-};
-export const RegisterDocument = gql`
-    mutation Register($options: UsernamePasswordInput!) {
-  register(options: $options) {
-    id
-  }
 }
-    `;
+export const RegisterDocument = gql`
+  mutation Register($options: UsernamePasswordInput!) {
+    register(options: $options) {
+      id
+    }
+  }
+`;
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
-};
-export const LoginDocument = gql`
-    query Login($options: UserInput!) {
-  login(options: $options) {
-    id
-  }
 }
-    `;
+export const LoginDocument = gql`
+  query Login($options: UserInput!) {
+    login(options: $options) {
+      id
+    }
+  }
+`;
 
 export function useLoginQuery(options: Omit<Urql.UseQueryArgs<LoginQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<LoginQuery>({ query: LoginDocument, ...options });
-};
-export const UserDocument = gql`
-    query User {
-  user {
-    name
-    email
-  }
 }
-    `;
+export const UserDocument = gql`
+  query User {
+    user {
+      name
+      email
+    }
+  }
+`;
 
 export function useUserQuery(options: Omit<Urql.UseQueryArgs<UserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<UserQuery>({ query: UserDocument, ...options });
-};
+}

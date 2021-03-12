@@ -1,10 +1,8 @@
-import React from "react";
-import Head from "next/head";
-import { GreenLink } from "../src/components/GreenLink";
-import AuthLayout, { QuestionBottom } from "../src/layouts/AuthLayout";
-import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React from 'react';
+import Head from 'next/head';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Button,
   FormControl,
@@ -14,11 +12,13 @@ import {
   VStack,
   Heading,
   useToast,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { client } from "../src/urqlClient";
-import { LoginDocument } from "../src/generated/graphql";
-import { connectionErrorToast } from "../src/toast";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
+import GreenLink from '../src/components/GreenLink';
+import client from '../src/urqlClient';
+import { LoginDocument } from '../src/generated/graphql';
+import connectionErrorToast from '../src/toast';
 
 interface LoginFields {
   email: string;
@@ -26,11 +26,8 @@ interface LoginFields {
 }
 
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .required("Adres e-mail jest wymagany")
-    .email("Nieprawidłowy adres e-mail"),
-  password: yup.string().required("Hasło jest wymagane"),
+  email: yup.string().required('Adres e-mail jest wymagany').email('Nieprawidłowy adres e-mail'),
+  password: yup.string().required('Hasło jest wymagane'),
 });
 
 export default function Login() {
@@ -47,7 +44,7 @@ export default function Login() {
   const router = useRouter();
   const toast = useToast();
 
-  const onSubmit: SubmitHandler<LoginFields> = async (data) => {
+  const onSubmit: SubmitHandler<LoginFields> = async data => {
     const response = await client
       .query(LoginDocument, {
         options: {
@@ -63,20 +60,22 @@ export default function Login() {
     if (response.error?.graphQLErrors?.length) {
       const errorMessage = response.error.graphQLErrors[0].message;
       switch (errorMessage) {
-        case "No account with provided email":
-          setError("email", {
-            message: "Konto o podanym adresie e-mail nie istnieje",
+        case 'No account with provided email':
+          setError('email', {
+            message: 'Konto o podanym adresie e-mail nie istnieje',
           });
           break;
-        case "Invalid credentials":
-          setError("password", {
-            message: "Nieprawidłowe hasło",
+        case 'Invalid credentials':
+          setError('password', {
+            message: 'Nieprawidłowe hasło',
           });
           break;
+        default:
+          console.error('Unreachable');
       }
     }
     if (response.data) {
-      router.push("/dashboard");
+      router.push('/dashboard');
     }
   };
 
@@ -89,7 +88,7 @@ export default function Login() {
         <Heading size="lg" fontWeight="normal" mb="4">
           Zaloguj się
         </Heading>
-        <VStack as={"form"} onSubmit={handleSubmit(onSubmit)} spacing="6">
+        <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
           <VStack width="100%" spacing="4">
             <FormControl id="email" isInvalid={!!errors.email} isRequired>
               <FormLabel>Adres e-mail</FormLabel>
@@ -115,26 +114,14 @@ export default function Login() {
             </FormControl>
           </VStack>
           <VStack width="100%" spacing="3">
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              width="100%"
-              isLoading={isSubmitting}
-            >
+            <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isSubmitting}>
               Zaloguj się
             </Button>
             <Button
               variant="secondaryOutlined"
               size="lg"
               width="100%"
-              leftIcon={
-                <img
-                  src="google-icon.svg"
-                  alt="Google Icon"
-                  draggable={false}
-                />
-              }
+              leftIcon={<img src="google-icon.svg" alt="Google Icon" draggable={false} />}
             >
               Zaloguj z Google
             </Button>

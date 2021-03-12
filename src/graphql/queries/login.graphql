@@ -1,5 +1,5 @@
 query Login($options: UserInput!) {
-    login(options: $options) {
-        id
-    }
+  login(options: $options) {
+    id
+  }
 }

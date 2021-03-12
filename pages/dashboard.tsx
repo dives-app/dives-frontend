@@ -1,7 +1,7 @@
-import { Button, Text } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import React from "react";
-import { useLogoutMutation, useUserQuery } from "../src/generated/graphql";
+import { Button, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useLogoutMutation, useUserQuery } from '../src/generated/graphql';
 
 export default function Dashboard() {
   const [{ data }] = useUserQuery();
@@ -11,7 +11,7 @@ export default function Dashboard() {
   const handleLogout = async () => {
     const response = await logout();
     if (response.data?.revokeToken) {
-      router.push("/");
+      router.push('/');
     }
   };
 

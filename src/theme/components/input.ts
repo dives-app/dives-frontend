@@ -1,5 +1,5 @@
 export default {
   defaultProps: {
-    focusBorderColor: "dives.green",
+    focusBorderColor: 'dives.green',
   },
 };

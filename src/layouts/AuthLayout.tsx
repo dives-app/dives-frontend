@@ -1,11 +1,11 @@
-import React from "react";
-import Image from "next/image";
-import { Grid, Flex, Text } from "@chakra-ui/react";
-import Link from "next/link";
+import React from 'react';
+import Image from 'next/image';
+import { Grid, Flex, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
 export const DivesHomeButtonLogo = () => (
   <Link href="/" passHref>
-    <Flex justifyContent={{ base: "center", sm: "left" }} mb="8">
+    <Flex justifyContent={{ base: 'center', sm: 'left' }} mb="8">
       <Image
         width="169"
         height="77"
@@ -28,8 +28,8 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
     <>
       <Grid
         templateColumns={{
-          base: "auto",
-          md: "minmax(500px, min-content) auto",
+          base: 'auto',
+          md: 'minmax(500px, min-content) auto',
         }}
         width="100vw"
         height="100vh"
@@ -40,7 +40,7 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
           direction="column"
           boxSizing="border-box"
           overflow="auto"
-          p={["40px 35px", "55px 70px"]}
+          p={['40px 35px', '55px 70px']}
         >
           <DivesHomeButtonLogo />
           {children}
@@ -50,7 +50,7 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
           alignContent="center"
           overflow="hidden"
           bg="linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff"
-          display={{ base: "none", md: "flex" }}
+          display={{ base: 'none', md: 'flex' }}
         >
           <Image
             src="/calc-and-calendar.svg"

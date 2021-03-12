@@ -1,10 +1,10 @@
 export default {
   defaultProps: {
-    colorScheme: "green",
+    colorScheme: 'green',
   },
   colorSchemes: {
     green: {
-      bg: "dives.green",
+      bg: 'dives.green',
     },
   },
 };
