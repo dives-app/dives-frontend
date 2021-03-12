@@ -9,7 +9,7 @@
     "storybook": "start-storybook -p 5001",
     "build-storybook": "build-storybook",
     "gen": "graphql-codegen --config codegen.yml",
-    "lint": "eslint ."
+    "lint": "prettier --check . && eslint ."
   },
   "dependencies": {
     "@chakra-ui/react": "^1.3.4",
