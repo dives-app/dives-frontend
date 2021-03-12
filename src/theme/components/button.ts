@@ -1,3 +1,16 @@
+const bg = (normal: string, hover: string, active: string) => ({
+  bg: normal,
+  _hover: {
+    bg: hover,
+    _disabled: {
+      bg: normal,
+    },
+  },
+  _active: {
+    bg: active,
+  },
+});
+
 export default {
   baseStyle: {
     fontWeight: "normal",
@@ -30,34 +43,16 @@ export default {
   },
   variants: {
     primary: {
-      bg: "dives.green",
+      ...bg("dives.green", "dives.lightGreen", "dives.darkGreen"),
       color: "white",
-      _hover: {
-        bg: "dives.lightGreen",
-      },
-      _active: {
-        bg: "dives.darkGreen",
-      },
     },
     secondary: {
-      bg: "white",
+      ...bg("white", "lightGray", "darkGray"),
       color: "dives.green",
-      _hover: {
-        bg: "lightGray",
-      },
-      _active: {
-        bg: "darkGray",
-      },
     },
     secondaryOutlined: {
-      bg: "white",
+      ...bg("white", "lightGray", "darkGray"),
       color: "darkerGray",
-      _hover: {
-        bg: "lightGray",
-      },
-      _active: {
-        bg: "darkGray",
-      },
       boxShadow: "xs",
     },
   },
