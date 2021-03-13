@@ -52,41 +52,49 @@ export default function Signup() {
   });
 
   const toast = useToast();
-  const [, register] = useRegisterMutation();
+  const [register] = useRegisterMutation();
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<RegisterFormFields> = async data => {
-    const response = await register({
-      options: {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        birthDate: '2000-01-03',
-      },
-    });
-    if (response.error?.networkError) {
-      console.error(response.error.message);
-      toast(connectionErrorToast);
-    }
-    if (response.error?.graphQLErrors?.length) {
-      const errorCode = response.error.graphQLErrors[0].extensions?.code;
-      switch (errorCode) {
-        case 'EMAIL_ALREADY_IN_USE':
-          setError('email', { message: 'Podany e-mail jest zajęty' });
-          break;
-        case 'INVALID_PASSWORD':
-          setError('password', {
-            message:
-              'Poprawne hasło powinno zawierać conajmniej jedną cyfrę, małą literę, wielką literę i znak specjalny oraz powinno być długości conajmniej 8 znaków.',
-          });
-          break;
-        default:
-          console.error('Unreachable');
+  const onSubmit: SubmitHandler<RegisterFormFields> = async submittedData => {
+    try {
+      const { data } = await register({
+        variables: {
+          options: {
+            name: submittedData.name,
+            email: submittedData.email,
+            password: submittedData.password,
+            birthDate: '2000-01-03',
+          },
+        },
+      });
+      console.log(data);
+      if (data) {
+        router.push('/login');
       }
+    } catch (e) {
+      console.log(e.message);
     }
-    if (response.data) {
-      router.push('/login');
-    }
+
+    // if (response.error?.networkError) {
+    //   console.error(response.error.message);
+    //   toast(connectionErrorToast);
+    // }
+    // if (response.error?.graphQLErrors?.length) {
+    //   const errorCode = response.error.graphQLErrors[0].extensions?.code;
+    //   switch (errorCode) {
+    //     case 'EMAIL_ALREADY_IN_USE':
+    //       setError('email', { message: 'Podany e-mail jest zajęty' });
+    //       break;
+    //     case 'INVALID_PASSWORD':
+    //       setError('password', {
+    //         message:
+    //           'Poprawne hasło powinno zawierać conajmniej jedną cyfrę, małą literę, wielką literę i znak specjalny oraz powinno być długości conajmniej 8 znaków.',
+    //       });
+    //       break;
+    //     default:
+    //       console.error('Unreachable');
+    //   }
+    // }
   };
 
   return (

@@ -4,8 +4,8 @@ import React from 'react';
 import { useLogoutMutation, useUserQuery } from '../src/generated/graphql';
 
 export default function Dashboard() {
-  const [{ data }] = useUserQuery();
-  const [, logout] = useLogoutMutation();
+  const { data } = useUserQuery();
+  const [logout] = useLogoutMutation();
   const router = useRouter();
 
   const handleLogout = async () => {
