@@ -14,9 +14,9 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useLazyQuery } from '@apollo/client';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
-import client from '../src/urqlClient';
 import { LoginDocument } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
 
@@ -43,22 +43,11 @@ export default function Login() {
 
   const router = useRouter();
   const toast = useToast();
+  const [login, { data, error }] = useLazyQuery(LoginDocument);
 
-  const onSubmit: SubmitHandler<LoginFields> = async data => {
-    const response = await client
-      .query(LoginDocument, {
-        options: {
-          email: data.email,
-          password: data.password,
-        },
-      })
-      .toPromise();
-    if (response.error?.networkError) {
-      console.error(response.error.message);
-      toast(connectionErrorToast);
-    }
-    if (response.error?.graphQLErrors?.length) {
-      const errorMessage = response.error.graphQLErrors[0].message;
+  React.useEffect(() => {
+    if (error?.graphQLErrors.length) {
+      const errorMessage = error?.message;
       if (errorMessage === 'No account with provided email') {
         setError('email', {
           message: 'Konto o podanym adresie e-mail nie istnieje',
@@ -71,9 +60,24 @@ export default function Login() {
         console.error('Unreachable');
       }
     }
-    if (response.data) {
+    if (error?.networkError) {
+      console.error(error.message);
+      toast(connectionErrorToast);
+    }
+    if (data) {
       router.push('/dashboard');
     }
+  }, [data, error]);
+
+  const onSubmit: SubmitHandler<LoginFields> = async submittedData => {
+    login({
+      variables: {
+        options: {
+          email: submittedData.email,
+          password: submittedData.password,
+        },
+      },
+    });
   };
 
   return (

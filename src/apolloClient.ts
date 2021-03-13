@@ -1,4 +1,4 @@
-import { createClient } from 'urql';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 if (!API_ENDPOINT) {
@@ -7,9 +7,8 @@ if (!API_ENDPOINT) {
   );
 }
 
-export default createClient({
-  url: API_ENDPOINT,
-  fetchOptions: {
-    credentials: 'include',
-  },
+export default new ApolloClient({
+  uri: API_ENDPOINT,
+  cache: new InMemoryCache(),
+  credentials: 'include',
 });

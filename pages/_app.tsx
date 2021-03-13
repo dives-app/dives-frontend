@@ -1,15 +1,15 @@
 import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
-import { Provider } from 'urql';
+import { ApolloProvider } from '@apollo/client';
 import theme from '../src/theme';
-import client from '../src/urqlClient';
+import client from '../src/apolloClient';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Provider value={client}>
+      <ApolloProvider client={client}>
         <Component {...pageProps} />
-      </Provider>
+      </ApolloProvider>
     </ChakraProvider>
   );
 }
