@@ -16,7 +16,7 @@ import {
 import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/client';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
-import GreenLink from '../src/components/GreenLink';
+import DivesLink from '../src/components/DivesLink';
 import { LoginDocument } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
 
@@ -47,19 +47,17 @@ export default function Login() {
 
   React.useEffect(() => {
     if (error?.graphQLErrors.length) {
-      switch (error?.message) {
-        case 'No account with provided email':
-          setError('email', {
-            message: 'Konto o podanym adresie e-mail nie istnieje',
-          });
-          break;
-        case 'Invalid credentials':
-          setError('password', {
-            message: 'Nieprawidłowe hasło',
-          });
-          break;
-        default:
-          console.error('Unreachable');
+      const errorMessage = error?.message;
+      if (errorMessage === 'No account with provided email') {
+        setError('email', {
+          message: 'Konto o podanym adresie e-mail nie istnieje',
+        });
+      } else if (errorMessage === 'Invalid credentials') {
+        setError('password', {
+          message: 'Nieprawidłowe hasło',
+        });
+      } else {
+        console.error('Unreachable');
       }
     }
     if (error?.networkError) {
@@ -131,7 +129,7 @@ export default function Login() {
           </VStack>
         </VStack>
         <QuestionBottom>
-          Nie masz konta? <GreenLink href="/signup">Zarejestruj się</GreenLink>
+          Nie masz konta? <DivesLink href="/signup">Zarejestruj się</DivesLink>
         </QuestionBottom>
       </AuthLayout>
     </>

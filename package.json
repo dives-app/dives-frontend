@@ -6,10 +6,11 @@
     "dev": "next dev -p 5000",
     "build": "env-cmd -f .env.staging next build",
     "start": "env-cmd -f .env.staging next start",
+    "analyze": "NEXT_PUBLIC_API_ENDPOINT=empty ANALYZE=true next build",
     "storybook": "start-storybook -p 5001",
     "build-storybook": "build-storybook",
     "gen": "graphql-codegen --config codegen.yml",
-    "lint": "eslint ."
+    "lint": "prettier --check . && eslint ."
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
@@ -40,6 +41,7 @@
     "@graphql-codegen/typescript": "1.21.1",
     "@graphql-codegen/typescript-operations": "1.17.15",
     "@graphql-codegen/typescript-react-apollo": "^2.2.2",
+    "@next/bundle-analyzer": "^10.0.8",
     "@storybook/addon-actions": "^6.1.21",
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.1.21",

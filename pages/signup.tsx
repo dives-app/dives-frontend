@@ -18,7 +18,7 @@ import { SchemaOf } from 'yup';
 import { useRouter } from 'next/router';
 import { useRegisterMutation } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
-import GreenLink from '../src/components/GreenLink';
+import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
 
 interface RegisterOptions {
@@ -143,8 +143,8 @@ export default function Signup() {
             isInvalid={!!errors.tos}
             isRequired
           >
-            Zapoznałem się i akceptuję <GreenLink href="/tos">Regulamin</GreenLink> oraz{' '}
-            <GreenLink href="/privacy">Politykę prywatności</GreenLink>
+            Zapoznałem się i akceptuję <DivesLink href="/tos">Regulamin</DivesLink> oraz{' '}
+            <DivesLink href="/privacy">Politykę prywatności</DivesLink>
           </Checkbox>
           <VStack width="100%" spacing="3">
             <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isSubmitting}>
@@ -161,7 +161,7 @@ export default function Signup() {
           </VStack>
         </VStack>
         <QuestionBottom>
-          Masz już konto? <GreenLink href="/login">Zaloguj się</GreenLink>
+          Masz już konto? <DivesLink href="/login">Zaloguj się</DivesLink>
         </QuestionBottom>
       </AuthLayout>
     </>
