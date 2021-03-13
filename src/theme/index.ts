@@ -10,7 +10,7 @@ const colors = {
     darkGreen: '#3f9f70',
   },
   white: '#fff',
-  // lightGray: "#F5F6F7",
+  lightGray: '#F5F6F7',
   // gray: "#EDEDED",
   // darkGray: "#C4C4C4",
   // darkerGray: "#A6A6A6",
