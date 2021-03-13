@@ -18,7 +18,7 @@ import { SchemaOf } from 'yup';
 import { useRouter } from 'next/router';
 import { useRegisterMutation } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
-import GreenLink from '../src/components/GreenLink';
+import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
 
 interface RegisterOptions {
@@ -70,18 +70,15 @@ export default function Signup() {
     }
     if (response.error?.graphQLErrors?.length) {
       const errorCode = response.error.graphQLErrors[0].extensions?.code;
-      switch (errorCode) {
-        case 'EMAIL_ALREADY_IN_USE':
-          setError('email', { message: 'Podany e-mail jest zajęty' });
-          break;
-        case 'INVALID_PASSWORD':
-          setError('password', {
-            message:
-              'Poprawne hasło powinno zawierać conajmniej jedną cyfrę, małą literę, wielką literę i znak specjalny oraz powinno być długości conajmniej 8 znaków.',
-          });
-          break;
-        default:
-          console.error('Unreachable');
+      if (errorCode === 'EMAIL_ALREADY_IN_USE') {
+        setError('email', { message: 'Podany e-mail jest zajęty' });
+      } else if (errorCode === 'INVALID_PASSWORD') {
+        setError('password', {
+          message:
+            'Poprawne hasło powinno zawierać conajmniej jedną cyfrę, małą literę, wielką literę i znak specjalny oraz powinno być długości conajmniej 8 znaków.',
+        });
+      } else {
+        console.error('Unreachable');
       }
     }
     if (response.data) {
@@ -135,8 +132,8 @@ export default function Signup() {
             isInvalid={!!errors.tos}
             isRequired
           >
-            Zapoznałem się i akceptuję <GreenLink href="/tos">Regulamin</GreenLink> oraz{' '}
-            <GreenLink href="/privacy">Politykę prywatności</GreenLink>
+            Zapoznałem się i akceptuję <DivesLink href="/tos">Regulamin</DivesLink> oraz{' '}
+            <DivesLink href="/privacy">Politykę prywatności</DivesLink>
           </Checkbox>
           <VStack width="100%" spacing="3">
             <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isSubmitting}>
@@ -153,7 +150,7 @@ export default function Signup() {
           </VStack>
         </VStack>
         <QuestionBottom>
-          Masz już konto? <GreenLink href="/login">Zaloguj się</GreenLink>
+          Masz już konto? <DivesLink href="/login">Zaloguj się</DivesLink>
         </QuestionBottom>
       </AuthLayout>
     </>

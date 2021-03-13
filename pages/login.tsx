@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
-import GreenLink from '../src/components/GreenLink';
+import DivesLink from '../src/components/DivesLink';
 import client from '../src/urqlClient';
 import { LoginDocument } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
@@ -59,19 +59,16 @@ export default function Login() {
     }
     if (response.error?.graphQLErrors?.length) {
       const errorMessage = response.error.graphQLErrors[0].message;
-      switch (errorMessage) {
-        case 'No account with provided email':
-          setError('email', {
-            message: 'Konto o podanym adresie e-mail nie istnieje',
-          });
-          break;
-        case 'Invalid credentials':
-          setError('password', {
-            message: 'Nieprawidłowe hasło',
-          });
-          break;
-        default:
-          console.error('Unreachable');
+      if (errorMessage === 'No account with provided email') {
+        setError('email', {
+          message: 'Konto o podanym adresie e-mail nie istnieje',
+        });
+      } else if (errorMessage === 'Invalid credentials') {
+        setError('password', {
+          message: 'Nieprawidłowe hasło',
+        });
+      } else {
+        console.error('Unreachable');
       }
     }
     if (response.data) {
@@ -128,7 +125,7 @@ export default function Login() {
           </VStack>
         </VStack>
         <QuestionBottom>
-          Nie masz konta? <GreenLink href="/signup">Zarejestruj się</GreenLink>
+          Nie masz konta? <DivesLink href="/signup">Zarejestruj się</DivesLink>
         </QuestionBottom>
       </AuthLayout>
     </>
