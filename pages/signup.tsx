@@ -16,7 +16,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SchemaOf } from 'yup';
 import { useRouter } from 'next/router';
-import { useRegisterMutation } from '../src/generated/graphql';
+import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
@@ -41,19 +41,16 @@ const schema: SchemaOf<RegisterFormFields> = yup
   .defined();
 
 export default function Signup() {
-  const {
-    register: registerInput,
-    handleSubmit,
-    errors,
-    setError,
-    formState: { isSubmitting },
-  } = useForm<RegisterFormFields>({
+  const { register: registerInput, handleSubmit, errors, setError } = useForm<RegisterFormFields>({
     resolver: yupResolver(schema),
   });
 
   const toast = useToast();
   const router = useRouter();
-  const [register] = useRegisterMutation({
+  useUserQuery({
+    onCompleted: () => router.push('/dashboard'),
+  });
+  const [register, { loading }] = useRegisterMutation({
     onCompleted: () => router.push('/dashboard'),
     onError: error => {
       if (error.graphQLErrors.length) {
@@ -137,7 +134,7 @@ export default function Signup() {
             <DivesLink href="/privacy">Politykę prywatności</DivesLink>
           </Checkbox>
           <VStack width="100%" spacing="3">
-            <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isSubmitting}>
+            <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
               Zarejestruj się
             </Button>
             <Button

@@ -1,38 +1,34 @@
+import React from 'react';
+import Head from 'next/head';
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useLogoutLazyQuery, useUserQuery } from '../src/generated/graphql';
 import DashboardLayout from '../src/layouts/DashboardLayout';
+import apolloClient from '../src/apolloClient';
 
 export default function Dashboard() {
-  const { data, error } = useUserQuery();
-  const [logout, { data: logoutData }] = useLogoutLazyQuery();
   const router = useRouter();
-
-  React.useEffect(() => {
-    if (logoutData?.logout) {
-      router.push('/');
-    }
-  }, [logoutData]);
-
-  React.useEffect(() => {
-    if (error) {
-      router.push('/login');
-    }
-  }, [error]);
-
-  const handleLogout = async () => {
-    logout();
-  };
+  const { data } = useUserQuery({
+    onError: () => router.push('/login'),
+  });
+  const [logout] = useLogoutLazyQuery({
+    onCompleted: async () => {
+      await apolloClient.cache.reset();
+      await router.push('/');
+    },
+  });
 
   return (
     <>
-      {data && (
+      <Head>
+        <title>Dives</title>
+      </Head>
+      {data ? (
         <DashboardLayout
           head={
             <Text>
-              Jesteś zalogowany jako {data?.user.name} ({data?.user.email})
-              <Button onClick={handleLogout}>Wyloguj</Button>
+              Jesteś zalogowany jako {data.user.name} ({data.user.email})
+              <Button onClick={() => logout()}>Wyloguj</Button>
             </Text>
           }
           leftColumn={
@@ -48,6 +44,8 @@ export default function Dashboard() {
             </VStack>
           }
         />
+      ) : (
+        <Text>TODO: Loading skeleton here...</Text>
       )}
     </>
   );

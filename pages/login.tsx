@@ -16,7 +16,7 @@ import {
 import { useRouter } from 'next/router';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
-import { useLoginLazyQuery } from '../src/generated/graphql';
+import { useLoginLazyQuery, useUserQuery } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
 
 interface LoginFields {
@@ -30,43 +30,38 @@ const schema = yup.object().shape({
 });
 
 export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    setError,
-    formState: { isSubmitting },
-  } = useForm<LoginFields>({
+  const { register, handleSubmit, errors, setError } = useForm<LoginFields>({
     resolver: yupResolver(schema),
   });
 
   const router = useRouter();
   const toast = useToast();
-  const [login, { data, error }] = useLoginLazyQuery();
-
-  React.useEffect(() => {
-    if (error?.graphQLErrors.length) {
-      const errorMessage = error?.message;
-      if (errorMessage === 'No account with provided email') {
-        setError('email', {
-          message: 'Konto o podanym adresie e-mail nie istnieje',
-        });
-      } else if (errorMessage === 'Invalid credentials') {
-        setError('password', {
-          message: 'Nieprawidłowe hasło',
-        });
-      } else {
-        console.error('Unreachable');
+  useUserQuery({
+    onCompleted: () => router.push('/dashboard'),
+  });
+  const [login, { loading }] = useLoginLazyQuery({
+    onCompleted: () => router.push('/dashboard'),
+    onError: error => {
+      if (error.graphQLErrors.length) {
+        const errorMessage = error.message;
+        if (errorMessage === 'No account with provided email') {
+          setError('email', {
+            message: 'Konto o podanym adresie e-mail nie istnieje',
+          });
+        } else if (errorMessage === 'Invalid credentials') {
+          setError('password', {
+            message: 'Nieprawidłowe hasło',
+          });
+        } else {
+          console.error('Unreachable');
+        }
       }
-    }
-    if (error?.networkError) {
-      console.error(error.message);
-      toast(connectionErrorToast);
-    }
-    if (data) {
-      router.push('/dashboard');
-    }
-  }, [data, error]);
+      if (error.networkError) {
+        toast(connectionErrorToast);
+        console.error(error.message);
+      }
+    },
+  });
 
   const onSubmit: SubmitHandler<LoginFields> = async submittedData => {
     login({
@@ -114,7 +109,7 @@ export default function Login() {
             </FormControl>
           </VStack>
           <VStack width="100%" spacing="3">
-            <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isSubmitting}>
+            <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
               Zaloguj się
             </Button>
             <Button
