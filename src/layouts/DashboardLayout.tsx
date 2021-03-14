@@ -5,7 +5,7 @@ import Image from 'next/image';
 import ActiveLink from '../components/ActiveLink';
 
 export const DivesLogo = () => (
-  <Image width="55" height="64" src="/logo-nav.svg" alt="Dives Logo" draggable={false} />
+  <Image width="55" height="64" src="/logo.svg" alt="Dives Logo" draggable={false} />
 );
 
 type NavigationElement = {
