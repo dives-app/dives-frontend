@@ -1,19 +1,22 @@
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useLogoutMutation, useUserQuery } from '../src/generated/graphql';
+import { useLogoutLazyQuery, useUserQuery } from '../src/generated/graphql';
 import DashboardLayout from '../src/layouts/DashboardLayout';
 
 export default function Dashboard() {
   const { data } = useUserQuery();
-  const [logout] = useLogoutMutation();
+  const [logout, { data: logoutData }] = useLogoutLazyQuery();
   const router = useRouter();
 
-  const handleLogout = async () => {
-    const response = await logout();
-    if (response.data?.revokeToken) {
+  React.useEffect(() => {
+    if (logoutData?.logout) {
       router.push('/');
     }
+  }, [logoutData]);
+
+  const handleLogout = async () => {
+    logout();
   };
 
   return (

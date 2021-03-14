@@ -67,9 +67,8 @@ export default function Signup() {
           },
         },
       });
-      console.log(data);
       if (data) {
-        router.push('/login');
+        router.push('/dashboard');
       }
     } catch (e) {
       console.log(e.message);

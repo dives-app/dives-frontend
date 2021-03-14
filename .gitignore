@@ -15,6 +15,9 @@
 # production
 /build
 
+# graphql related
+.graphqlconfig
+
 # misc
 .DS_Store
 *.pem

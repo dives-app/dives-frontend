@@ -8,16 +8,15 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Input,
-  VStack,
   Heading,
+  Input,
   useToast,
+  VStack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useLazyQuery } from '@apollo/client';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
-import { LoginDocument } from '../src/generated/graphql';
+import { useLoginLazyQuery } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
 
 interface LoginFields {
@@ -43,7 +42,7 @@ export default function Login() {
 
   const router = useRouter();
   const toast = useToast();
-  const [login, { data, error }] = useLazyQuery(LoginDocument);
+  const [login, { data, error }] = useLoginLazyQuery();
 
   React.useEffect(() => {
     if (error?.graphQLErrors.length) {
