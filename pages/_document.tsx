@@ -38,6 +38,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&family=Work+Sans:wght@500&display=swap"
             rel="stylesheet"
           />
+          {/* Comfortaa 500/700 */}
           {/* <link */}
           {/*  href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" */}
           {/*  rel="stylesheet" */}
