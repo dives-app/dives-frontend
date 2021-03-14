@@ -5,7 +5,7 @@ import { useLogoutLazyQuery, useUserQuery } from '../src/generated/graphql';
 import DashboardLayout from '../src/layouts/DashboardLayout';
 
 export default function Dashboard() {
-  const { data } = useUserQuery();
+  const { data, error } = useUserQuery();
   const [logout, { data: logoutData }] = useLogoutLazyQuery();
   const router = useRouter();
 
@@ -14,6 +14,12 @@ export default function Dashboard() {
       router.push('/');
     }
   }, [logoutData]);
+
+  React.useEffect(() => {
+    if (error) {
+      router.push('/login');
+    }
+  }, [error]);
 
   const handleLogout = async () => {
     logout();

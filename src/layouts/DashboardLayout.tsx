@@ -27,6 +27,7 @@ export const DashboardNavigation = ({ navigationElements }: DashboardNavigationP
     </NextLink>
     {navigationElements.map(({ name, icon, url }) => (
       <ActiveLink
+        key={name}
         href={url}
         passHref
         activeStyle={{

@@ -52,48 +52,39 @@ export default function Signup() {
   });
 
   const toast = useToast();
-  const [register] = useRegisterMutation();
   const router = useRouter();
+  const [register] = useRegisterMutation({
+    onCompleted: () => router.push('/dashboard'),
+    onError: error => {
+      if (error.graphQLErrors.length) {
+        const errorCode = error.graphQLErrors[0].extensions?.code;
+        if (errorCode === 'EMAIL_ALREADY_IN_USE') {
+          setError('email', { message: 'Podany e-mail jest zajęty' });
+        } else if (errorCode === 'INVALID_PASSWORD') {
+          setError('password', {
+            message:
+              'Hasło powinno mieć długość co najmniej 8 znaków i zawierać co najmniej jedną cyfrę, wielką literę, małą literę i znak specjalny.',
+          });
+        }
+      }
+      if (error.networkError) {
+        console.error(error.message);
+        toast(connectionErrorToast);
+      }
+    },
+  });
 
   const onSubmit: SubmitHandler<RegisterFormFields> = async submittedData => {
-    try {
-      const { data } = await register({
-        variables: {
-          options: {
-            name: submittedData.name,
-            email: submittedData.email,
-            password: submittedData.password,
-            birthDate: '2000-01-03',
-          },
+    await register({
+      variables: {
+        options: {
+          name: submittedData.name,
+          email: submittedData.email,
+          password: submittedData.password,
+          birthDate: '2000-01-03',
         },
-      });
-      if (data) {
-        router.push('/dashboard');
-      }
-    } catch (e) {
-      console.log(e.message);
-    }
-
-    // if (response.error?.networkError) {
-    //   console.error(response.error.message);
-    //   toast(connectionErrorToast);
-    // }
-    // if (response.error?.graphQLErrors?.length) {
-    //   const errorCode = response.error.graphQLErrors[0].extensions?.code;
-    //   switch (errorCode) {
-    //     case 'EMAIL_ALREADY_IN_USE':
-    //       setError('email', { message: 'Podany e-mail jest zajęty' });
-    //       break;
-    //     case 'INVALID_PASSWORD':
-    //       setError('password', {
-    //         message:
-    //           'Poprawne hasło powinno zawierać conajmniej jedną cyfrę, małą literę, wielką literę i znak specjalny oraz powinno być długości conajmniej 8 znaków.',
-    //       });
-    //       break;
-    //     default:
-    //       console.error('Unreachable');
-    //   }
-    // }
+      },
+    });
   };
 
   return (
