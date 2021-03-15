@@ -1,7 +1,13 @@
+.idea
 node_modules
 .next
 .storybook
-.gitignore
 README.md
 .env.sample
 .env.development
+.eslintignore
+.eslintrc.js
+.gitignore
+.prettierignore
+.prettierrc.js
+codegen.yml
