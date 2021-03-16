@@ -13,7 +13,7 @@ export default function Dashboard() {
   });
   const [logout] = useLogoutLazyQuery({
     onCompleted: async () => {
-      await apolloClient.cache.reset();
+      await apolloClient.clearStore();
       await router.push('/');
     },
   });
