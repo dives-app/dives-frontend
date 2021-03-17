@@ -32,23 +32,22 @@ yarn dev
 
 Open [http://localhost:5000](http://localhost:5000) with your browser to see the app.
 
-## Storybook
+### Other useful commands
 
-(temporarily not working, skip this section)
+`yarn build-start` - builds and starts the app locally (with local API)
 
-Launch Storybook:
+`yarn gen` - to run [`graphql-code-generator`](https://www.graphql-code-generator.com/)
 
-```shell
-yarn storybook
-```
+`yarn analyze` - runs bundle analyzer and generates reports in `.next/analyze`
 
-Open [http://localhost:5001](http://localhost:5001) with your browser to see the Storybook.
+`yarn as` - short for "analyze and start" - runs `yarn analyze` and serves it using [`http-server`](https://www.npmjs.com/package/http-server) (install it globally if you want to use this command)
+
+`yarn clean` - removes `node_modules` and `.next` folders
 
 ## CI/CD
 
 Each push to main triggers build and deploy on Google Cloud Run and the website becomes available at
-[dives-txvot44owa-ez.a.run.app/](https://dives-txvot44owa-ez.a.run.app/) (unfortunately until we
-have a custom domain we're unable to change the address)
+[dives-txvot44owa-ez.a.run.app](https://dives-txvot44owa-ez.a.run.app/).
 
 ## Knowledge base
 

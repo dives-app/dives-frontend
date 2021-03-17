@@ -4,12 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 5000",
+    "build-start": "yarn build:dev && yarn start:dev -p 5000",
+    "build:dev": "env-cmd -f .env.development next build",
+    "start:dev": "env-cmd -f .env.development next start",
     "build": "env-cmd -f .env.staging next build",
     "start": "env-cmd -f .env.staging next start",
-    "analyze": "NEXT_PUBLIC_API_ENDPOINT=empty ANALYZE=true next build",
-    "analyze-serve": "yarn analyze && hs .next/analyze/",
+    "analyze": "ANALYZE=true env-cmd -f .env.staging next build",
+    "as": "yarn analyze && hs .next/analyze/",
     "gen": "graphql-codegen --config codegen.yml",
-    "lint": "prettier --check . && eslint ."
+    "lint": "prettier --check . && eslint .",
+    "clean": "rimraf node_modules .next"
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
@@ -25,6 +29,7 @@
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "next": "10.0.8",
+    "next-compose-plugins": "^2.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-hook-form": "^6.15.4",
@@ -46,7 +51,8 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "rimraf": "^3.0.2"
   },
   "author": "Dives (https://github.com/dives-app)",
   "license": "MIT"

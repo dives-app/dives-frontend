@@ -1,4 +1,5 @@
-if (process.env.ANALYZE === 'true') {
-  module.exports = require('@next/bundle-analyzer');
-}
-module.exports = config => config;
+const { withPlugins } = require('next-compose-plugins');
+
+module.exports = withPlugins([
+  [process.env.ANALYZE === 'true' ? require('@next/bundle-analyzer')({ enable: true }) : {}],
+]);
