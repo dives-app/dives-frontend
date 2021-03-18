@@ -13,10 +13,10 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           {/* Comfortaa 500/700 */}
-          {/* <link */}
-          {/*  href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap" */}
-          {/*  rel="stylesheet" */}
-          {/* /> */}
+          <link
+            href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&display=swap"
+            rel="stylesheet"
+          />
           {/* <link */}
           {/*  href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" */}
           {/*  rel="stylesheet" */}

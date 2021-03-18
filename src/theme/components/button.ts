@@ -47,13 +47,19 @@ export default {
       color: 'white',
     },
     secondary: {
-      ...bg('white', 'lightGray', 'darkGray'),
+      ...bg('white', 'dives.lightGray', 'dives.darkGray'),
       color: 'dives.green',
     },
     secondaryOutlined: {
-      ...bg('white', 'lightGray', 'darkGray'),
+      ...bg('white', 'dives.lightGray', 'dives.darkGray'),
       color: 'darkerGray',
       boxShadow: 'xs',
+    },
+    menu: {
+      ...bg('transparent', 'dives.gray', 'dives.darkGray'),
+      fontFamily: 'Comfortaa',
+      borderRadius: '10',
+      h: '14',
     },
   },
 };
