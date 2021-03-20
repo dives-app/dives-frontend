@@ -1,11 +1,23 @@
 import React, { PropsWithChildren } from 'react';
-import { Box, chakra } from '@chakra-ui/react';
+import { Box, chakra, Heading } from '@chakra-ui/react';
 
-interface Props {}
+interface CardProps {
+  title: string;
+}
 
-const Card = ({ children, ...rest }: PropsWithChildren<Props>) => (
+const Card = ({ children, title, ...rest }: PropsWithChildren<CardProps>) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
-  <Box bg="white" borderRadius="12px" w="100%" {...rest}>
+  <Box bg="white" borderRadius="12px" w="100%" px={6} py={4} {...rest}>
+    <Heading
+      fontSize="lg"
+      fontWeight="semibold"
+      pb={3}
+      mb={4}
+      borderBottom="1px"
+      borderColor="dives.gray"
+    >
+      {title}
+    </Heading>
     {children}
   </Box>
 );
