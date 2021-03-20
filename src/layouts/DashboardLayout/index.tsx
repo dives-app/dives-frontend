@@ -17,9 +17,9 @@ const navigationElements: Array<NavigationElement> = [
     url: '/budget',
   },
   {
-    name: 'account',
+    name: 'accounts',
     icon: '/bank.svg',
-    url: '/account',
+    url: '/accounts',
   },
   {
     name: 'stats',
