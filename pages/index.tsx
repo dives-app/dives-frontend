@@ -2,8 +2,14 @@ import Head from 'next/head';
 import { Flex, Button, VStack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Image from 'next/image';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
+
+const ns = ['index', 'common'];
 
 export default function Home() {
+  const { t } = useTranslation(ns);
+
   return (
     <>
       <Head>
@@ -19,17 +25,17 @@ export default function Home() {
         <VStack>
           <Image src="/logo.svg" draggable={false} alt="Dives Logo" width={100} height={128} />
           <Text fontSize="lg" color="white">
-            work in progress
+            {t`wip`}
           </Text>
           <Flex>
             <NextLink href="/login" passHref>
               <Button as="a" variant="primary" mr="1rem" color="white">
-                Log in
+                {t`common:login`}
               </Button>
             </NextLink>
             <NextLink href="/signup" passHref>
               <Button as="a" variant="primary" color="white">
-                Sign up
+                {t`common:signup`}
               </Button>
             </NextLink>
           </Flex>
@@ -39,3 +45,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ns)),
+  },
+});

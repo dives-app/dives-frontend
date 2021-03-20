@@ -16,10 +16,14 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SchemaOf } from 'yup';
 import { useRouter } from 'next/router';
+import { Trans, useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
+
+const ns = ['signup', 'auth', 'common'];
 
 interface RegisterOptions {
   email: string;
@@ -30,37 +34,42 @@ interface RegisterOptions {
 
 type RegisterFormFields = Omit<RegisterOptions & { tos: boolean }, 'birthDate'>;
 
-const schema: SchemaOf<RegisterFormFields> = yup
-  .object()
-  .shape({
-    name: yup.string().required('Imię jest wymagane'),
-    email: yup.string().required('Adres e-mail jest wymagany').email('Nieprawidłowy adres e-mail'),
-    password: yup.string().required('Hasło jest wymagane'),
-    tos: yup.bool().oneOf([true], 'Musisz zaakceptować Regulamin i Politykę prywatności'),
-  })
-  .defined();
-
 export default function Signup() {
+  const { t } = useTranslation(ns);
+  const router = useRouter();
+  const toast = useToast();
+
+  const schema: SchemaOf<RegisterFormFields> = yup
+    .object()
+    .shape({
+      name: yup.string().required(t`nameRequired`),
+      email: yup
+        .string()
+        .required(t`auth:emailRequired`)
+        .email(t`auth:emailInvalid`),
+      password: yup.string().required(t`auth:passwordRequired`),
+      tos: yup.bool().oneOf([true], t`tosRequired`),
+    })
+    .defined();
+
   const { register: registerInput, handleSubmit, errors, setError } = useForm<RegisterFormFields>({
     resolver: yupResolver(schema),
   });
 
-  const toast = useToast();
-  const router = useRouter();
   useUserQuery({
     onCompleted: () => router.push('/dashboard'),
   });
+
   const [register, { loading }] = useRegisterMutation({
     onCompleted: () => router.push('/dashboard'),
     onError: error => {
       if (error.graphQLErrors.length) {
         const errorCode = error.graphQLErrors[0].extensions?.code;
         if (errorCode === 'EMAIL_ALREADY_IN_USE') {
-          setError('email', { message: 'Podany e-mail jest zajęty' });
+          setError('email', { message: t`wrongEmail` });
         } else if (errorCode === 'INVALID_PASSWORD') {
           setError('password', {
-            message:
-              'Hasło powinno mieć długość co najmniej 8 znaków i zawierać co najmniej jedną cyfrę, wielką literę, małą literę i znak specjalny.',
+            message: t`wrongPassword`,
           });
         }
       }
@@ -87,32 +96,37 @@ export default function Signup() {
   return (
     <>
       <Head>
-        <title>Załóż konto w Dives</title>
+        <title>{t`title`}</title>
       </Head>
       <AuthLayout>
         <Heading size="lg" fontWeight="normal" mb="4">
-          Zarejestruj się
+          {t`common:signup`}
         </Heading>
         <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
           <VStack width="100%" spacing="4">
             <FormControl id="name" isInvalid={!!errors.name} isRequired>
-              <FormLabel>Imię</FormLabel>
-              <Input name="name" placeholder="Jan" ref={registerInput} variant="flushed" />
+              <FormLabel>{t`name`}</FormLabel>
+              <Input
+                name="name"
+                placeholder={t`namePlaceholder`}
+                ref={registerInput}
+                variant="flushed"
+              />
               <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
             </FormControl>
             <FormControl id="email" isInvalid={!!errors.email} isRequired>
-              <FormLabel>Adres e-mail</FormLabel>
+              <FormLabel>{t`auth:email`}</FormLabel>
               <Input
                 type="email"
                 name="email"
-                placeholder="jan.kowalski@example.com"
+                placeholder={t`auth:emailPlaceholder`}
                 ref={registerInput}
                 variant="flushed"
               />
               <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
             </FormControl>
             <FormControl id="password" isInvalid={!!errors.password} isRequired>
-              <FormLabel>Hasło</FormLabel>
+              <FormLabel>{t`auth:password`}</FormLabel>
               <Input
                 type="password"
                 name="password"
@@ -130,12 +144,14 @@ export default function Signup() {
             isInvalid={!!errors.tos}
             isRequired
           >
-            Zapoznałem się i akceptuję <DivesLink href="/tos">Regulamin</DivesLink> oraz{' '}
-            <DivesLink href="/privacy">Politykę prywatności</DivesLink>
+            <Trans i18nKey="tosCheckbox" t={t}>
+              Zapoznałem się i akceptuję <DivesLink href="/tos">Regulamin</DivesLink> oraz
+              <DivesLink href="/privacy">Politykę prywatności</DivesLink>
+            </Trans>
           </Checkbox>
           <VStack width="100%" spacing="3">
             <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
-              Zarejestruj się
+              {t`common:signup`}
             </Button>
             <Button
               variant="secondaryOutlined"
@@ -143,14 +159,20 @@ export default function Signup() {
               leftIcon={<img src="google-icon.svg" alt="Google Icon" draggable={false} />}
               width="100%"
             >
-              Zaloguj z Google
+              {t`auth:loginWithGoogle`}
             </Button>
           </VStack>
         </VStack>
         <QuestionBottom>
-          Masz już konto? <DivesLink href="/login">Zaloguj się</DivesLink>
+          {t`accountQuestion`} <DivesLink href="/login">{t`common:login`}</DivesLink>
         </QuestionBottom>
       </AuthLayout>
     </>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ns)),
+  },
+});

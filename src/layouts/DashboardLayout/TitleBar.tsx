@@ -13,6 +13,7 @@ import {
   Spacer,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useTranslation } from 'next-i18next';
 import { useLogoutLazyQuery, useUserQuery } from '../../generated/graphql';
 import apolloClient from '../../apolloClient';
 
@@ -29,6 +30,7 @@ const TitleBar = ({ title }: TitleBarProps) => {
       await router.push('/');
     },
   });
+  const { t } = useTranslation('dashboard');
 
   return (
     <Flex px="8" alignItems="center">
@@ -47,7 +49,7 @@ const TitleBar = ({ title }: TitleBarProps) => {
             </Flex>
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => logout()}>Wyloguj</MenuItem>
+            <MenuItem onClick={() => logout()}>{t`logout`}</MenuItem>
           </MenuList>
         </Menu>
       </Box>

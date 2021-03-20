@@ -1,0 +1,6 @@
+{
+  "title": "Log in to Dives",
+  "accountQuestion": "Don't have an account?",
+  "wrongEmail": "Account with provided email address does not exist",
+  "wrongPassword": "Invalid password"
+}
