@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Grid, Flex, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 export const DivesHomeButtonLogo = () => (
   <Link href="/" passHref>
@@ -44,6 +45,7 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
         >
           <DivesHomeButtonLogo />
           {children}
+          <LanguageSwitcher />
         </Flex>
         <Flex
           justifyContent="center"

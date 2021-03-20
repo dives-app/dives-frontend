@@ -1,9 +1,11 @@
+import React from 'react';
 import Head from 'next/head';
 import { Flex, Button, VStack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import LanguageSwitcher from '../src/components/LanguageSwitcher';
 
 const ns = ['index', 'common'];
 
@@ -27,6 +29,7 @@ export default function Home() {
           <Text fontSize="lg" color="white">
             {t`wip`}
           </Text>
+          <LanguageSwitcher />
           <Flex>
             <NextLink href="/login" passHref>
               <Button as="a" variant="primary" mr="1rem" color="white">

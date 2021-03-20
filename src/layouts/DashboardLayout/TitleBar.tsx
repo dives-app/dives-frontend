@@ -11,11 +11,13 @@ import {
   MenuItem,
   MenuList,
   Spacer,
+  HStack,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useTranslation } from 'next-i18next';
 import { useLogoutLazyQuery, useUserQuery } from '../../generated/graphql';
 import apolloClient from '../../apolloClient';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 interface TitleBarProps {
   title: string;
@@ -40,19 +42,22 @@ const TitleBar = ({ title }: TitleBarProps) => {
         </Heading>
       </Box>
       <Spacer />
-      <Box>
-        <Menu>
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="menu">
-            <Flex alignItems="center">
-              <Avatar name={data?.user.name} mr="2" borderRadius="21px" />
-              {data?.user.name}
-            </Flex>
-          </MenuButton>
-          <MenuList>
-            <MenuItem onClick={() => logout()}>{t`logout`}</MenuItem>
-          </MenuList>
-        </Menu>
-      </Box>
+      <HStack spacing={3}>
+        <LanguageSwitcher />
+        <Box>
+          <Menu>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />} variant="menu">
+              <Flex alignItems="center">
+                <Avatar name={data?.user.name} mr="2" borderRadius="21px" />
+                {data?.user.name}
+              </Flex>
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={() => logout()}>{t`logout`}</MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+      </HStack>
     </Flex>
   );
 };
