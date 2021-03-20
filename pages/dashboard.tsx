@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
-import { Box, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import DashboardLayout from '../src/layouts/DashboardLayout';
-import Card from '../src/components/Card';
-import CardList from '../src/components/CardList';
+import Card from '../src/components/cards/base/Card';
+import LatestOperations from '../src/components/cards/LatestOperations';
 
 export default function Dashboard() {
   return (
@@ -15,21 +15,7 @@ export default function Dashboard() {
         title="Home"
         leftColumn={
           <VStack>
-            <Card title="Latest operations">
-              <CardList
-                title="Today"
-                items={[{ icon: '', iconColor: '', title: 'Test title', date: '03.02.2001' }]}
-              />
-              <Box h={4} />
-              <CardList
-                title="Yesterday"
-                items={[
-                  { icon: '', iconColor: '', title: 'Test title', date: '03.02.2001' },
-                  { icon: '', iconColor: '', title: 'Test title', date: '03.02.2001' },
-                  { icon: '', iconColor: '', title: 'Test title', date: '03.02.2001' },
-                ]}
-              />
-            </Card>
+            <LatestOperations />
             <Card h="400" title="Test" />
           </VStack>
         }
