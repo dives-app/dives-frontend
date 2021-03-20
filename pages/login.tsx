@@ -14,31 +14,41 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import { useLoginLazyQuery, useUserQuery } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
+
+const ns = ['login', 'auth', 'common'];
 
 interface LoginFields {
   email: string;
   password: string;
 }
 
-const schema = yup.object().shape({
-  email: yup.string().required('Adres e-mail jest wymagany').email('Nieprawidłowy adres e-mail'),
-  password: yup.string().required('Hasło jest wymagane'),
-});
-
 export default function Login() {
+  const { t } = useTranslation(ns);
+  const router = useRouter();
+  const toast = useToast();
+
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .required(t`auth:emailRequired`)
+      .email(t`auth:invalidEmail`),
+    password: yup.string().required(t`auth:passwordRequired`),
+  });
+
   const { register, handleSubmit, errors, setError } = useForm<LoginFields>({
     resolver: yupResolver(schema),
   });
 
-  const router = useRouter();
-  const toast = useToast();
   useUserQuery({
     onCompleted: () => router.push('/dashboard'),
   });
+
   const [login, { loading }] = useLoginLazyQuery({
     onCompleted: () => router.push('/dashboard'),
     onError: error => {
@@ -46,11 +56,11 @@ export default function Login() {
         const errorMessage = error.message;
         if (errorMessage === 'No account with provided email') {
           setError('email', {
-            message: 'Konto o podanym adresie e-mail nie istnieje',
+            message: t`wrongEmail`,
           });
         } else if (errorMessage === 'Invalid credentials') {
           setError('password', {
-            message: 'Nieprawidłowe hasło',
+            message: t`wrongPassword`,
           });
         } else {
           console.error('Unreachable');
@@ -77,27 +87,27 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Zaloguj się do Dives</title>
+        <title>{t`title`}</title>
       </Head>
       <AuthLayout>
         <Heading size="lg" fontWeight="normal" mb="4">
-          Zaloguj się
+          {t`common:login`}
         </Heading>
         <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
           <VStack width="100%" spacing="4">
             <FormControl id="email" isInvalid={!!errors.email} isRequired>
-              <FormLabel>Adres e-mail</FormLabel>
+              <FormLabel>{t`auth:email`}</FormLabel>
               <Input
                 type="email"
                 name="email"
-                placeholder="jan.kowalski@example.com"
+                placeholder={t`auth:emailPlaceholder`}
                 ref={register}
                 variant="flushed"
               />
               <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
             </FormControl>
             <FormControl id="password" isInvalid={!!errors.password} isRequired>
-              <FormLabel>Hasło</FormLabel>
+              <FormLabel>{t`auth:password`}</FormLabel>
               <Input
                 type="password"
                 name="password"
@@ -110,7 +120,7 @@ export default function Login() {
           </VStack>
           <VStack width="100%" spacing="3">
             <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
-              Zaloguj się
+              {t`common:login`}
             </Button>
             <Button
               variant="secondaryOutlined"
@@ -118,14 +128,20 @@ export default function Login() {
               width="100%"
               leftIcon={<img src="google-icon.svg" alt="Google Icon" draggable={false} />}
             >
-              Zaloguj z Google
+              {t`auth:loginWithGoogle`}
             </Button>
           </VStack>
         </VStack>
         <QuestionBottom>
-          Nie masz konta? <DivesLink href="/signup">Zarejestruj się</DivesLink>
+          {t`accountQuestion`} <DivesLink href="/signup">{t`common:signup`}</DivesLink>
         </QuestionBottom>
       </AuthLayout>
     </>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ns)),
+  },
+});

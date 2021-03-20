@@ -1,0 +1,11 @@
+{
+  "title": "Załóż konto w Dives",
+  "nameRequired": "Imię jest wymagane",
+  "tosRequired": "Musisz zaakceptować Regulamin i Politykę prywatności",
+  "wrongEmail": "Podany e-mail jest zajęty",
+  "wrongPassword": "Hasło powinno mieć długość co najmniej 8 znaków i zawierać co najmniej jedną cyfrę, wielką literę, małą literę i znak specjalny.",
+  "name": "Imię",
+  "namePlaceholder": "Jan",
+  "accountQuestion": "Masz już konto?",
+  "tosCheckbox": "Zapoznałem się i akceptuję <1>Regulamin</1> oraz <3>Politykę prywatności<3>"
+}

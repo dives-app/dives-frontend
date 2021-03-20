@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { Box, VStack } from '@chakra-ui/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import DashboardLayout from '../src/layouts/DashboardLayout';
 import Card from '../src/components/Card';
 import CardList from '../src/components/CardList';
@@ -43,3 +44,9 @@ export default function Dashboard() {
     </>
   );
 }
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['dashboard'])),
+  },
+});

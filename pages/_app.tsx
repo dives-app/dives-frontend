@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { ApolloProvider } from '@apollo/client';
+import { appWithTranslation } from 'next-i18next';
 import theme from '../src/theme';
 import client from '../src/apolloClient';
 
@@ -14,4 +15,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);
