@@ -2,12 +2,12 @@ import { Flex, ListItem, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
 
-export type CardListItemProps = {
+export interface CardListItemProps {
   icon: string;
   iconColor: string;
   title: string;
   date?: string;
-};
+}
 
 function getIconUrl(icon: string) {
   return '/icons/food.svg';

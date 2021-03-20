@@ -16,11 +16,11 @@ import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useLogoutLazyQuery, useUserQuery } from '../../generated/graphql';
 import apolloClient from '../../apolloClient';
 
-interface Props {
+interface TitleBarProps {
   title: string;
 }
 
-const TitleBar = ({ title }: Props) => {
+const TitleBar = ({ title }: TitleBarProps) => {
   const router = useRouter();
   const { data } = useUserQuery();
   const [logout] = useLogoutLazyQuery({

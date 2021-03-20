@@ -40,7 +40,9 @@ Open [http://localhost:5000](http://localhost:5000) with your browser to see the
 
 `yarn analyze` - runs bundle analyzer and generates reports in `.next/analyze`
 
-`yarn as` - short for "analyze and start" - runs `yarn analyze` and serves it using [`http-server`](https://www.npmjs.com/package/http-server) (install it globally if you want to use this command)
+`yarn as` - short for "analyze and start" - runs `yarn analyze` and serves it using
+[`http-server`](https://www.npmjs.com/package/http-server) (install it globally if you want to use
+this command)
 
 `yarn clean` - removes `node_modules` and `.next` folders
 

@@ -28,11 +28,11 @@ const navigationElements: Array<NavigationElement> = [
   },
 ];
 
-type DashboardLayoutProps = {
+interface DashboardLayoutProps {
   leftColumn: JSX.Element;
   rightColumn: JSX.Element;
   title: string;
-};
+}
 
 const DashboardLayout = ({ leftColumn, rightColumn, title }: DashboardLayoutProps) => {
   const router = useRouter();

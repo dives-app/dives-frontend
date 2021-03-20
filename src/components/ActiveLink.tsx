@@ -1,11 +1,11 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import NextLink, { LinkProps } from 'next/link';
-import { CSSObject } from '@chakra-ui/styled-system';
+import { CSSObject } from '@chakra-ui/react';
 
-type ActiveLinkProps = LinkProps & {
-  activeStyle: CSSObject | undefined;
-};
+interface ActiveLinkProps extends LinkProps {
+  activeStyle?: CSSObject;
+}
 
 const ActiveLink = ({
   children,

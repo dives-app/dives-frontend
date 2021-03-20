@@ -1,4 +1,4 @@
-import { UseToastOptions } from '@chakra-ui/toast';
+import { UseToastOptions } from '@chakra-ui/react';
 
 const connectionErrorToast: UseToastOptions = {
   title: 'Błąd połączenia z serwerem.',

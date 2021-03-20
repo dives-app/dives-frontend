@@ -17,7 +17,7 @@ export default function Home() {
         minHeight="100vh"
       >
         <VStack>
-          <Image src="/logo.svg" draggable="false" alt="Dives Logo" width={100} height={128} />
+          <Image src="/logo.svg" draggable={false} alt="Dives Logo" width={100} height={128} />
           <Text fontSize="lg" color="white">
             work in progress
           </Text>

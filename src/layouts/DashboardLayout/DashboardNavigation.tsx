@@ -8,14 +8,15 @@ export const DivesLogo = () => (
   <Image width="55" height="64" src="/logo.svg" alt="Dives Logo" draggable={false} />
 );
 
-export type NavigationElement = {
+export interface NavigationElement {
   name: string;
   icon: string;
   url: string;
-};
-type DashboardNavigationProps = {
+}
+
+interface DashboardNavigationProps {
   navigationElements: Array<NavigationElement>;
-};
+}
 
 const DashboardNavigation = ({ navigationElements }: DashboardNavigationProps) => (
   <Flex bg="dives.green" h="100%" p="4" direction="column" align="center" boxShadow="messenger">

@@ -2,10 +2,10 @@ import { Heading, List, Text } from '@chakra-ui/react';
 import React from 'react';
 import CardListItem, { CardListItemProps } from './CardListItem';
 
-type CardListProps = {
+interface CardListProps {
   title?: string;
   items: Array<CardListItemProps>;
-};
+}
 
 const CardList = ({ title, items }: CardListProps) => (
   <div>
