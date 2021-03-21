@@ -67,10 +67,10 @@ const Signup: NextPage & LayoutProperty = () => {
       if (error.graphQLErrors.length) {
         const errorCode = error.graphQLErrors[0].extensions?.code;
         if (errorCode === 'EMAIL_ALREADY_IN_USE') {
-          setError('email', { message: t`wrongEmail` });
+          setError('email', { message: t`emailWrong` });
         } else if (errorCode === 'INVALID_PASSWORD') {
           setError('password', {
-            message: t`wrongPassword`,
+            message: t`passwordWrong`,
           });
         }
       }

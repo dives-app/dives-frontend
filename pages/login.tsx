@@ -39,7 +39,7 @@ const Login: NextPage & LayoutProperty = () => {
     email: yup
       .string()
       .required(t`auth:emailRequired`)
-      .email(t`auth:invalidEmail`),
+      .email(t`auth:emailInvalid`),
     password: yup.string().required(t`auth:passwordRequired`),
   });
 
@@ -58,11 +58,11 @@ const Login: NextPage & LayoutProperty = () => {
         const errorMessage = error.message;
         if (errorMessage === 'No account with provided email') {
           setError('email', {
-            message: t`wrongEmail`,
+            message: t`emailWrong`,
           });
         } else if (errorMessage === 'Invalid credentials') {
           setError('password', {
-            message: t`wrongPassword`,
+            message: t`passwordWrong`,
           });
         } else {
           console.error('Unreachable');
