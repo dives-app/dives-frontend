@@ -29,10 +29,9 @@ interface RegisterOptions {
   email: string;
   name: string;
   password: string;
-  birthDate: string;
 }
 
-type RegisterFormFields = Omit<RegisterOptions & { tos: boolean }, 'birthDate'>;
+type RegisterFormFields = RegisterOptions & { tos: boolean };
 
 export default function Signup() {
   const { t } = useTranslation(ns);
@@ -87,7 +86,6 @@ export default function Signup() {
           name: submittedData.name,
           email: submittedData.email,
           password: submittedData.password,
-          birthDate: '2000-01-03',
         },
       },
     });
