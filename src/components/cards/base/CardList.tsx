@@ -4,7 +4,7 @@ import CardListItem, { CardListItemProps } from './CardListItem';
 
 interface CardListProps {
   title?: string;
-  items: Array<CardListItemProps>;
+  items: Array<CardListItemProps & { id: string }>;
 }
 
 const CardList = ({ title, items }: CardListProps) => (
@@ -15,8 +15,8 @@ const CardList = ({ title, items }: CardListProps) => (
       </Heading>
     ) : null}
     <List spacing={3} listStyleType="none">
-      {items.map(({ icon, iconColor, title: listItemTitle, date }) => (
-        <CardListItem icon={icon} iconColor={iconColor} title={listItemTitle} date={date}>
+      {items.map(({ id, icon, iconColor, title: listItemTitle, date }) => (
+        <CardListItem key={id} icon={icon} iconColor={iconColor} title={listItemTitle} date={date}>
           <Text color="dives.red">- 20,00 zł</Text>
         </CardListItem>
       ))}

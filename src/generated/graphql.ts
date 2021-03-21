@@ -76,7 +76,7 @@ export type User = {
   id: Scalars['String'];
   name: Scalars['String'];
   email: Scalars['String'];
-  birthDate: Scalars['String'];
+  birthDate?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   photoUrl?: Maybe<Scalars['String']>;
   updatePhotoUrl?: Maybe<Scalars['String']>;
@@ -97,7 +97,7 @@ export type Category = {
   name: Scalars['String'];
   limit?: Maybe<Scalars['Float']>;
   type: Scalars['Float'];
-  iconUrl: Scalars['String'];
+  icon: Scalars['String'];
   color: Scalars['String'];
   ownerUser?: Maybe<User>;
   ownerBudget?: Maybe<Budget>;
@@ -130,7 +130,7 @@ export type Merchant = {
 export type Transaction = {
   __typename?: 'Transaction';
   id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   amount: Scalars['Float'];
   time: Scalars['String'];
   description?: Maybe<Scalars['String']>;
@@ -148,7 +148,7 @@ export type Account = {
   currency: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   balance: Scalars['Float'];
-  iconUrl: Scalars['String'];
+  icon: Scalars['String'];
   color: Scalars['String'];
   type: Scalars['Float'];
   interestRate?: Maybe<Scalars['Float']>;
@@ -162,7 +162,7 @@ export type Account = {
 export type CycleTransaction = {
   __typename?: 'CycleTransaction';
   id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   amount?: Maybe<Scalars['Float']>;
   date: Scalars['String'];
   period: Scalars['Float'];
@@ -190,7 +190,7 @@ export type Debt = {
   endDate: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   balance: Scalars['Float'];
-  iconUrl: Scalars['String'];
+  icon: Scalars['String'];
   color: Scalars['String'];
   owner: User;
 };
@@ -304,7 +304,7 @@ export type Mutation = {
 };
 
 export type MutationRegisterArgs = {
-  options: UsernamePasswordInput;
+  options: NewUserInput;
 };
 
 export type MutationUpdateUserArgs = {
@@ -427,11 +427,11 @@ export type MutationDeletePurchaseArgs = {
   options: PurchaseInput;
 };
 
-export type UsernamePasswordInput = {
+export type NewUserInput = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
-  birthDate: Scalars['String'];
+  birthDate?: Maybe<Scalars['String']>;
 };
 
 export type UpdateUserInput = {
@@ -467,7 +467,7 @@ export type RemoveBudgetMemberInput = {
 };
 
 export type NewTransactionInput = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   accountId: Scalars['String'];
   categoryId: Scalars['String'];
   amount: Scalars['Float'];
@@ -553,7 +553,7 @@ export type UpdateAccountInput = {
 };
 
 export type NewCycleTransactionInput = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   accountId?: Maybe<Scalars['String']>;
   categoryId: Scalars['String'];
   amount: Scalars['Float'];
@@ -619,7 +619,7 @@ export type UpdatePurchaseInput = {
 };
 
 export type RegisterMutationVariables = Exact<{
-  options: UsernamePasswordInput;
+  options: NewUserInput;
 }>;
 
 export type RegisterMutation = { __typename?: 'Mutation' } & {
@@ -638,6 +638,18 @@ export type LogoutQueryVariables = Exact<{ [key: string]: never }>;
 
 export type LogoutQuery = { __typename?: 'Query' } & Pick<Query, 'logout'>;
 
+export type RecentTransactionsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type RecentTransactionsQuery = { __typename?: 'Query' } & {
+  user: { __typename?: 'User' } & {
+    transactions: Array<
+      { __typename?: 'Transaction' } & Pick<Transaction, 'id' | 'name' | 'time' | 'amount'> & {
+          category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'>;
+        }
+    >;
+  };
+};
+
 export type UserQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UserQuery = { __typename?: 'Query' } & {
@@ -645,7 +657,7 @@ export type UserQuery = { __typename?: 'Query' } & {
 };
 
 export const RegisterDocument = gql`
-  mutation Register($options: UsernamePasswordInput!) {
+  mutation Register($options: NewUserInput!) {
     register(options: $options) {
       id
     }
@@ -765,6 +777,69 @@ export function useLogoutLazyQuery(
 export type LogoutQueryHookResult = ReturnType<typeof useLogoutQuery>;
 export type LogoutLazyQueryHookResult = ReturnType<typeof useLogoutLazyQuery>;
 export type LogoutQueryResult = Apollo.QueryResult<LogoutQuery, LogoutQueryVariables>;
+export const RecentTransactionsDocument = gql`
+  query RecentTransactions {
+    user {
+      transactions {
+        id
+        name
+        time
+        amount
+        category {
+          icon
+          color
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useRecentTransactionsQuery__
+ *
+ * To run a query within a React component, call `useRecentTransactionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRecentTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRecentTransactionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRecentTransactionsQuery(
+  baseOptions?: Apollo.QueryHookOptions<RecentTransactionsQuery, RecentTransactionsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<RecentTransactionsQuery, RecentTransactionsQueryVariables>(
+    RecentTransactionsDocument,
+    options,
+  );
+}
+
+export function useRecentTransactionsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    RecentTransactionsQuery,
+    RecentTransactionsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<RecentTransactionsQuery, RecentTransactionsQueryVariables>(
+    RecentTransactionsDocument,
+    options,
+  );
+}
+
+export type RecentTransactionsQueryHookResult = ReturnType<typeof useRecentTransactionsQuery>;
+export type RecentTransactionsLazyQueryHookResult = ReturnType<
+  typeof useRecentTransactionsLazyQuery
+>;
+export type RecentTransactionsQueryResult = Apollo.QueryResult<
+  RecentTransactionsQuery,
+  RecentTransactionsQueryVariables
+>;
 export const UserDocument = gql`
   query User {
     user {

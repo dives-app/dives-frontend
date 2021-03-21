@@ -1,0 +1,14 @@
+query RecentTransactions {
+  user {
+    transactions {
+      id
+      name
+      time
+      amount
+      category {
+        icon
+        color
+      }
+    }
+  }
+}
