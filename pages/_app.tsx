@@ -1,18 +1,18 @@
-import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import { ApolloProvider } from '@apollo/client';
 import { appWithTranslation } from 'next-i18next';
+import { AppProps } from '../src/types';
 import theme from '../src/theme';
 import client from '../src/apolloClient';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
+  const layout = Component.layout || (page => page);
+
   return (
     <ChakraProvider theme={theme}>
-      <ApolloProvider client={client}>
-        <Component {...pageProps} />
-      </ApolloProvider>
+      <ApolloProvider client={client}>{layout(<Component {...pageProps} />)}</ApolloProvider>
     </ChakraProvider>
   );
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(App);

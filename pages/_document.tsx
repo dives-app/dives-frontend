@@ -1,12 +1,12 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
 
-class MyDocument extends Document {
+class Document extends NextDocument {
   render() {
+    // noinspection HtmlRequiredTitleElement
     return (
       <Html>
         <Head>
           <link rel="icon" href="/favicon.ico" />
-
           {/* Source Sans Pro 400/600, Work Sans 500 */}
           <link
             href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&family=Work+Sans:wght@500&display=swap"
@@ -35,4 +35,5 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument;
+// noinspection JSUnusedGlobalSymbols
+export default Document;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import {
   useToast,
@@ -22,6 +23,7 @@ import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
+import { LayoutProperty } from '../src/types';
 
 const ns = ['signup', 'auth', 'common'];
 
@@ -33,7 +35,7 @@ interface RegisterOptions {
 
 type RegisterFormFields = RegisterOptions & { tos: boolean };
 
-export default function Signup() {
+const Signup: NextPage & LayoutProperty = () => {
   const { t } = useTranslation(ns);
   const router = useRouter();
   const toast = useToast();
@@ -96,81 +98,86 @@ export default function Signup() {
       <Head>
         <title>{t`title`}</title>
       </Head>
-      <AuthLayout>
-        <Heading size="lg" fontWeight="normal" mb="4">
-          {t`common:signup`}
-        </Heading>
-        <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
-          <VStack width="100%" spacing="4">
-            <FormControl id="name" isInvalid={!!errors.name} isRequired>
-              <FormLabel>{t`name`}</FormLabel>
-              <Input
-                name="name"
-                placeholder={t`namePlaceholder`}
-                ref={registerInput}
-                variant="flushed"
-              />
-              <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
-            </FormControl>
-            <FormControl id="email" isInvalid={!!errors.email} isRequired>
-              <FormLabel>{t`auth:email`}</FormLabel>
-              <Input
-                type="email"
-                name="email"
-                placeholder={t`auth:emailPlaceholder`}
-                ref={registerInput}
-                variant="flushed"
-              />
-              <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-            </FormControl>
-            <FormControl id="password" isInvalid={!!errors.password} isRequired>
-              <FormLabel>{t`auth:password`}</FormLabel>
-              <Input
-                type="password"
-                name="password"
-                placeholder="********"
-                ref={registerInput}
-                variant="flushed"
-              />
-              <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-            </FormControl>
-          </VStack>
-          <Checkbox
-            name="tos"
-            ref={registerInput}
-            errors={errors.tos}
-            isInvalid={!!errors.tos}
-            isRequired
-          >
-            <Trans i18nKey="tosCheckbox" t={t}>
-              Zapoznałem się i akceptuję <DivesLink href="/tos">Regulamin</DivesLink> oraz
-              <DivesLink href="/privacy">Politykę prywatności</DivesLink>
-            </Trans>
-          </Checkbox>
-          <VStack width="100%" spacing="3">
-            <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
-              {t`common:signup`}
-            </Button>
-            <Button
-              variant="secondaryOutlined"
-              size="lg"
-              leftIcon={<img src="google-icon.svg" alt="Google Icon" draggable={false} />}
-              width="100%"
-            >
-              {t`auth:loginWithGoogle`}
-            </Button>
-          </VStack>
+      <Heading size="lg" fontWeight="normal" mb="4">
+        {t`common:signup`}
+      </Heading>
+      <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="6">
+        <VStack width="100%" spacing="4">
+          <FormControl id="name" isInvalid={!!errors.name} isRequired>
+            <FormLabel>{t`name`}</FormLabel>
+            <Input
+              name="name"
+              placeholder={t`namePlaceholder`}
+              ref={registerInput}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl id="email" isInvalid={!!errors.email} isRequired>
+            <FormLabel>{t`auth:email`}</FormLabel>
+            <Input
+              type="email"
+              name="email"
+              placeholder={t`auth:emailPlaceholder`}
+              ref={registerInput}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl id="password" isInvalid={!!errors.password} isRequired>
+            <FormLabel>{t`auth:password`}</FormLabel>
+            <Input
+              type="password"
+              name="password"
+              placeholder="********"
+              ref={registerInput}
+              variant="flushed"
+            />
+            <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+          </FormControl>
         </VStack>
-        <QuestionBottom>
-          {t`accountQuestion`} <DivesLink href="/login">{t`common:login`}</DivesLink>
-        </QuestionBottom>
-      </AuthLayout>
+        <Checkbox
+          name="tos"
+          ref={registerInput}
+          errors={errors.tos}
+          isInvalid={!!errors.tos}
+          isRequired
+        >
+          <Trans i18nKey="tosCheckbox" t={t}>
+            Zapoznałem się i akceptuję <DivesLink href="/tos">Regulamin</DivesLink> oraz
+            <DivesLink href="/privacy">Politykę prywatności</DivesLink>
+          </Trans>
+        </Checkbox>
+        <VStack width="100%" spacing="3">
+          <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
+            {t`common:signup`}
+          </Button>
+          <Button
+            variant="secondaryOutlined"
+            size="lg"
+            leftIcon={<img src="google-icon.svg" alt="Google Icon" draggable={false} />}
+            width="100%"
+          >
+            {t`auth:loginWithGoogle`}
+          </Button>
+        </VStack>
+      </VStack>
+      <QuestionBottom>
+        {t`accountQuestion`} <DivesLink href="/login">{t`common:login`}</DivesLink>
+      </QuestionBottom>
     </>
   );
-}
+};
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ns)),
-  },
-});
+Signup.layout = page => <AuthLayout>{page}</AuthLayout>;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  if (!locale) throw new Error('GetStaticProps: missing locale for i18n in getStaticProps');
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ns)),
+    },
+  };
+};
+
+export default Signup;

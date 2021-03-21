@@ -26,43 +26,41 @@ export const QuestionBottom = ({ children }: React.PropsWithChildren<{}>) => (
 
 export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
   return (
-    <>
-      <Grid
-        templateColumns={{
-          base: 'auto',
-          md: 'minmax(500px, min-content) auto',
-        }}
-        width="100vw"
-        height="100vh"
+    <Grid
+      templateColumns={{
+        base: 'auto',
+        md: 'minmax(500px, min-content) auto',
+      }}
+      width="100vw"
+      height="100vh"
+      boxSizing="border-box"
+    >
+      <Flex
+        as="main"
+        direction="column"
         boxSizing="border-box"
+        overflow="auto"
+        p={['40px 35px', '55px 70px']}
       >
-        <Flex
-          as="main"
-          direction="column"
-          boxSizing="border-box"
-          overflow="auto"
-          p={['40px 35px', '55px 70px']}
-        >
-          <DivesHomeButtonLogo />
-          {children}
-          <LanguageSwitcher />
-        </Flex>
-        <Flex
-          justifyContent="center"
-          alignContent="center"
-          overflow="hidden"
-          bg="linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff"
-          display={{ base: 'none', md: 'flex' }}
-        >
-          <Image
-            src="/calc-and-calendar.svg"
-            alt="Calc and calendar"
-            width="500"
-            height="500"
-            draggable={false}
-          />
-        </Flex>
-      </Grid>
-    </>
+        <DivesHomeButtonLogo />
+        {children}
+        <LanguageSwitcher />
+      </Flex>
+      <Flex
+        justifyContent="center"
+        alignContent="center"
+        overflow="hidden"
+        bg="linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff"
+        display={{ base: 'none', md: 'flex' }}
+      >
+        <Image
+          src="/calc-and-calendar.svg"
+          alt="Calc and calendar"
+          width="500"
+          height="500"
+          draggable={false}
+        />
+      </Flex>
+    </Grid>
   );
 }
