@@ -1,12 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
+import { NextPage } from 'next';
 import { Flex, Button, VStack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 import LanguageSwitcher from '../src/components/LanguageSwitcher';
 
-export default function Home() {
+const Home: NextPage = () => {
   const { t } = useTranslation('index');
 
   return (
@@ -44,4 +45,6 @@ export default function Home() {
       </Flex>
     </>
   );
-}
+};
+
+export default Home;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetStaticProps, NextPage } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import {
   useToast,
@@ -23,7 +23,7 @@ import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
-import { LayoutProperty } from '../src/types';
+import { NextPageWithLayout } from '../src/types';
 
 interface RegisterOptions {
   email: string;
@@ -33,7 +33,7 @@ interface RegisterOptions {
 
 type RegisterFormFields = RegisterOptions & { tos: boolean };
 
-const Signup: NextPage & LayoutProperty = () => {
+const Signup: NextPageWithLayout = () => {
   const { t } = useTranslation('signup');
   const router = useRouter();
   const toast = useToast();

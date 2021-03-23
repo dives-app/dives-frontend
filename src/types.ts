@@ -1,9 +1,9 @@
 import { AppInitialProps } from 'next/app';
-import { NextComponentType, NextPageContext } from 'next';
+import { NextComponentType, NextPage, NextPageContext } from 'next';
 import { NextRouter } from 'next/router';
 
-export type LayoutProperty = {
-  layout?: (page: JSX.Element) => JSX.Element;
+type LayoutProperty = {
+  layout: (page: JSX.Element) => JSX.Element;
 };
 
 /**
@@ -16,3 +16,5 @@ export type AppProps<P = {}> = AppInitialProps & {
   __N_SSG?: boolean;
   __N_SSP?: boolean;
 };
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & LayoutProperty;

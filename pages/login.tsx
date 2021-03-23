@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetStaticProps, NextPage } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -20,14 +20,14 @@ import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import { useLoginLazyQuery, useUserQuery } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
-import { LayoutProperty } from '../src/types';
+import { NextPageWithLayout } from '../src/types';
 
 interface LoginFields {
   email: string;
   password: string;
 }
 
-const Login: NextPage & LayoutProperty = () => {
+const Login: NextPageWithLayout = () => {
   const { t } = useTranslation('login');
   const router = useRouter();
   const toast = useToast();
