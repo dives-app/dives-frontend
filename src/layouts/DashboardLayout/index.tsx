@@ -7,22 +7,22 @@ import { useUserQuery } from '../../generated/graphql';
 
 const navigationElements: Array<NavigationElement> = [
   {
-    name: 'home',
+    i18nKey: 'home',
     icon: '/house.svg',
     url: '/dashboard',
   },
   {
-    name: 'budget',
+    i18nKey: 'budget',
     icon: '/book.svg',
     url: '/budget',
   },
   {
-    name: 'accounts',
+    i18nKey: 'accounts',
     icon: '/bank.svg',
     url: '/accounts',
   },
   {
-    name: 'stats',
+    i18nKey: 'stats',
     icon: '/stats.svg',
     url: '/stats',
   },
@@ -37,6 +37,7 @@ const DashboardLayout = ({ children, title }: PropsWithChildren<DashboardLayoutP
   const { data } = useUserQuery({
     onError: () => router.push('/login'),
   });
+
   return data ? (
     <Grid
       templateColumns="100px 1fr"

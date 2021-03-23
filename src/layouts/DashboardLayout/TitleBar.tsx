@@ -32,7 +32,7 @@ const TitleBar = ({ title }: TitleBarProps) => {
       await router.push('/');
     },
   });
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslation('app');
 
   return (
     <Flex px="8" alignItems="center">

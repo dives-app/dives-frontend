@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>🚧 Dives</title>
+        <title>🚧 {t`common:appName`}</title>
       </Head>
       <Flex
         backgroundColor="dives.green"
@@ -23,7 +23,13 @@ const Home: NextPage = () => {
         minHeight="100vh"
       >
         <VStack>
-          <Image src="/logo.svg" draggable={false} alt="Dives Logo" width={100} height={128} />
+          <Image
+            src="/logo.svg"
+            draggable={false}
+            alt={`${t('common:appName')} Logo`}
+            width={100}
+            height={128}
+          />
           <Text fontSize="lg" color="white">
             {t`wip`}
           </Text>

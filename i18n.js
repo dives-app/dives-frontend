@@ -4,8 +4,11 @@ module.exports = {
   pages: {
     '*': ['common'],
     '/': ['index'],
-    '/login': ['login', 'auth'],
-    '/signup': ['signup', 'auth'],
-    '/dashboard': ['dashboard'],
+    '/login': ['auth', 'login'],
+    '/signup': ['auth', 'signup'],
+    '/dashboard': ['app', 'dashboard'],
+    '/budget': ['app', 'budget'],
+    '/accounts': ['app', 'accounts'],
+    '/stats': ['app', 'stats'],
   },
 };
