@@ -15,15 +15,12 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import { useLoginLazyQuery, useUserQuery } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
 import { LayoutProperty } from '../src/types';
-
-const ns = ['login', 'auth', 'common'];
 
 interface LoginFields {
   email: string;
@@ -31,7 +28,7 @@ interface LoginFields {
 }
 
 const Login: NextPage & LayoutProperty = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation('login');
   const router = useRouter();
   const toast = useToast();
 
@@ -142,13 +139,10 @@ const Login: NextPage & LayoutProperty = () => {
 
 Login.layout = page => <AuthLayout>{page}</AuthLayout>;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  if (!locale) throw new Error('GetStaticProps: missing locale for i18n in getStaticProps');
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ns)),
-    },
-  };
-};
+// getStaticProps is needed on pages with Layout because of this bug:
+// https://github.com/vinissimus/next-translate/issues/486
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {},
+});
 
 export default Login;

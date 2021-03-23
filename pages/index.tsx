@@ -3,14 +3,11 @@ import Head from 'next/head';
 import { Flex, Button, VStack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Image from 'next/image';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import LanguageSwitcher from '../src/components/LanguageSwitcher';
 
-const ns = ['index', 'common'];
-
 export default function Home() {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation('index');
 
   return (
     <>
@@ -48,9 +45,3 @@ export default function Home() {
     </>
   );
 }
-
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ns)),
-  },
-});

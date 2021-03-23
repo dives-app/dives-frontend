@@ -17,15 +17,13 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SchemaOf } from 'yup';
 import { useRouter } from 'next/router';
-import { Trans, useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
 import { LayoutProperty } from '../src/types';
-
-const ns = ['signup', 'auth', 'common'];
 
 interface RegisterOptions {
   email: string;
@@ -36,7 +34,7 @@ interface RegisterOptions {
 type RegisterFormFields = RegisterOptions & { tos: boolean };
 
 const Signup: NextPage & LayoutProperty = () => {
-  const { t } = useTranslation(ns);
+  const { t } = useTranslation('signup');
   const router = useRouter();
   const toast = useToast();
 
@@ -143,10 +141,13 @@ const Signup: NextPage & LayoutProperty = () => {
           isInvalid={!!errors.tos}
           isRequired
         >
-          <Trans i18nKey="tosCheckbox" t={t}>
-            Zapoznałem się i akceptuję <DivesLink href="/tos">Regulamin</DivesLink> oraz
-            <DivesLink href="/privacy">Politykę prywatności</DivesLink>
-          </Trans>
+          <Trans
+            i18nKey="signup:tosCheckbox"
+            components={{
+              tosLink: <DivesLink href="/tos" />,
+              privacyLink: <DivesLink href="/privacy" />,
+            }}
+          />
         </Checkbox>
         <VStack width="100%" spacing="3">
           <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
@@ -171,13 +172,10 @@ const Signup: NextPage & LayoutProperty = () => {
 
 Signup.layout = page => <AuthLayout>{page}</AuthLayout>;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  if (!locale) throw new Error('GetStaticProps: missing locale for i18n in getStaticProps');
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ns)),
-    },
-  };
-};
+// getStaticProps is needed on pages with Layout because of this bug:
+// https://github.com/vinissimus/next-translate/issues/486
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {},
+});
 
 export default Signup;

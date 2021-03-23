@@ -14,7 +14,7 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import { useTranslation } from 'next-i18next';
+import useTranslation from 'next-translate/useTranslation';
 import { useLogoutLazyQuery, useUserQuery } from '../../generated/graphql';
 import apolloClient from '../../apolloClient';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
