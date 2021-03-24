@@ -1,11 +1,13 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import Card from './base/Card';
 import CardList from './base/CardList';
 import { useRecentTransactionsQuery } from '../../generated/graphql';
 import { CardListItemProps } from './base/CardListItem';
 
 const LatestOperations = () => {
+  const { t } = useTranslation('dashboard');
   const { data } = useRecentTransactionsQuery();
   const { locale } = useRouter();
   // TODO: Abstract relative time into own function
@@ -50,7 +52,7 @@ const LatestOperations = () => {
   });
 
   return (
-    <Card title="Latest operations">
+    <Card title={t`latestOperations`}>
       {Array.from(transactions.entries()).map(([relativeDate, items]) => (
         <CardList key={relativeDate} title={relativeDate} items={items} />
       ))}

@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
 import { Text, Grid, GridItem } from '@chakra-ui/react';
+import useTranslation from 'next-translate/useTranslation';
 import DashboardNavigation, { NavigationElement } from './DashboardNavigation';
 import TitleBar from './TitleBar';
 import { useUserQuery } from '../../generated/graphql';
@@ -28,15 +29,12 @@ const navigationElements: Array<NavigationElement> = [
   },
 ];
 
-interface DashboardLayoutProps {
-  title: string;
-}
-
-const DashboardLayout = ({ children, title }: PropsWithChildren<DashboardLayoutProps>) => {
+const DashboardLayout = ({ children }: PropsWithChildren<{}>) => {
   const router = useRouter();
   const { data } = useUserQuery({
     onError: () => router.push('/login'),
   });
+  const { t } = useTranslation();
 
   return data ? (
     <Grid
@@ -48,7 +46,7 @@ const DashboardLayout = ({ children, title }: PropsWithChildren<DashboardLayoutP
       <GridItem rowSpan={2}>
         <DashboardNavigation navigationElements={navigationElements} />
       </GridItem>
-      <TitleBar title={title} />
+      <TitleBar title={t(`${router.pathname.substring(1)}:title`)} />
       <Grid overflow="auto" templateColumns="55fr 45fr" gap="4" px="8">
         {children}
       </Grid>

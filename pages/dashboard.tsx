@@ -28,7 +28,7 @@ const Dashboard: NextPageWithLayout = () => {
   );
 };
 
-Dashboard.layout = page => <DashboardLayout title="Home">{page}</DashboardLayout>;
+Dashboard.layout = page => <DashboardLayout>{page}</DashboardLayout>;
 
 // getStaticProps is needed on pages with Layout because of this bug:
 // https://github.com/vinissimus/next-translate/issues/486
