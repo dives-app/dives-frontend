@@ -1,6 +1,8 @@
 {
   "name": "dives-frontend",
   "version": "0.1.0",
+  "author": "Dives (https://github.com/dives-app)",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev -p 5000",
@@ -56,9 +58,16 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "lint-staged": ">=10",
     "prettier": "2.2.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "simple-git-hooks": ">=2.0.3"
   },
-  "author": "Dives (https://github.com/dives-app)",
-  "license": "MIT"
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx,css,md,json}": "prettier --write"
+  }
 }
