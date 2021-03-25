@@ -144,8 +144,8 @@ const Signup: NextPageWithLayout = () => {
           <Trans
             i18nKey="signup:tosCheckbox"
             components={{
-              tosLink: <DivesLink href="/tos" />,
-              privacyLink: <DivesLink href="/privacy" />,
+              termsLink: <DivesLink href="/terms" openInNewTab />,
+              privacyLink: <DivesLink href="/privacy" openInNewTab />,
             }}
           />
         </Checkbox>

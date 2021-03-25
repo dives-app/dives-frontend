@@ -7,5 +7,5 @@
   "name": "Imię",
   "namePlaceholder": "Jan",
   "accountQuestion": "Masz już konto?",
-  "tosCheckbox": "Zapoznałem się i akceptuję <tosLink>Regulamin</tosLink> oraz <privacyLink>Politykę prywatności</privacyLink>"
+  "tosCheckbox": "Zapoznałem się i akceptuję <termsLink>Regulamin</termsLink> oraz <privacyLink>Politykę prywatności</privacyLink>"
 }
