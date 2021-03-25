@@ -1,21 +1,18 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
-import { VStack } from '@chakra-ui/react';
+import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
+import { VStack } from '@chakra-ui/react';
 import DashboardLayout from '../src/layouts/DashboardLayout';
 import Card from '../src/components/cards/base/Card';
 import { NextPageWithLayout } from '../src/types';
 
 const Accounts: NextPageWithLayout = () => {
   const { t } = useTranslation('accounts');
+
   return (
     <>
-      <Head>
-        <title>
-          {t`common:appName`} - {t`title`}
-        </title>
-      </Head>
+      <NextSeo title={`${t`common:appName`} - ${t`title`}`} noindex nofollow />
       <VStack>
         <Card title="test" h="500" />
         <Card title="test" h="400" />

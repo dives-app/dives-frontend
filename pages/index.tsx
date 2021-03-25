@@ -1,10 +1,10 @@
 import React from 'react';
-import Head from 'next/head';
 import { NextPage } from 'next';
-import { Flex, Button, VStack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Image from 'next/image';
+import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
+import { Flex, Button, VStack, Text } from '@chakra-ui/react';
 import LanguageSwitcher from '../src/components/LanguageSwitcher';
 
 const Home: NextPage = () => {
@@ -12,9 +12,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>🚧 {t`common:appName`}</title>
-      </Head>
+      <NextSeo title={`🚧 ${t`common:appName`}`} />
       <Flex
         backgroundColor="dives.green"
         direction="column"

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import {
   useToast,
   Button,
@@ -15,14 +18,11 @@ import {
   InputRightElement,
   IconButton,
 } from '@chakra-ui/react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { SchemaOf } from 'yup';
-import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
-import Trans from 'next-translate/Trans';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
@@ -98,9 +98,7 @@ const Signup: NextPageWithLayout = () => {
 
   return (
     <>
-      <Head>
-        <title>{t`title`}</title>
-      </Head>
+      <NextSeo title={t`title`} />
       <Heading size="lg" fontWeight="normal" mb="4">
         {t`common:signup`}
       </Heading>

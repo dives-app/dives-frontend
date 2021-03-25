@@ -1,8 +1,8 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
-import { VStack } from '@chakra-ui/react';
+import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
+import { VStack } from '@chakra-ui/react';
 import DashboardLayout from '../src/layouts/DashboardLayout';
 import Card from '../src/components/cards/base/Card';
 import LatestOperations from '../src/components/cards/LatestOperations';
@@ -13,9 +13,7 @@ const Dashboard: NextPageWithLayout = () => {
 
   return (
     <>
-      <Head>
-        <title>{t`common:appName`}</title>
-      </Head>
+      <NextSeo title={t`common:appName`} noindex nofollow />
       <VStack>
         <LatestOperations />
         <Card h="400" title="Test" />
