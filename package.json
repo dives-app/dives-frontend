@@ -30,6 +30,7 @@
     "framer-motion": "^4.0.2",
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
+    "lodash": "^4.17.21",
     "next": "10.0.9",
     "next-compose-plugins": "^2.2.1",
     "next-translate": "^1.0.5",

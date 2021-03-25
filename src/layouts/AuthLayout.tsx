@@ -2,7 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import { Grid, Flex, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import random from 'lodash/random';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+
+const images = [
+  { src: '/auth/calc-and-calendar.svg', alt: 'Calculator and calendar' },
+  { src: '/auth/wallet-and-people.svg', alt: 'Wallet and people' },
+  { src: '/auth/stonks.svg', alt: 'Man pointing at chart' },
+];
 
 export const DivesHomeButtonLogo = () => (
   <Link href="/" passHref>
@@ -25,6 +32,8 @@ export const QuestionBottom = ({ children }: React.PropsWithChildren<{}>) => (
 );
 
 export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
+  const randomImage = images[random(images.length - 1)];
+
   return (
     <Grid
       templateColumns={{
@@ -54,10 +63,11 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
         overflow="hidden"
         bg="linear-gradient(90deg, #93d9b6 0%, #70cc9e 100%), #ffffff"
         display={{ base: 'none', md: 'flex' }}
+        p={4}
       >
         <Image
-          src="/calc-and-calendar.svg"
-          alt="Calc and calendar"
+          src={randomImage.src}
+          alt={randomImage.alt}
           width="500"
           height="500"
           draggable={false}
