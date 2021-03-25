@@ -6,6 +6,8 @@ module.exports = {
     '/': ['index'],
     '/login': ['auth', 'login'],
     '/signup': ['auth', 'signup'],
+    '/terms': ['terms'],
+    '/privacy': ['privacy'],
     '/dashboard': ['app', 'dashboard'],
     '/budget': ['app', 'budget'],
     '/accounts': ['app', 'accounts'],
