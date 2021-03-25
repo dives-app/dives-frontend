@@ -41,6 +41,8 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
         boxSizing="border-box"
         overflow="auto"
         p={['40px 35px', '55px 70px']}
+        boxShadow="messengerLighter"
+        position="relative" // without it boxShadow doesn't show up
       >
         <DivesHomeButtonLogo />
         {children}
