@@ -61,5 +61,8 @@ export default {
       borderRadius: '10',
       h: '14',
     },
+    inputButton: {
+      ...bg('transparent', 'rgba(0,0,0,0.04)', 'rgba(0,0,0,0.08)'),
+    },
   },
 };

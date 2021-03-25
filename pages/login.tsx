@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -10,12 +10,16 @@ import {
   FormErrorMessage,
   FormLabel,
   Heading,
+  IconButton,
   Input,
+  InputGroup,
+  InputRightElement,
   useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import { useLoginLazyQuery, useUserQuery } from '../src/generated/graphql';
@@ -31,6 +35,7 @@ const Login: NextPageWithLayout = () => {
   const { t } = useTranslation('login');
   const router = useRouter();
   const toast = useToast();
+  const [showPassword, setShowPassword] = useState(false);
 
   const schema = yup.object().shape({
     email: yup
@@ -106,13 +111,25 @@ const Login: NextPageWithLayout = () => {
           </FormControl>
           <FormControl id="password" isInvalid={!!errors.password} isRequired>
             <FormLabel>{t`auth:password`}</FormLabel>
-            <Input
-              type="password"
-              name="password"
-              placeholder="********"
-              ref={register}
-              variant="flushed"
-            />
+            <InputGroup>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="********"
+                ref={register}
+                variant="flushed"
+              />
+              <InputRightElement width="3rem">
+                <IconButton
+                  aria-label="Show password"
+                  aria-pressed={showPassword}
+                  variant="inputButton"
+                  isRound
+                  onClick={() => setShowPassword(show => !show)}
+                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                />
+              </InputRightElement>
+            </InputGroup>
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
         </VStack>
