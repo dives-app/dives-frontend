@@ -36,6 +36,7 @@ const Login: NextPageWithLayout = () => {
   const router = useRouter();
   const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const schema = yup.object().shape({
     email: yup
@@ -53,9 +54,10 @@ const Login: NextPageWithLayout = () => {
     onCompleted: () => router.push('/dashboard'),
   });
 
-  const [login, { loading }] = useLoginLazyQuery({
+  const [login] = useLoginLazyQuery({
     onCompleted: () => router.push('/dashboard'),
     onError: error => {
+      setIsLoggingIn(false);
       if (error.graphQLErrors.length) {
         const errorMessage = error.message;
         if (errorMessage === 'No account with provided email') {
@@ -78,6 +80,7 @@ const Login: NextPageWithLayout = () => {
   });
 
   const onSubmit: SubmitHandler<LoginFields> = async submittedData => {
+    setIsLoggingIn(true);
     login({
       variables: {
         options: {
@@ -102,6 +105,7 @@ const Login: NextPageWithLayout = () => {
               type="email"
               name="email"
               placeholder={t`auth:emailPlaceholder`}
+              autoComplete="email"
               ref={register}
               variant="flushed"
             />
@@ -113,7 +117,8 @@ const Login: NextPageWithLayout = () => {
               <Input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
-                placeholder="********"
+                placeholder="••••••••"
+                autoComplete="current-password"
                 ref={register}
                 variant="flushed"
               />
@@ -132,7 +137,7 @@ const Login: NextPageWithLayout = () => {
           </FormControl>
         </VStack>
         <VStack width="100%" spacing="3">
-          <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
+          <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isLoggingIn}>
             {t`common:login`}
           </Button>
           <Button

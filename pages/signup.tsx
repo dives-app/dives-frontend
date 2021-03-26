@@ -42,6 +42,7 @@ const Signup: NextPageWithLayout = () => {
   const router = useRouter();
   const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const schema: SchemaOf<RegisterFormFields> = yup
     .object()
@@ -64,9 +65,10 @@ const Signup: NextPageWithLayout = () => {
     onCompleted: () => router.push('/dashboard'),
   });
 
-  const [register, { loading }] = useRegisterMutation({
+  const [register] = useRegisterMutation({
     onCompleted: () => router.push('/dashboard'),
     onError: error => {
+      setIsSigningIn(false);
       if (error.graphQLErrors.length) {
         const errorCode = error.graphQLErrors[0].extensions?.code;
         if (errorCode === 'EMAIL_ALREADY_IN_USE') {
@@ -85,6 +87,7 @@ const Signup: NextPageWithLayout = () => {
   });
 
   const onSubmit: SubmitHandler<RegisterFormFields> = async submittedData => {
+    setIsSigningIn(true);
     await register({
       variables: {
         options: {
@@ -109,6 +112,7 @@ const Signup: NextPageWithLayout = () => {
             <Input
               name="name"
               placeholder={t`namePlaceholder`}
+              autoComplete="given-name"
               ref={registerInput}
               variant="flushed"
             />
@@ -120,6 +124,7 @@ const Signup: NextPageWithLayout = () => {
               type="email"
               name="email"
               placeholder={t`auth:emailPlaceholder`}
+              autoComplete="email"
               ref={registerInput}
               variant="flushed"
             />
@@ -131,7 +136,8 @@ const Signup: NextPageWithLayout = () => {
               <Input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
-                placeholder="********"
+                placeholder="••••••••"
+                autoComplete="new-password"
                 ref={registerInput}
                 variant="flushed"
               />
@@ -165,7 +171,7 @@ const Signup: NextPageWithLayout = () => {
           />
         </Checkbox>
         <VStack width="100%" spacing="3">
-          <Button type="submit" variant="primary" size="lg" width="100%" isLoading={loading}>
+          <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isSigningIn}>
             {t`common:signup`}
           </Button>
           <Button
