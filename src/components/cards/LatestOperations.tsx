@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Card from './base/Card';
 import CardList from './base/CardList';
 import { useRecentTransactionsQuery } from '../../generated/graphql';
 import { CardListItemProps } from './base/CardListItem';
+import Modal from '../modals/base/Modal';
 
 const LatestOperations = () => {
   const { t } = useTranslation('dashboard');
   const { data } = useRecentTransactionsQuery();
   const { locale } = useRouter();
+  const [openModal, setOpenModal] = useState(false);
+
   // TODO: Abstract relative time into own function
   const relativeTimeFormatter = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
   const dateFormatter = new Intl.DateTimeFormat(locale);
@@ -52,12 +55,22 @@ const LatestOperations = () => {
   });
 
   return (
-    <Card title={t`latestOperations`}>
-      {Array.from(transactions.entries()).map(([relativeDate, items]) => (
-        <CardList key={relativeDate} title={relativeDate} items={items} />
-      ))}
-    </Card>
+    <>
+      <Card
+        title={t`latestOperations`}
+        action={{
+          name: 'Add new',
+          handler: () => {
+            setOpenModal(true);
+          },
+        }}
+      >
+        {Array.from(transactions.entries()).map(([relativeDate, items]) => (
+          <CardList key={relativeDate} title={relativeDate} items={items} />
+        ))}
+      </Card>
+      {openModal ? <Modal closeModal={() => setOpenModal(false)}>Test modal</Modal> : null}
+    </>
   );
 };
-
 export default LatestOperations;

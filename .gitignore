@@ -18,6 +18,9 @@
 # graphql related
 .graphqlconfig
 
+# eslint
+.eslintcache
+
 # misc
 .DS_Store
 *.pem
