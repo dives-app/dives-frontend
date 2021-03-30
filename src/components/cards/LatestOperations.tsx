@@ -4,7 +4,7 @@ import Card from './base/Card';
 import CardList from './base/CardList';
 import { useRecentTransactionsQuery } from '../../generated/graphql';
 import { CardListItemProps } from './base/CardListItem';
-import Modal from '../modals/base/Modal';
+import TransactionModal from '../modals/TransactionModal';
 import { useDateTimeFormatter, useRecentRelativeDateFormatter } from '../../utils/time';
 import { Icon } from '../../utils/icons';
 
@@ -48,7 +48,7 @@ const LatestOperations = () => {
           <CardList key={relativeDate} title={relativeDate} items={items} />
         ))}
       </Card>
-      {openModal ? <Modal closeModal={() => setOpenModal(false)}>Test modal</Modal> : null}
+      {openModal ? <TransactionModal closeModal={() => setOpenModal(false)} /> : null}
     </>
   );
 };

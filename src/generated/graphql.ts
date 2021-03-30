@@ -618,6 +618,17 @@ export type UserInput = {
   password: Scalars['String'];
 };
 
+export type CreateTransactionMutationVariables = Exact<{
+  options: NewTransactionInput;
+}>;
+
+export type CreateTransactionMutation = { __typename?: 'Mutation' } & {
+  createTransaction: { __typename?: 'Transaction' } & Pick<
+    Transaction,
+    'id' | 'name' | 'time' | 'amount'
+  > & { category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'> };
+};
+
 export type RegisterMutationVariables = Exact<{
   options: NewUserInput;
 }>;
@@ -656,6 +667,60 @@ export type UserQuery = { __typename?: 'Query' } & {
   user: { __typename?: 'User' } & Pick<User, 'id' | 'name' | 'email'>;
 };
 
+export const CreateTransactionDocument = gql`
+  mutation CreateTransaction($options: NewTransactionInput!) {
+    createTransaction(options: $options) {
+      id
+      name
+      time
+      amount
+      category {
+        icon
+        color
+      }
+    }
+  }
+`;
+export type CreateTransactionMutationFn = Apollo.MutationFunction<
+  CreateTransactionMutation,
+  CreateTransactionMutationVariables
+>;
+
+/**
+ * __useCreateTransactionMutation__
+ *
+ * To run a mutation, you first call `useCreateTransactionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTransactionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTransactionMutation, { data, loading, error }] = useCreateTransactionMutation({
+ *   variables: {
+ *      options: // value for 'options'
+ *   },
+ * });
+ */
+export function useCreateTransactionMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateTransactionMutation,
+    CreateTransactionMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateTransactionMutation, CreateTransactionMutationVariables>(
+    CreateTransactionDocument,
+    options,
+  );
+}
+export type CreateTransactionMutationHookResult = ReturnType<typeof useCreateTransactionMutation>;
+export type CreateTransactionMutationResult = Apollo.MutationResult<CreateTransactionMutation>;
+export type CreateTransactionMutationOptions = Apollo.BaseMutationOptions<
+  CreateTransactionMutation,
+  CreateTransactionMutationVariables
+>;
 export const RegisterDocument = gql`
   mutation Register($options: NewUserInput!) {
     register(options: $options) {
@@ -691,7 +756,6 @@ export function useRegisterMutation(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
 }
-
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<
@@ -728,14 +792,12 @@ export function useLoginQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoginQuery, LoginQueryVariables>(LoginDocument, options);
 }
-
 export function useLoginLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<LoginQuery, LoginQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<LoginQuery, LoginQueryVariables>(LoginDocument, options);
 }
-
 export type LoginQueryHookResult = ReturnType<typeof useLoginQuery>;
 export type LoginLazyQueryHookResult = ReturnType<typeof useLoginLazyQuery>;
 export type LoginQueryResult = Apollo.QueryResult<LoginQuery, LoginQueryVariables>;
@@ -766,14 +828,12 @@ export function useLogoutQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LogoutQuery, LogoutQueryVariables>(LogoutDocument, options);
 }
-
 export function useLogoutLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<LogoutQuery, LogoutQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<LogoutQuery, LogoutQueryVariables>(LogoutDocument, options);
 }
-
 export type LogoutQueryHookResult = ReturnType<typeof useLogoutQuery>;
 export type LogoutLazyQueryHookResult = ReturnType<typeof useLogoutLazyQuery>;
 export type LogoutQueryResult = Apollo.QueryResult<LogoutQuery, LogoutQueryVariables>;
@@ -818,7 +878,6 @@ export function useRecentTransactionsQuery(
     options,
   );
 }
-
 export function useRecentTransactionsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     RecentTransactionsQuery,
@@ -831,7 +890,6 @@ export function useRecentTransactionsLazyQuery(
     options,
   );
 }
-
 export type RecentTransactionsQueryHookResult = ReturnType<typeof useRecentTransactionsQuery>;
 export type RecentTransactionsLazyQueryHookResult = ReturnType<
   typeof useRecentTransactionsLazyQuery
@@ -869,14 +927,12 @@ export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, Us
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
-
 export function useUserLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
-
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
 export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
 export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;

@@ -26,14 +26,7 @@ const Card = ({ children, title, action, ...rest }: PropsWithChildren<CardProps>
         {title}
       </Heading>
       {action ? (
-        <Button
-          backgroundColor="dives.green"
-          color="white"
-          _hover={{
-            bg: 'dives.lightGreen',
-          }}
-          onClick={action.handler}
-        >
+        <Button variant="primary" onClick={action.handler}>
           {action.name}
         </Button>
       ) : null}

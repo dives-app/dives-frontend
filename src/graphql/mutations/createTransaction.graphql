@@ -1,0 +1,12 @@
+mutation CreateTransaction($options: NewTransactionInput!) {
+  createTransaction(options: $options) {
+    id
+    name
+    time
+    amount
+    category {
+      icon
+      color
+    }
+  }
+}
