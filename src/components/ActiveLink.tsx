@@ -19,9 +19,9 @@ const ActiveLink = ({
   shallow,
   activeStyle,
 }: React.PropsWithChildren<ActiveLinkProps>) => {
-  const { asPath } = useRouter();
+  const { pathname } = useRouter();
   const child = React.Children.only(children) as React.ReactElement;
-  const isActive = asPath === href || asPath === as;
+  const isActive = pathname === href || pathname === as;
   return (
     <NextLink
       href={href}
