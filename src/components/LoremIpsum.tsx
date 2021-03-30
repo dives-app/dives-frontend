@@ -9,7 +9,7 @@ const LoremIpsum = () => (
       dreamcatcher selvage try-hard jianbing, iceland bushwick snackwave street art XOXO photo
       booth. Lo-fi typewriter vexillologist health goth four loko succulents biodiesel tattooed
       fingerstache truffaut vegan godard taiyaki. Woke swag copper mug 3 wolf moon ugh etsy you
-      probably haven't heard of them narwhal aesthetic. Helvetica direct trade post-ironic, meh
+      probably haven&apos;t heard of them narwhal aesthetic. Helvetica direct trade post-ironic, meh
       tumblr pinterest salvia viral. Fingerstache locavore tote bag taxidermy meggings wolf.
     </Text>
     <Text>
@@ -39,7 +39,7 @@ const LoremIpsum = () => (
       dreamcatcher selvage try-hard jianbing, iceland bushwick snackwave street art XOXO photo
       booth. Lo-fi typewriter vexillologist health goth four loko succulents biodiesel tattooed
       fingerstache truffaut vegan godard taiyaki. Woke swag copper mug 3 wolf moon ugh etsy you
-      probably haven't heard of them narwhal aesthetic. Helvetica direct trade post-ironic, meh
+      probably haven&apos;t heard of them narwhal aesthetic. Helvetica direct trade post-ironic, meh
       tumblr pinterest salvia viral. Fingerstache locavore tote bag taxidermy meggings wolf.
     </Text>
     <Text>
