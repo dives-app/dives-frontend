@@ -6,13 +6,14 @@ import { Icon } from '../utils/icons';
 interface Option {
   icon: Icon;
   name: string;
+  value?: any;
 }
 
 interface SelectProps {
   options: Array<Option>;
   defaultOption?: Option;
 
-  onSelect(selected: Option): void;
+  onSelect?(selected: Option): void;
 }
 
 const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
@@ -21,7 +22,6 @@ const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
   return (
     <Box borderRadius="lg" bg="dives.lightGray" w="2xs">
       <Flex
-        as="button"
         onClick={() => setSelecting(prevState => !prevState)}
         justify="space-between"
         align="center"
@@ -37,7 +37,9 @@ const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
             const handler = () => {
               setActiveOption(option);
               setSelecting(false);
-              onSelect(option);
+              if (onSelect) {
+                onSelect(option);
+              }
             };
             return (
               <Box
