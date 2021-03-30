@@ -17,13 +17,15 @@ const LatestOperations = () => {
 
   const transactions = new Map<string, Array<CardListItemProps & { id: string }>>();
 
-  data?.user.transactions.forEach(({ id, name, time, category }) => {
+  data?.user.transactions.forEach(({ id, name, time, category, amount }) => {
     const displayDate = recentRelativeDateFormatter.format(Number(time));
     const transaction = {
       id,
       title: name,
       date: dateTimeFormatter.format(Number(time)),
       icon: 'food' as Icon,
+      amount,
+      currency: 'zł',
       iconColor: category.color,
     };
     if (transactions.has(displayDate)) {
