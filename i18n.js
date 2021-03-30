@@ -12,5 +12,6 @@ module.exports = {
     '/budget': ['app', 'budget'],
     '/accounts': ['app', 'accounts'],
     '/stats': ['app', 'stats'],
+    '/settings': ['app', 'settings'],
   },
 };

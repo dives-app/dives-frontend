@@ -5,6 +5,7 @@ export function getIconUrl(icon: Icon) {
     case 'food':
       return '/icons/food.svg';
     default:
-      throw new Error(`Unreachable, received unexpected icon ${icon}`);
+      console.error(`Unreachable, received unexpected icon ${icon}`);
+      return '/icons/placeholder.svg';
   }
 }

@@ -1,0 +1,10 @@
+query Categories {
+  user {
+    categories {
+      id
+      color
+      icon
+      name
+    }
+  }
+}

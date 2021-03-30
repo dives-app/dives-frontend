@@ -1,0 +1,8 @@
+mutation CreateCategory($options: NewCategoryInput!) {
+  createCategory(options: $options) {
+    id
+    color
+    icon
+    name
+  }
+}
