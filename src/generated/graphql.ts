@@ -15,48 +15,325 @@ export type Scalars = {
   Float: number;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  user: User;
-  login: User;
-  logout: Scalars['Boolean'];
+export type Account = {
+  __typename?: 'Account';
+  balance: Scalars['Float'];
+  billingDate?: Maybe<Scalars['String']>;
+  billingPeriod?: Maybe<Scalars['Float']>;
+  color: Scalars['String'];
+  currency: Scalars['String'];
+  cycleTransaction: Array<CycleTransaction>;
+  description?: Maybe<Scalars['String']>;
+  icon: Scalars['String'];
+  id: Scalars['String'];
+  interestRate?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+  owner: User;
+  transactions: Array<Transaction>;
+  type: Scalars['Float'];
+};
+
+export type Budget = {
+  __typename?: 'Budget';
+  categories: Array<Category>;
+  cycleTransactions: Array<CycleTransaction>;
+  id: Scalars['String'];
+  limit?: Maybe<Scalars['Float']>;
+  membership: Array<BudgetMembership>;
+  merchants: Array<Merchant>;
+  name: Scalars['String'];
+  transactions: Array<Transaction>;
+};
+
+export type BudgetMembership = {
+  __typename?: 'BudgetMembership';
+  accessLevel: Scalars['String'];
   budget: Budget;
-  transaction: Transaction;
-  category: Category;
-  debt: Debt;
+  user: User;
+};
+
+export type Category = {
+  __typename?: 'Category';
+  color: Scalars['String'];
+  cycleTransactions: Array<CycleTransaction>;
+  icon: Scalars['String'];
+  id: Scalars['String'];
+  limit?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+  ownerBudget?: Maybe<Budget>;
+  ownerUser?: Maybe<User>;
+  transactions: Array<Transaction>;
+  type: Scalars['Float'];
+};
+
+export type CycleTransaction = {
+  __typename?: 'CycleTransaction';
   account: Account;
-  cycleTransaction: CycleTransaction;
-  merchant: Merchant;
-  notification: Notification;
-  purchase: Purchase;
+  amount?: Maybe<Scalars['Float']>;
+  budget?: Maybe<Budget>;
+  category: Category;
+  creator?: Maybe<User>;
+  date: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  merchant?: Maybe<Merchant>;
+  name: Scalars['String'];
+  period: Scalars['Float'];
 };
 
-export type QueryLoginArgs = {
-  options: UserInput;
+export type Debt = {
+  __typename?: 'Debt';
+  balance: Scalars['Float'];
+  color: Scalars['String'];
+  currency: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  endDate: Scalars['String'];
+  icon: Scalars['String'];
+  id: Scalars['String'];
+  interestRate?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+  owner: User;
 };
 
-export type QueryBudgetArgs = {
+export type Merchant = {
+  __typename?: 'Merchant';
+  cycleTransactions: Array<CycleTransaction>;
+  id: Scalars['String'];
+  name: Scalars['String'];
+  ownerBudget?: Maybe<Budget>;
+  ownerUser?: Maybe<User>;
+  transactions: Array<Transaction>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addBudgetMember: Scalars['Boolean'];
+  createAccount: Account;
+  createBudget: Budget;
+  createCategory: Category;
+  createCycleTransaction: CycleTransaction;
+  createDebt: Debt;
+  createMerchant: Merchant;
+  createNotification: Notification;
+  createPurchase: Purchase;
+  createTransaction: Transaction;
+  deleteAccount: Account;
+  deleteBudget: Budget;
+  deleteCategory: Category;
+  deleteCycleTransaction: CycleTransaction;
+  deleteDebt: Debt;
+  deleteMerchant: Merchant;
+  deleteNotification: Notification;
+  deletePurchase: Purchase;
+  deleteTransaction: Transaction;
+  deleteUser: User;
+  register: User;
+  removeBudgetMember: Scalars['Boolean'];
+  revokeToken: Scalars['Boolean'];
+  updateAccount: Account;
+  updateBudget: Budget;
+  updateCategory: Category;
+  updateCycleTransaction: CycleTransaction;
+  updateDebt: Debt;
+  updateMerchant: Merchant;
+  updateNotification: Notification;
+  updatePurchase: Purchase;
+  updateTransaction: Transaction;
+  updateUser: User;
+};
+
+export type MutationAddBudgetMemberArgs = {
+  options: AddBudgetMemberInput;
+};
+
+export type MutationCreateAccountArgs = {
+  options: NewAccountInput;
+};
+
+export type MutationCreateBudgetArgs = {
+  options: NewBudgetInput;
+};
+
+export type MutationCreateCategoryArgs = {
+  options: NewCategoryInput;
+};
+
+export type MutationCreateCycleTransactionArgs = {
+  options: NewCycleTransactionInput;
+};
+
+export type MutationCreateDebtArgs = {
+  options: NewDebtInput;
+};
+
+export type MutationCreateMerchantArgs = {
+  options: NewMerchantInput;
+};
+
+export type MutationCreateNotificationArgs = {
+  options: NewNotificationInput;
+};
+
+export type MutationCreatePurchaseArgs = {
+  options: NewPurchaseInput;
+};
+
+export type MutationCreateTransactionArgs = {
+  options: NewTransactionInput;
+};
+
+export type MutationDeleteAccountArgs = {
+  options: AccountInput;
+};
+
+export type MutationDeleteBudgetArgs = {
   options: BudgetInput;
 };
 
-export type QueryTransactionArgs = {
-  options: TransactionInput;
-};
-
-export type QueryCategoryArgs = {
+export type MutationDeleteCategoryArgs = {
   options: CategoryInput;
 };
 
-export type QueryDebtArgs = {
+export type MutationDeleteCycleTransactionArgs = {
+  options: CycleTransactionInput;
+};
+
+export type MutationDeleteDebtArgs = {
   options: DebtInput;
+};
+
+export type MutationDeleteMerchantArgs = {
+  options: MerchantInput;
+};
+
+export type MutationDeleteNotificationArgs = {
+  options: NotificationInput;
+};
+
+export type MutationDeletePurchaseArgs = {
+  options: PurchaseInput;
+};
+
+export type MutationDeleteTransactionArgs = {
+  options: TransactionInput;
+};
+
+export type MutationRegisterArgs = {
+  options: NewUserInput;
+};
+
+export type MutationRemoveBudgetMemberArgs = {
+  options: RemoveBudgetMemberInput;
+};
+
+export type MutationUpdateAccountArgs = {
+  options: UpdateAccountInput;
+};
+
+export type MutationUpdateBudgetArgs = {
+  options: UpdateBudgetInput;
+};
+
+export type MutationUpdateCategoryArgs = {
+  options: UpdateCategoryInput;
+};
+
+export type MutationUpdateCycleTransactionArgs = {
+  options: UpdateCycleTransactionInput;
+};
+
+export type MutationUpdateDebtArgs = {
+  options: UpdateDebtInput;
+};
+
+export type MutationUpdateMerchantArgs = {
+  options: UpdateMerchantInput;
+};
+
+export type MutationUpdateNotificationArgs = {
+  options: UpdateNotificationInput;
+};
+
+export type MutationUpdatePurchaseArgs = {
+  options: UpdatePurchaseInput;
+};
+
+export type MutationUpdateTransactionArgs = {
+  options: UpdateTransactionInput;
+};
+
+export type MutationUpdateUserArgs = {
+  options: UpdateUserInput;
+};
+
+export type Notification = {
+  __typename?: 'Notification';
+  action?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  read: Scalars['String'];
+  text: Scalars['String'];
+  time: Scalars['String'];
+  user: User;
+};
+
+export type Plan = {
+  __typename?: 'Plan';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  purchases: Purchase;
+};
+
+export type Purchase = {
+  __typename?: 'Purchase';
+  currency: Scalars['String'];
+  endDate: Scalars['String'];
+  id: Scalars['String'];
+  name: Scalars['String'];
+  plan: Plan;
+  price: Scalars['Float'];
+  startDate: Scalars['String'];
+  user: User;
+};
+
+export type Query = {
+  __typename?: 'Query';
+  account: Account;
+  budget: Budget;
+  category: Category;
+  cycleTransaction: CycleTransaction;
+  debt: Debt;
+  login: User;
+  logout: Scalars['Boolean'];
+  merchant: Merchant;
+  notification: Notification;
+  purchase: Purchase;
+  transaction: Transaction;
+  user: User;
 };
 
 export type QueryAccountArgs = {
   options: AccountInput;
 };
 
+export type QueryBudgetArgs = {
+  options: BudgetInput;
+};
+
+export type QueryCategoryArgs = {
+  options: CategoryInput;
+};
+
 export type QueryCycleTransactionArgs = {
   options: CycleTransactionInput;
+};
+
+export type QueryDebtArgs = {
+  options: DebtInput;
+};
+
+export type QueryLoginArgs = {
+  options: UserInput;
 };
 
 export type QueryMerchantArgs = {
@@ -71,170 +348,55 @@ export type QueryPurchaseArgs = {
   options: PurchaseInput;
 };
 
-export type User = {
-  __typename?: 'User';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  birthDate?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  photoUrl?: Maybe<Scalars['String']>;
-  updatePhotoUrl?: Maybe<Scalars['String']>;
-  categories: Array<Category>;
-  merchants: Array<Merchant>;
-  transactions: Array<Transaction>;
-  cycleTransactions: Array<CycleTransaction>;
-  accounts: Array<Account>;
-  budgetMembership: Array<BudgetMembership>;
-  debts: Array<Debt>;
-  notifications: Array<Notification>;
-  purchases: Array<Purchase>;
-};
-
-export type Category = {
-  __typename?: 'Category';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  limit?: Maybe<Scalars['Float']>;
-  type: Scalars['Float'];
-  icon: Scalars['String'];
-  color: Scalars['String'];
-  ownerUser?: Maybe<User>;
-  ownerBudget?: Maybe<Budget>;
-  transactions: Array<Transaction>;
-  cycleTransactions: Array<CycleTransaction>;
-};
-
-export type Budget = {
-  __typename?: 'Budget';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  limit?: Maybe<Scalars['Float']>;
-  categories: Array<Category>;
-  merchants: Array<Merchant>;
-  transactions: Array<Transaction>;
-  cycleTransactions: Array<CycleTransaction>;
-  membership: Array<BudgetMembership>;
-};
-
-export type Merchant = {
-  __typename?: 'Merchant';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  ownerUser?: Maybe<User>;
-  ownerBudget?: Maybe<Budget>;
-  transactions: Array<Transaction>;
-  cycleTransactions: Array<CycleTransaction>;
+export type QueryTransactionArgs = {
+  options: TransactionInput;
 };
 
 export type Transaction = {
   __typename?: 'Transaction';
-  id: Scalars['String'];
-  name: Scalars['String'];
+  account: Account;
   amount: Scalars['Float'];
-  time: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  category: Category;
-  account: Account;
   budget?: Maybe<Budget>;
-  merchant?: Maybe<Merchant>;
-  creator?: Maybe<User>;
-};
-
-export type Account = {
-  __typename?: 'Account';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  currency: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  balance: Scalars['Float'];
-  icon: Scalars['String'];
-  color: Scalars['String'];
-  type: Scalars['Float'];
-  interestRate?: Maybe<Scalars['Float']>;
-  billingDate?: Maybe<Scalars['String']>;
-  billingPeriod?: Maybe<Scalars['Float']>;
-  owner: User;
-  transactions: Array<Transaction>;
-  cycleTransaction: Array<CycleTransaction>;
-};
-
-export type CycleTransaction = {
-  __typename?: 'CycleTransaction';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  amount?: Maybe<Scalars['Float']>;
-  date: Scalars['String'];
-  period: Scalars['Float'];
-  description?: Maybe<Scalars['String']>;
   category: Category;
-  account: Account;
-  budget?: Maybe<Budget>;
-  merchant?: Maybe<Merchant>;
   creator?: Maybe<User>;
-};
-
-export type BudgetMembership = {
-  __typename?: 'BudgetMembership';
-  user: User;
-  budget: Budget;
-  accessLevel: Scalars['String'];
-};
-
-export type Debt = {
-  __typename?: 'Debt';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  currency: Scalars['String'];
-  interestRate?: Maybe<Scalars['Float']>;
-  endDate: Scalars['String'];
   description?: Maybe<Scalars['String']>;
-  balance: Scalars['Float'];
-  icon: Scalars['String'];
-  color: Scalars['String'];
-  owner: User;
-};
-
-export type Notification = {
-  __typename?: 'Notification';
   id: Scalars['String'];
-  text: Scalars['String'];
-  action?: Maybe<Scalars['String']>;
-  read: Scalars['String'];
+  merchant?: Maybe<Merchant>;
+  name: Scalars['String'];
   time: Scalars['String'];
-  user: User;
 };
 
-export type Purchase = {
-  __typename?: 'Purchase';
-  id: Scalars['String'];
-  startDate: Scalars['String'];
-  endDate: Scalars['String'];
-  price: Scalars['Float'];
-  currency: Scalars['String'];
-  name: Scalars['String'];
-  user: User;
-  plan: Plan;
-};
-
-export type Plan = {
-  __typename?: 'Plan';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  price: Scalars['Float'];
-  purchases: Purchase;
-};
-
-export type UserInput = {
+export type User = {
+  __typename?: 'User';
+  accounts: Array<Account>;
+  birthDate?: Maybe<Scalars['String']>;
+  budgetMembership: Array<BudgetMembership>;
+  categories: Array<Category>;
+  country?: Maybe<Scalars['String']>;
+  cycleTransactions: Array<CycleTransaction>;
+  debts: Array<Debt>;
   email: Scalars['String'];
-  password: Scalars['String'];
+  id: Scalars['String'];
+  merchants: Array<Merchant>;
+  name: Scalars['String'];
+  notifications: Array<Notification>;
+  photoUrl?: Maybe<Scalars['String']>;
+  purchases: Array<Purchase>;
+  transactions: Array<Transaction>;
+  updatePhotoUrl?: Maybe<Scalars['String']>;
+};
+
+export type AccountInput = {
+  id: Scalars['String'];
+};
+
+export type AddBudgetMemberInput = {
+  accessLevel?: Maybe<Scalars['String']>;
+  budgetId: Scalars['String'];
+  email: Scalars['String'];
 };
 
 export type BudgetInput = {
-  id: Scalars['String'];
-};
-
-export type TransactionInput = {
   id: Scalars['String'];
 };
 
@@ -242,20 +404,97 @@ export type CategoryInput = {
   id: Scalars['String'];
 };
 
-export type DebtInput = {
-  id: Scalars['String'];
-};
-
-export type AccountInput = {
-  id: Scalars['String'];
-};
-
 export type CycleTransactionInput = {
+  id: Scalars['String'];
+};
+
+export type DebtInput = {
   id: Scalars['String'];
 };
 
 export type MerchantInput = {
   id: Scalars['String'];
+};
+
+export type NewAccountInput = {
+  balance: Scalars['Float'];
+  color: Scalars['String'];
+  currency: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  icon: Scalars['String'];
+  name: Scalars['String'];
+  type: Scalars['Float'];
+};
+
+export type NewBudgetInput = {
+  limit?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+};
+
+export type NewCategoryInput = {
+  color: Scalars['String'];
+  icon: Scalars['String'];
+  limit?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+  ownerBudget?: Maybe<Scalars['String']>;
+  type: Scalars['Float'];
+};
+
+export type NewCycleTransactionInput = {
+  accountId?: Maybe<Scalars['String']>;
+  amount: Scalars['Float'];
+  categoryId: Scalars['String'];
+  date: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  period: Scalars['Float'];
+};
+
+export type NewDebtInput = {
+  balance: Scalars['Float'];
+  color: Scalars['String'];
+  currency: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  endDate: Scalars['String'];
+  icon: Scalars['String'];
+  interestRate?: Maybe<Scalars['Float']>;
+  name: Scalars['String'];
+};
+
+export type NewMerchantInput = {
+  name: Scalars['String'];
+};
+
+export type NewNotificationInput = {
+  action?: Maybe<Scalars['String']>;
+  read: Scalars['String'];
+  text: Scalars['String'];
+  time: Scalars['String'];
+};
+
+export type NewPurchaseInput = {
+  currency: Scalars['String'];
+  endDate: Scalars['String'];
+  name: Scalars['String'];
+  planId: Scalars['String'];
+  price: Scalars['Float'];
+  startDate: Scalars['String'];
+};
+
+export type NewTransactionInput = {
+  accountId: Scalars['String'];
+  amount: Scalars['Float'];
+  categoryId: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  time: Scalars['String'];
+};
+
+export type NewUserInput = {
+  birthDate?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  name: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type NotificationInput = {
@@ -266,317 +505,67 @@ export type PurchaseInput = {
   id: Scalars['String'];
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  register: User;
-  updateUser: User;
-  deleteUser: User;
-  revokeToken: Scalars['Boolean'];
-  createBudget: Budget;
-  updateBudget: Budget;
-  deleteBudget: Budget;
-  addBudgetMember: Scalars['Boolean'];
-  removeBudgetMember: Scalars['Boolean'];
-  createTransaction: Transaction;
-  updateTransaction: Transaction;
-  deleteTransaction: Transaction;
-  createCategory: Category;
-  updateCategory: Category;
-  deleteCategory: Category;
-  createDebt: Debt;
-  updateDebt: Debt;
-  deleteDebt: Debt;
-  createAccount: Account;
-  updateAccount: Account;
-  deleteAccount: Account;
-  createCycleTransaction: CycleTransaction;
-  updateCycleTransaction: CycleTransaction;
-  deleteCycleTransaction: CycleTransaction;
-  createMerchant: Merchant;
-  updateMerchant: Merchant;
-  deleteMerchant: Merchant;
-  createNotification: Notification;
-  updateNotification: Notification;
-  deleteNotification: Notification;
-  createPurchase: Purchase;
-  updatePurchase: Purchase;
-  deletePurchase: Purchase;
-};
-
-export type MutationRegisterArgs = {
-  options: NewUserInput;
-};
-
-export type MutationUpdateUserArgs = {
-  options: UpdateUserInput;
-};
-
-export type MutationCreateBudgetArgs = {
-  options: NewBudgetInput;
-};
-
-export type MutationUpdateBudgetArgs = {
-  options: UpdateBudgetInput;
-};
-
-export type MutationDeleteBudgetArgs = {
-  options: BudgetInput;
-};
-
-export type MutationAddBudgetMemberArgs = {
-  options: AddBudgetMemberInput;
-};
-
-export type MutationRemoveBudgetMemberArgs = {
-  options: RemoveBudgetMemberInput;
-};
-
-export type MutationCreateTransactionArgs = {
-  options: NewTransactionInput;
-};
-
-export type MutationUpdateTransactionArgs = {
-  options: UpdateTransactionInput;
-};
-
-export type MutationDeleteTransactionArgs = {
-  options: TransactionInput;
-};
-
-export type MutationCreateCategoryArgs = {
-  options: NewCategoryInput;
-};
-
-export type MutationUpdateCategoryArgs = {
-  options: UpdateCategoryInput;
-};
-
-export type MutationDeleteCategoryArgs = {
-  options: CategoryInput;
-};
-
-export type MutationCreateDebtArgs = {
-  options: NewDebtInput;
-};
-
-export type MutationUpdateDebtArgs = {
-  options: UpdateDebtInput;
-};
-
-export type MutationDeleteDebtArgs = {
-  options: DebtInput;
-};
-
-export type MutationCreateAccountArgs = {
-  options: NewAccountInput;
-};
-
-export type MutationUpdateAccountArgs = {
-  options: UpdateAccountInput;
-};
-
-export type MutationDeleteAccountArgs = {
-  options: AccountInput;
-};
-
-export type MutationCreateCycleTransactionArgs = {
-  options: NewCycleTransactionInput;
-};
-
-export type MutationUpdateCycleTransactionArgs = {
-  options: UpdateCycleTransactionInput;
-};
-
-export type MutationDeleteCycleTransactionArgs = {
-  options: CycleTransactionInput;
-};
-
-export type MutationCreateMerchantArgs = {
-  options: NewMerchantInput;
-};
-
-export type MutationUpdateMerchantArgs = {
-  options: UpdateMerchantInput;
-};
-
-export type MutationDeleteMerchantArgs = {
-  options: MerchantInput;
-};
-
-export type MutationCreateNotificationArgs = {
-  options: NewNotificationInput;
-};
-
-export type MutationUpdateNotificationArgs = {
-  options: UpdateNotificationInput;
-};
-
-export type MutationDeleteNotificationArgs = {
-  options: NotificationInput;
-};
-
-export type MutationCreatePurchaseArgs = {
-  options: NewPurchaseInput;
-};
-
-export type MutationUpdatePurchaseArgs = {
-  options: UpdatePurchaseInput;
-};
-
-export type MutationDeletePurchaseArgs = {
-  options: PurchaseInput;
-};
-
-export type NewUserInput = {
-  email: Scalars['String'];
-  name: Scalars['String'];
-  password: Scalars['String'];
-  birthDate?: Maybe<Scalars['String']>;
-};
-
-export type UpdateUserInput = {
-  name?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  /** filename with extension to upload */
-  photo?: Maybe<Scalars['String']>;
-};
-
-export type NewBudgetInput = {
-  name: Scalars['String'];
-  limit?: Maybe<Scalars['Float']>;
-};
-
-export type UpdateBudgetInput = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Float']>;
-};
-
-export type AddBudgetMemberInput = {
-  budgetId: Scalars['String'];
-  email: Scalars['String'];
-  accessLevel?: Maybe<Scalars['String']>;
-};
-
 export type RemoveBudgetMemberInput = {
   budgetId: Scalars['String'];
   userId: Scalars['String'];
 };
 
-export type NewTransactionInput = {
-  name: Scalars['String'];
-  accountId: Scalars['String'];
-  categoryId: Scalars['String'];
-  amount: Scalars['Float'];
-  time: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-};
-
-export type UpdateTransactionInput = {
+export type TransactionInput = {
   id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  accountId?: Maybe<Scalars['String']>;
-  categoryId?: Maybe<Scalars['String']>;
-  budgetId?: Maybe<Scalars['String']>;
-  merchantId?: Maybe<Scalars['String']>;
-  amount?: Maybe<Scalars['Float']>;
-  time?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-};
-
-export type NewCategoryInput = {
-  name: Scalars['String'];
-  limit?: Maybe<Scalars['Float']>;
-  type: Scalars['Float'];
-  icon: Scalars['String'];
-  color: Scalars['String'];
-  ownerBudget?: Maybe<Scalars['String']>;
-};
-
-export type UpdateCategoryInput = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Float']>;
-  type?: Maybe<Scalars['Float']>;
-  icon?: Maybe<Scalars['String']>;
-  color?: Maybe<Scalars['String']>;
-};
-
-export type NewDebtInput = {
-  name: Scalars['String'];
-  currency: Scalars['String'];
-  endDate: Scalars['String'];
-  balance: Scalars['Float'];
-  icon: Scalars['String'];
-  color: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  interestRate?: Maybe<Scalars['Float']>;
-};
-
-export type UpdateDebtInput = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  currency?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  balance?: Maybe<Scalars['Float']>;
-  icon?: Maybe<Scalars['String']>;
-  color?: Maybe<Scalars['String']>;
-  interestRate?: Maybe<Scalars['Float']>;
-};
-
-export type NewAccountInput = {
-  name: Scalars['String'];
-  currency: Scalars['String'];
-  balance: Scalars['Float'];
-  icon: Scalars['String'];
-  color: Scalars['String'];
-  type: Scalars['Float'];
-  description?: Maybe<Scalars['String']>;
 };
 
 export type UpdateAccountInput = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  currency?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
   balance?: Maybe<Scalars['Float']>;
-  icon?: Maybe<Scalars['String']>;
-  color?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['Float']>;
-  interestRate?: Maybe<Scalars['Float']>;
   billingDate?: Maybe<Scalars['String']>;
   billingPeriod?: Maybe<Scalars['Float']>;
+  color?: Maybe<Scalars['String']>;
+  currency?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  interestRate?: Maybe<Scalars['Float']>;
+  name?: Maybe<Scalars['String']>;
   owner?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['Float']>;
 };
 
-export type NewCycleTransactionInput = {
-  name: Scalars['String'];
-  accountId?: Maybe<Scalars['String']>;
-  categoryId: Scalars['String'];
-  amount: Scalars['Float'];
-  date: Scalars['String'];
-  period: Scalars['Float'];
-  description?: Maybe<Scalars['String']>;
+export type UpdateBudgetInput = {
+  id: Scalars['String'];
+  limit?: Maybe<Scalars['Float']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type UpdateCategoryInput = {
+  color?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  limit?: Maybe<Scalars['Float']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['Float']>;
 };
 
 export type UpdateCycleTransactionInput = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
   accountId?: Maybe<Scalars['String']>;
-  categoryId?: Maybe<Scalars['String']>;
-  budgetId?: Maybe<Scalars['String']>;
-  merchantId?: Maybe<Scalars['String']>;
   amount?: Maybe<Scalars['Float']>;
+  budgetId?: Maybe<Scalars['String']>;
+  categoryId?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['String']>;
-  period?: Maybe<Scalars['Float']>;
   description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  merchantId?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  period?: Maybe<Scalars['Float']>;
 };
 
-export type NewMerchantInput = {
-  name: Scalars['String'];
+export type UpdateDebtInput = {
+  balance?: Maybe<Scalars['Float']>;
+  color?: Maybe<Scalars['String']>;
+  currency?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  interestRate?: Maybe<Scalars['Float']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type UpdateMerchantInput = {
@@ -584,38 +573,49 @@ export type UpdateMerchantInput = {
   name?: Maybe<Scalars['String']>;
 };
 
-export type NewNotificationInput = {
-  text: Scalars['String'];
-  action?: Maybe<Scalars['String']>;
-  read: Scalars['String'];
-  time: Scalars['String'];
-};
-
 export type UpdateNotificationInput = {
-  id: Scalars['String'];
-  text?: Maybe<Scalars['String']>;
   action?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   read?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
   time?: Maybe<Scalars['String']>;
 };
 
-export type NewPurchaseInput = {
-  name: Scalars['String'];
-  startDate: Scalars['String'];
-  endDate: Scalars['String'];
-  price: Scalars['Float'];
-  currency: Scalars['String'];
-  planId: Scalars['String'];
-};
-
 export type UpdatePurchaseInput = {
+  currency?: Maybe<Scalars['String']>;
+  endDate?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
-  startDate?: Maybe<Scalars['String']>;
-  endDate?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Float']>;
-  currency?: Maybe<Scalars['String']>;
   planId?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['Float']>;
+  startDate?: Maybe<Scalars['String']>;
+};
+
+export type UpdateTransactionInput = {
+  accountId?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['Float']>;
+  budgetId?: Maybe<Scalars['String']>;
+  categoryId?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  merchantId?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  time?: Maybe<Scalars['String']>;
+};
+
+export type UpdateUserInput = {
+  birthDate?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  /** filename with extension to upload */
+  photo?: Maybe<Scalars['String']>;
+};
+
+export type UserInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -653,7 +653,7 @@ export type RecentTransactionsQuery = { __typename?: 'Query' } & {
 export type UserQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UserQuery = { __typename?: 'Query' } & {
-  user: { __typename?: 'User' } & Pick<User, 'name' | 'email'>;
+  user: { __typename?: 'User' } & Pick<User, 'id' | 'name' | 'email'>;
 };
 
 export const RegisterDocument = gql`
@@ -843,6 +843,7 @@ export type RecentTransactionsQueryResult = Apollo.QueryResult<
 export const UserDocument = gql`
   query User {
     user {
+      id
       name
       email
     }
