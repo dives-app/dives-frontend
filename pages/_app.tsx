@@ -9,7 +9,6 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={theme}>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <ApolloProvider client={client}>{layout(<Component {...pageProps} />)}</ApolloProvider>
     </ChakraProvider>
   );

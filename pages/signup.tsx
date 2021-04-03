@@ -20,14 +20,12 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import * as yup from 'yup';
-import { SchemaOf } from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import connectionErrorToast from '../src/toast';
 import { NextPageWithLayout } from '../src/types';
+import { emailRegex } from '../src/regexes';
 
 interface RegisterOptions {
   email: string;
@@ -44,27 +42,12 @@ const Signup: NextPageWithLayout = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
 
-  const schema: SchemaOf<RegisterFormFields> = yup
-    .object()
-    .shape({
-      name: yup.string().required(t`nameRequired`),
-      email: yup
-        .string()
-        .required(t`auth:emailRequired`)
-        .email(t`auth:emailInvalid`),
-      password: yup.string().required(t`auth:passwordRequired`),
-      tos: yup.bool().oneOf([true], t`tosRequired`),
-    })
-    .defined();
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<RegisterFormFields>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<RegisterFormFields>();
 
   useUserQuery({
     onCompleted: () => router.push('/dashboard'),
@@ -118,7 +101,7 @@ const Signup: NextPageWithLayout = () => {
               placeholder={t`namePlaceholder`}
               autoComplete="given-name"
               variant="flushed"
-              {...register('name')} // eslint-disable-line react/jsx-props-no-spreading
+              {...register('name', { required: t`nameRequired` })}
             />
             <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
           </FormControl>
@@ -129,7 +112,13 @@ const Signup: NextPageWithLayout = () => {
               placeholder={t`auth:emailPlaceholder`}
               autoComplete="email"
               variant="flushed"
-              {...register('email')} // eslint-disable-line react/jsx-props-no-spreading
+              {...register('email', {
+                required: t`auth:emailRequired`,
+                pattern: {
+                  value: emailRegex,
+                  message: t`auth:emailInvalid`,
+                },
+              })}
             />
             <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
           </FormControl>
@@ -141,7 +130,9 @@ const Signup: NextPageWithLayout = () => {
                 placeholder="••••••••"
                 autoComplete="new-password"
                 variant="flushed"
-                {...register('password')} // eslint-disable-line react/jsx-props-no-spreading
+                {...register('password', {
+                  required: t`auth:passwordRequired`,
+                })}
               />
               <InputRightElement width="3rem">
                 <IconButton
@@ -157,16 +148,18 @@ const Signup: NextPageWithLayout = () => {
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
         </VStack>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <Checkbox errors={errors.tos} isInvalid={!!errors.tos} isRequired {...register('tos')}>
-          <Trans
-            i18nKey="signup:tosCheckbox"
-            components={{
-              termsLink: <DivesLink href="/terms" openInNewTab />,
-              privacyLink: <DivesLink href="/privacy" openInNewTab />,
-            }}
-          />
-        </Checkbox>
+        <FormControl id="tos" isInvalid={!!errors.tos} isRequired>
+          <Checkbox isInvalid={!!errors.tos} {...register('tos', { required: t`tosRequired` })}>
+            <Trans
+              i18nKey="signup:tosCheckbox"
+              components={{
+                termsLink: <DivesLink href="/terms" openInNewTab />,
+                privacyLink: <DivesLink href="/privacy" openInNewTab />,
+              }}
+            />
+          </Checkbox>
+          <FormErrorMessage>{errors.tos?.message}</FormErrorMessage>
+        </FormControl>
         <VStack width="100%" spacing="3">
           <Button type="submit" variant="primary" size="lg" width="100%" isLoading={isSigningIn}>
             {t`common:signup`}

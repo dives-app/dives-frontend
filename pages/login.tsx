@@ -18,13 +18,12 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
 import DivesLink from '../src/components/DivesLink';
 import { useLoginLazyQuery, useUserQuery } from '../src/generated/graphql';
 import connectionErrorToast from '../src/toast';
 import { NextPageWithLayout } from '../src/types';
+import { emailRegex } from '../src/regexes';
 
 interface LoginFields {
   email: string;
@@ -38,22 +37,12 @@ const Login: NextPageWithLayout = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .required(t`auth:emailRequired`)
-      .email(t`auth:emailInvalid`),
-    password: yup.string().required(t`auth:passwordRequired`),
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<LoginFields>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<LoginFields>();
 
   useUserQuery({
     onCompleted: () => router.push('/dashboard'),
@@ -111,7 +100,13 @@ const Login: NextPageWithLayout = () => {
               placeholder={t`auth:emailPlaceholder`}
               autoComplete="email"
               variant="flushed"
-              {...register('email')} // eslint-disable-line react/jsx-props-no-spreading
+              {...register('email', {
+                required: t`auth:emailRequired`,
+                pattern: {
+                  value: emailRegex,
+                  message: t`auth:emailInvalid`,
+                },
+              })}
             />
             <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
           </FormControl>
@@ -123,7 +118,9 @@ const Login: NextPageWithLayout = () => {
                 placeholder="••••••••"
                 autoComplete="current-password"
                 variant="flushed"
-                {...register('password')} // eslint-disable-line react/jsx-props-no-spreading
+                {...register('password', {
+                  required: t`auth:passwordRequired`,
+                })}
               />
               <InputRightElement width="3rem">
                 <IconButton

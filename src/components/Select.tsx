@@ -44,6 +44,7 @@ const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
             return (
               <Box
                 as="button"
+                key={option.name}
                 display="block"
                 px={4}
                 py={2}
