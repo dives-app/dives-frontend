@@ -1,7 +1,7 @@
-import { Flex, ListItem, Text } from '@chakra-ui/react';
-import Image from 'next/image';
 import React from 'react';
-import { getIconUrl, Icon } from '../../../utils/icons';
+import { Flex, ListItem, Text } from '@chakra-ui/react';
+import { Icon } from '../../../utils/icons';
+import ItemIcon from '../../ItemIcon';
 
 export interface CardListItemProps {
   icon: Icon;
@@ -19,16 +19,7 @@ const CardListItem = ({
 }: React.PropsWithChildren<CardListItemProps>) => (
   <ListItem display="flex" alignItems="center" justifyContent="space-between">
     <Flex alignItems="center">
-      <Flex
-        borderRadius="xl"
-        alignItems="center"
-        justifyContent="center"
-        bg={iconColor}
-        w="8"
-        h="8"
-      >
-        <Image src={getIconUrl(icon)} width={20} height={20} />
-      </Flex>
+      <ItemIcon icon={icon} color={iconColor} />
       <Text ml="3" color="dives.brightBlack">
         {title}
       </Text>

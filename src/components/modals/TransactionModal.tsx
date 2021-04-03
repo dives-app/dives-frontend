@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@chakra-ui/react';
 import Modal from './base/Modal';
-import { useCreateTransactionMutation } from '../../generated/graphql';
+import { useCategoriesQuery, useCreateTransactionMutation } from '../../generated/graphql';
 import Select from '../Select';
 import { Icon } from '../../utils/icons';
 
@@ -10,11 +10,8 @@ interface TransactionModalProps {
 }
 
 const TransactionModal = ({ closeModal }: TransactionModalProps) => {
+  const { data } = useCategoriesQuery();
   const [createTransaction] = useCreateTransactionMutation();
-  const options = [
-    { name: 'Name', icon: 'food' },
-    { name: 'Name2', icon: 'food' },
-  ] as Array<{ name: string; icon: Icon }>;
   return (
     <Modal closeModal={closeModal}>
       <Button
@@ -36,7 +33,18 @@ const TransactionModal = ({ closeModal }: TransactionModalProps) => {
       >
         First add component to show list of categories and add a new category
       </Button>
-      <Select options={options} onSelect={() => {}} />
+      {data === undefined ? (
+        'Loading categories'
+      ) : (
+        <Select
+          options={data?.user.categories.map(({ name, color, icon }) => ({
+            name,
+            color,
+            icon: icon as Icon,
+          }))}
+          onSelect={() => {}}
+        />
+      )}
     </Modal>
   );
 };
