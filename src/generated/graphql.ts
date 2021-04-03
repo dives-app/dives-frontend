@@ -648,11 +648,11 @@ export type RegisterMutation = { __typename?: 'Mutation' } & {
 export type CategoriesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type CategoriesQuery = { __typename?: 'Query' } & {
-  user: { __typename?: 'User' } & {
-    categories: Array<
-      { __typename?: 'Category' } & Pick<Category, 'id' | 'color' | 'icon' | 'name'>
-    >;
-  };
+  user: { __typename?: 'User' } & Pick<User, 'id'> & {
+      categories: Array<
+        { __typename?: 'Category' } & Pick<Category, 'id' | 'color' | 'icon' | 'name'>
+      >;
+    };
 };
 
 export type LoginQueryVariables = Exact<{
@@ -670,13 +670,13 @@ export type LogoutQuery = { __typename?: 'Query' } & Pick<Query, 'logout'>;
 export type RecentTransactionsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type RecentTransactionsQuery = { __typename?: 'Query' } & {
-  user: { __typename?: 'User' } & {
-    transactions: Array<
-      { __typename?: 'Transaction' } & Pick<Transaction, 'id' | 'name' | 'time' | 'amount'> & {
-          category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'>;
-        }
-    >;
-  };
+  user: { __typename?: 'User' } & Pick<User, 'id'> & {
+      transactions: Array<
+        { __typename?: 'Transaction' } & Pick<Transaction, 'id' | 'name' | 'time' | 'amount'> & {
+            category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'>;
+          }
+      >;
+    };
 };
 
 export type UserQueryVariables = Exact<{ [key: string]: never }>;
@@ -830,6 +830,7 @@ export type RegisterMutationOptions = Apollo.BaseMutationOptions<
 export const CategoriesDocument = gql`
   query Categories {
     user {
+      id
       categories {
         id
         color
@@ -951,6 +952,7 @@ export type LogoutQueryResult = Apollo.QueryResult<LogoutQuery, LogoutQueryVaria
 export const RecentTransactionsDocument = gql`
   query RecentTransactions {
     user {
+      id
       transactions {
         id
         name
