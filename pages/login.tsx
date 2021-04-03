@@ -46,7 +46,12 @@ const Login: NextPageWithLayout = () => {
     password: yup.string().required(t`auth:passwordRequired`),
   });
 
-  const { register, handleSubmit, errors, setError } = useForm<LoginFields>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<LoginFields>({
     resolver: yupResolver(schema),
   });
 
@@ -103,11 +108,10 @@ const Login: NextPageWithLayout = () => {
             <FormLabel>{t`auth:email`}</FormLabel>
             <Input
               type="email"
-              name="email"
               placeholder={t`auth:emailPlaceholder`}
               autoComplete="email"
-              ref={register}
               variant="flushed"
+              {...register('email')} // eslint-disable-line react/jsx-props-no-spreading
             />
             <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
           </FormControl>
@@ -116,11 +120,10 @@ const Login: NextPageWithLayout = () => {
             <InputGroup>
               <Input
                 type={showPassword ? 'text' : 'password'}
-                name="password"
                 placeholder="••••••••"
                 autoComplete="current-password"
-                ref={register}
                 variant="flushed"
+                {...register('password')} // eslint-disable-line react/jsx-props-no-spreading
               />
               <InputRightElement width="3rem">
                 <IconButton

@@ -57,7 +57,12 @@ const Signup: NextPageWithLayout = () => {
     })
     .defined();
 
-  const { register: registerInput, handleSubmit, errors, setError } = useForm<RegisterFormFields>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<RegisterFormFields>({
     resolver: yupResolver(schema),
   });
 
@@ -65,7 +70,7 @@ const Signup: NextPageWithLayout = () => {
     onCompleted: () => router.push('/dashboard'),
   });
 
-  const [register] = useRegisterMutation({
+  const [registerUser] = useRegisterMutation({
     onCompleted: () => router.push('/dashboard'),
     onError: error => {
       setIsSigningIn(false);
@@ -88,7 +93,7 @@ const Signup: NextPageWithLayout = () => {
 
   const onSubmit: SubmitHandler<RegisterFormFields> = async submittedData => {
     setIsSigningIn(true);
-    await register({
+    await registerUser({
       variables: {
         options: {
           name: submittedData.name,
@@ -110,11 +115,10 @@ const Signup: NextPageWithLayout = () => {
           <FormControl id="name" isInvalid={!!errors.name} isRequired>
             <FormLabel>{t`name`}</FormLabel>
             <Input
-              name="name"
               placeholder={t`namePlaceholder`}
               autoComplete="given-name"
-              ref={registerInput}
               variant="flushed"
+              {...register('name')} // eslint-disable-line react/jsx-props-no-spreading
             />
             <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
           </FormControl>
@@ -122,11 +126,10 @@ const Signup: NextPageWithLayout = () => {
             <FormLabel>{t`auth:email`}</FormLabel>
             <Input
               type="email"
-              name="email"
               placeholder={t`auth:emailPlaceholder`}
               autoComplete="email"
-              ref={registerInput}
               variant="flushed"
+              {...register('email')} // eslint-disable-line react/jsx-props-no-spreading
             />
             <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
           </FormControl>
@@ -135,11 +138,10 @@ const Signup: NextPageWithLayout = () => {
             <InputGroup>
               <Input
                 type={showPassword ? 'text' : 'password'}
-                name="password"
                 placeholder="••••••••"
                 autoComplete="new-password"
-                ref={registerInput}
                 variant="flushed"
+                {...register('password')} // eslint-disable-line react/jsx-props-no-spreading
               />
               <InputRightElement width="3rem">
                 <IconButton
@@ -155,13 +157,8 @@ const Signup: NextPageWithLayout = () => {
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
         </VStack>
-        <Checkbox
-          name="tos"
-          ref={registerInput}
-          errors={errors.tos}
-          isInvalid={!!errors.tos}
-          isRequired
-        >
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <Checkbox errors={errors.tos} isInvalid={!!errors.tos} isRequired {...register('tos')}>
           <Trans
             i18nKey="signup:tosCheckbox"
             components={{

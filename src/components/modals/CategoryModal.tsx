@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -32,13 +32,14 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
     type: yup.number().required(t`app:typeRequired`),
     icon: yup.string().required(t`app:iconRequired`),
   });
-  const { register, handleSubmit, errors, setValue } = useForm<CategoryFields>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<CategoryFields>({
     resolver: yupResolver(schema),
   });
-  useEffect(() => {
-    register('type');
-    register('icon');
-  }, [register]);
   const options = [{ name: 'food', icon: 'food' }] as Array<{ name: string; icon: Icon }>;
 
   const onSubmit: SubmitHandler<CategoryFields> = ({ name, color, type, icon }) => {
@@ -60,16 +61,18 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
         <Select
           options={options}
           onSelect={option => {
-            setValue('icon', Number(option.name));
+            setValue('icon', option.icon);
           }}
         />
         <FormControl isInvalid={!!errors.name}>
           <FormLabel>Name</FormLabel>
-          <Input name="name" ref={register} />
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Input {...register('name')} />
         </FormControl>
         <FormControl isInvalid={!!errors.color}>
           <FormLabel>Color</FormLabel>
-          <Input name="color" type="color" ref={register} />
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Input type="color" {...register('color')} />
         </FormControl>
         <Select
           options={[
@@ -77,7 +80,9 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
             { name: '2', icon: 'food' },
           ]}
           onSelect={option => {
-            setValue('type', Number(option.name));
+            // TODO remove this @ts-ignore
+            // @ts-ignore
+            setValue('type', Number(option.type));
           }}
         />
         <Button variant="primary" type="submit">
