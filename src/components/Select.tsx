@@ -48,6 +48,7 @@ interface SelectProps {
   onSelect?(selected: Option): void;
 }
 
+// TODO: make accessible and close on click outside
 const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
   const [activeOption, setActiveOption] = useState(defaultOption);
   const [selecting, setSelecting] = useState(false);

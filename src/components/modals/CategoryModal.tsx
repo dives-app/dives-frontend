@@ -57,16 +57,21 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
   return (
     <Modal closeModal={closeModal}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Select
-          options={options}
-          onSelect={option => {
-            setValue('icon', option.icon);
-          }}
-        />
-        <p>{errors.icon?.message}</p>
+        <FormControl>
+          <FormLabel>Icon</FormLabel>
+          <Select
+            options={options}
+            onSelect={option => {
+              // TODO remove this @ts-ignore
+              // @ts-ignore
+              setValue('icon', option.icon);
+            }}
+          />
+          <FormErrorMessage>{errors.icon?.message}</FormErrorMessage>
+        </FormControl>
         <FormControl isInvalid={!!errors.name}>
           <FormLabel>Name</FormLabel>
-          <Input {...register('name', { required: t`app:nameRequired` })} />
+          <Input variant="flushed" {...register('name', { required: t`app:nameRequired` })} />
           <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={!!errors.color}>
@@ -79,18 +84,21 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
           />
           <FormErrorMessage>{errors.color?.message}</FormErrorMessage>
         </FormControl>
-        <Select
-          options={[
-            { name: '1', icon: 'food' },
-            { name: '2', icon: 'food' },
-          ]}
-          onSelect={option => {
-            // TODO remove this @ts-ignore
-            // @ts-ignore
-            setValue('type', option.name);
-          }}
-        />
-        <p>{errors.type?.message}</p>
+        <FormControl>
+          <FormLabel>Category type</FormLabel>
+          <Select
+            options={[
+              { name: '1', icon: 'food', value: 1 },
+              { name: '2', icon: 'food', value: 2 },
+            ]}
+            onSelect={option => {
+              // TODO remove this @ts-ignore
+              // @ts-ignore
+              setValue('type', option.value);
+            }}
+          />
+          <FormErrorMessage>{errors.type?.message}</FormErrorMessage>
+        </FormControl>
         <Button variant="primary" type="submit">
           submit
         </Button>

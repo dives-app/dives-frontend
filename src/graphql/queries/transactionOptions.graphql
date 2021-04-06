@@ -1,0 +1,27 @@
+query TransactionOptions {
+  user {
+    id
+    accounts {
+      id
+      icon
+      color
+      name
+    }
+    categories {
+      id
+      icon
+      color
+      name
+    }
+    merchants {
+      id
+      name
+    }
+    budgetMembership {
+      budget {
+        id
+        name
+      }
+    }
+  }
+}

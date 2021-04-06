@@ -634,7 +634,9 @@ export type CreateTransactionMutation = { __typename?: 'Mutation' } & {
   createTransaction: { __typename?: 'Transaction' } & Pick<
     Transaction,
     'id' | 'name' | 'time' | 'amount'
-  > & { category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'> };
+  > & {
+      category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'>;
+    };
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -675,6 +677,23 @@ export type RecentTransactionsQuery = { __typename?: 'Query' } & {
         { __typename?: 'Transaction' } & Pick<Transaction, 'id' | 'name' | 'time' | 'amount'> & {
             category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'>;
           }
+      >;
+    };
+};
+
+export type TransactionOptionsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TransactionOptionsQuery = { __typename?: 'Query' } & {
+  user: { __typename?: 'User' } & Pick<User, 'id'> & {
+      accounts: Array<{ __typename?: 'Account' } & Pick<Account, 'id' | 'icon' | 'color' | 'name'>>;
+      categories: Array<
+        { __typename?: 'Category' } & Pick<Category, 'id' | 'icon' | 'color' | 'name'>
+      >;
+      merchants: Array<{ __typename?: 'Merchant' } & Pick<Merchant, 'id' | 'name'>>;
+      budgetMembership: Array<
+        { __typename?: 'BudgetMembership' } & {
+          budget: { __typename?: 'Budget' } & Pick<Budget, 'id' | 'name'>;
+        }
       >;
     };
 };
@@ -726,6 +745,7 @@ export function useCreateCategoryMutation(
     options,
   );
 }
+
 export type CreateCategoryMutationHookResult = ReturnType<typeof useCreateCategoryMutation>;
 export type CreateCategoryMutationResult = Apollo.MutationResult<CreateCategoryMutation>;
 export type CreateCategoryMutationOptions = Apollo.BaseMutationOptions<
@@ -780,6 +800,7 @@ export function useCreateTransactionMutation(
     options,
   );
 }
+
 export type CreateTransactionMutationHookResult = ReturnType<typeof useCreateTransactionMutation>;
 export type CreateTransactionMutationResult = Apollo.MutationResult<CreateTransactionMutation>;
 export type CreateTransactionMutationOptions = Apollo.BaseMutationOptions<
@@ -821,6 +842,7 @@ export function useRegisterMutation(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
 }
+
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<
@@ -862,6 +884,7 @@ export function useCategoriesQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
 }
+
 export function useCategoriesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<CategoriesQuery, CategoriesQueryVariables>,
 ) {
@@ -871,6 +894,7 @@ export function useCategoriesLazyQuery(
     options,
   );
 }
+
 export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
 export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
 export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
@@ -904,12 +928,14 @@ export function useLoginQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoginQuery, LoginQueryVariables>(LoginDocument, options);
 }
+
 export function useLoginLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<LoginQuery, LoginQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<LoginQuery, LoginQueryVariables>(LoginDocument, options);
 }
+
 export type LoginQueryHookResult = ReturnType<typeof useLoginQuery>;
 export type LoginLazyQueryHookResult = ReturnType<typeof useLoginLazyQuery>;
 export type LoginQueryResult = Apollo.QueryResult<LoginQuery, LoginQueryVariables>;
@@ -940,12 +966,14 @@ export function useLogoutQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LogoutQuery, LogoutQueryVariables>(LogoutDocument, options);
 }
+
 export function useLogoutLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<LogoutQuery, LogoutQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<LogoutQuery, LogoutQueryVariables>(LogoutDocument, options);
 }
+
 export type LogoutQueryHookResult = ReturnType<typeof useLogoutQuery>;
 export type LogoutLazyQueryHookResult = ReturnType<typeof useLogoutLazyQuery>;
 export type LogoutQueryResult = Apollo.QueryResult<LogoutQuery, LogoutQueryVariables>;
@@ -991,6 +1019,7 @@ export function useRecentTransactionsQuery(
     options,
   );
 }
+
 export function useRecentTransactionsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     RecentTransactionsQuery,
@@ -1003,6 +1032,7 @@ export function useRecentTransactionsLazyQuery(
     options,
   );
 }
+
 export type RecentTransactionsQueryHookResult = ReturnType<typeof useRecentTransactionsQuery>;
 export type RecentTransactionsLazyQueryHookResult = ReturnType<
   typeof useRecentTransactionsLazyQuery
@@ -1010,6 +1040,82 @@ export type RecentTransactionsLazyQueryHookResult = ReturnType<
 export type RecentTransactionsQueryResult = Apollo.QueryResult<
   RecentTransactionsQuery,
   RecentTransactionsQueryVariables
+>;
+export const TransactionOptionsDocument = gql`
+  query TransactionOptions {
+    user {
+      id
+      accounts {
+        id
+        icon
+        color
+        name
+      }
+      categories {
+        id
+        icon
+        color
+        name
+      }
+      merchants {
+        id
+        name
+      }
+      budgetMembership {
+        budget {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useTransactionOptionsQuery__
+ *
+ * To run a query within a React component, call `useTransactionOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTransactionOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTransactionOptionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTransactionOptionsQuery(
+  baseOptions?: Apollo.QueryHookOptions<TransactionOptionsQuery, TransactionOptionsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<TransactionOptionsQuery, TransactionOptionsQueryVariables>(
+    TransactionOptionsDocument,
+    options,
+  );
+}
+
+export function useTransactionOptionsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    TransactionOptionsQuery,
+    TransactionOptionsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<TransactionOptionsQuery, TransactionOptionsQueryVariables>(
+    TransactionOptionsDocument,
+    options,
+  );
+}
+
+export type TransactionOptionsQueryHookResult = ReturnType<typeof useTransactionOptionsQuery>;
+export type TransactionOptionsLazyQueryHookResult = ReturnType<
+  typeof useTransactionOptionsLazyQuery
+>;
+export type TransactionOptionsQueryResult = Apollo.QueryResult<
+  TransactionOptionsQuery,
+  TransactionOptionsQueryVariables
 >;
 export const UserDocument = gql`
   query User {
@@ -1040,12 +1146,14 @@ export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, Us
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
+
 export function useUserLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
+
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
 export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
 export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
