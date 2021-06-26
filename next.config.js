@@ -5,7 +5,6 @@ module.exports = withPlugins(
   [[process.env.ANALYZE === 'true' ? require('@next/bundle-analyzer')({ enable: true }) : {}]],
   nextTranslate({
     future: {
-      webpack5: true,
       strictPostcssConfiguration: true,
     },
   }),
