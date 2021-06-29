@@ -11,7 +11,7 @@ const bg = (normal: string, hover: string, active: string) => ({
   },
 });
 
-export default {
+export const Button = {
   baseStyle: {
     fontWeight: 'normal',
     borderRadius: 'full',

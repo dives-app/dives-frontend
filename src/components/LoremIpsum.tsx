@@ -1,7 +1,7 @@
-import { Text, VStack } from '@chakra-ui/react';
 import React from 'react';
+import { Text, VStack } from '@chakra-ui/react';
 
-const LoremIpsum = () => (
+export const LoremIpsum = () => (
   <VStack as="main" textAlign="justify">
     <Text>
       Cred dreamcatcher woke cold-pressed tousled. Church-key knausgaard cred, truffaut health goth
@@ -59,5 +59,3 @@ const LoremIpsum = () => (
     </Text>
   </VStack>
 );
-
-export default LoremIpsum;

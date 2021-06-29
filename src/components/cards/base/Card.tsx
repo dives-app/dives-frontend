@@ -11,7 +11,7 @@ interface CardProps {
   action?: Action;
 }
 
-const Card = ({ children, title, action, ...rest }: PropsWithChildren<CardProps>) => (
+export const Card = chakra(({ children, title, action, ...rest }: PropsWithChildren<CardProps>) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
   <Box bg="white" borderRadius="12px" w="100%" px={6} py={4} {...rest}>
     <Flex
@@ -33,6 +33,4 @@ const Card = ({ children, title, action, ...rest }: PropsWithChildren<CardProps>
     </Flex>
     {children}
   </Box>
-);
-
-export default chakra(Card);
+));

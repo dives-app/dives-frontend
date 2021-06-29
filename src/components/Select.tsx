@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useState } from 'react';
 import { Flex, Box, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { Icon } from '../utils/icons';
-import ItemIcon from './ItemIcon';
+import { ItemIcon } from './ItemIcon';
 
 interface Option {
   icon?: Icon;
@@ -16,30 +16,28 @@ interface SelectItemProps {
   item: Option;
 }
 
-function SelectItem({ item, onClick, children }: PropsWithChildren<SelectItemProps>) {
-  return (
-    <Flex
-      as="button"
-      onClick={onClick}
-      justify="space-between"
-      align="center"
-      w="100%"
-      px={3}
-      py={2}
-      _hover={{
-        bg: 'dives.gray',
-      }}
-    >
-      <Flex align="center">
-        {item?.icon !== undefined && item?.color !== undefined ? (
-          <ItemIcon icon={item.icon} color={item.color} />
-        ) : null}
-        <Text paddingLeft={2}>{item.name}</Text>
-      </Flex>
-      {children}
+const SelectItem = ({ item, onClick, children }: PropsWithChildren<SelectItemProps>) => (
+  <Flex
+    as="button"
+    onClick={onClick}
+    justify="space-between"
+    align="center"
+    w="100%"
+    px={3}
+    py={2}
+    _hover={{
+      bg: 'dives.gray',
+    }}
+  >
+    <Flex align="center">
+      {item?.icon !== undefined && item?.color !== undefined ? (
+        <ItemIcon icon={item.icon} color={item.color} />
+      ) : null}
+      <Text paddingLeft={2}>{item.name}</Text>
     </Flex>
-  );
-}
+    {children}
+  </Flex>
+);
 
 interface SelectProps {
   options: Array<Option>;
@@ -49,7 +47,7 @@ interface SelectProps {
 }
 
 // TODO: make accessible and close on click outside
-const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
+export const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
   const [activeOption, setActiveOption] = useState(defaultOption);
   const [selecting, setSelecting] = useState(false);
   return (
@@ -91,5 +89,3 @@ const Select = ({ options, onSelect, defaultOption }: SelectProps) => {
     </Box>
   );
 };
-
-export default Select;

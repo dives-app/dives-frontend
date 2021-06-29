@@ -7,7 +7,7 @@ interface ActiveLinkProps extends LinkProps {
   activeStyle?: CSSObject;
 }
 
-const ActiveLink = ({
+export const ActiveLink = ({
   children,
   href,
   as,
@@ -37,5 +37,3 @@ const ActiveLink = ({
     </NextLink>
   );
 };
-
-export default ActiveLink;

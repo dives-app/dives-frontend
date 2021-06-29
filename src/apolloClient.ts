@@ -7,7 +7,7 @@ if (!API_ENDPOINT) {
   );
 }
 
-export default new ApolloClient({
+export const apolloClient = new ApolloClient({
   uri: API_ENDPOINT,
   cache: new InMemoryCache(),
   credentials: 'include',

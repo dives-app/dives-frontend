@@ -2,8 +2,8 @@ import React from 'react';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
-import TermsLayout from '../src/layouts/TermsLayout';
-import LoremIpsum from '../src/components/LoremIpsum';
+import { TermsLayout } from '../src/layouts/TermsLayout';
+import { LoremIpsum } from '../src/components/LoremIpsum';
 
 const defaultNs = 'privacy';
 

@@ -2,8 +2,8 @@ import React, { PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
 import { Text, Grid, GridItem } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
-import DashboardNavigation, { NavigationElement } from './DashboardNavigation';
-import TitleBar from './TitleBar';
+import { DashboardNavigation, NavigationElement } from './DashboardNavigation';
+import { TitleBar } from './TitleBar';
 import { useUserQuery } from '../../generated/graphql';
 
 const navigationElements: Array<NavigationElement> = [
@@ -29,7 +29,7 @@ const navigationElements: Array<NavigationElement> = [
   },
 ];
 
-const DashboardLayout = ({ children }: PropsWithChildren<{}>) => {
+export const DashboardLayout = ({ children }: PropsWithChildren<{}>) => {
   const router = useRouter();
   const { data } = useUserQuery({
     onError: () => router.push('/login'),
@@ -55,5 +55,3 @@ const DashboardLayout = ({ children }: PropsWithChildren<{}>) => {
     <Text>TODO: Loading skeleton here...</Text>
   );
 };
-
-export default DashboardLayout;

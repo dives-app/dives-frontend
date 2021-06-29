@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import Card from './base/Card';
-import CardList from './base/CardList';
+import { Card } from './base/Card';
+import { CardList } from './base/CardList';
 import { useCategoriesQuery } from '../../generated/graphql';
 import { Icon } from '../../utils/icons';
-import CategoryModal from '../modals/CategoryModal';
+import { CategoryModal } from '../modals/CategoryModal';
 
-const Categories = () => {
+export const Categories = () => {
   const { t } = useTranslation('settings');
   const { data } = useCategoriesQuery();
   const [openModal, setOpenModal] = useState(false);
@@ -35,5 +35,3 @@ const Categories = () => {
     </>
   );
 };
-
-export default Categories;

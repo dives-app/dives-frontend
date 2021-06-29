@@ -1,13 +1,13 @@
-import { Heading, List, Text } from '@chakra-ui/react';
 import React from 'react';
-import CardListItem, { CardListItemProps } from './CardListItem';
+import { Heading, List, Text } from '@chakra-ui/react';
+import { CardListItem, CardListItemProps } from './CardListItem';
 
 interface CardListProps {
   title?: string;
   items: Array<CardListItemProps & { id: string; currency?: string; amount?: number }>;
 }
 
-const CardList = ({ title, items }: CardListProps) => (
+export const CardList = ({ title, items }: CardListProps) => (
   <div>
     {title !== undefined ? (
       <Heading as="h3" fontSize="md" fontWeight="normal" mb={3}>
@@ -27,5 +27,3 @@ const CardList = ({ title, items }: CardListProps) => (
     </List>
   </div>
 );
-
-export default CardList;

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Flex, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import MenuItem from './MenuItem';
+import { MenuItem } from './MenuItem';
 
 export const DivesLogo = () => (
   <Image width="55" height="64" src="/logo.svg" alt="Dives Logo" draggable={false} />
@@ -18,7 +18,7 @@ interface DashboardNavigationProps {
   navigationElements: Array<NavigationElement>;
 }
 
-const DashboardNavigation = ({ navigationElements }: DashboardNavigationProps) => (
+export const DashboardNavigation = ({ navigationElements }: DashboardNavigationProps) => (
   <Flex bg="dives.green" h="100%" p="4" direction="column" align="center" boxShadow="messenger">
     <NextLink href="/dashboard" passHref>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -36,5 +36,3 @@ const DashboardNavigation = ({ navigationElements }: DashboardNavigationProps) =
     </Flex>
   </Flex>
 );
-
-export default DashboardNavigation;

@@ -21,9 +21,9 @@ import {
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRegisterMutation, useUserQuery } from '../src/generated/graphql';
-import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
-import DivesLink from '../src/components/DivesLink';
-import connectionErrorToast from '../src/toast';
+import { AuthLayout, QuestionBottom } from '../src/layouts/AuthLayout';
+import { DivesLink } from '../src/components/DivesLink';
+import { connectionErrorToast } from '../src/toast';
 import { NextPageWithLayout } from '../src/types';
 import { emailRegex } from '../src/regexes';
 

@@ -8,10 +8,8 @@ interface ItemIconProps {
   color: string;
 }
 
-const ItemIcon = ({ icon, color }: ItemIconProps) => (
+export const ItemIcon = ({ icon, color }: ItemIconProps) => (
   <Center width={9} height={9} bgColor={color} borderRadius="xl">
     <Image width={20} height={20} src={getIconUrl(icon)} />
   </Center>
 );
-
-export default ItemIcon;

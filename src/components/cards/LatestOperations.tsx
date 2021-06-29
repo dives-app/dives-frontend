@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import Card from './base/Card';
-import CardList from './base/CardList';
+import { Card } from './base/Card';
+import { CardList } from './base/CardList';
 import { useRecentTransactionsQuery } from '../../generated/graphql';
 import { CardListItemProps } from './base/CardListItem';
-import TransactionModal from '../modals/TransactionModal';
+import { TransactionModal } from '../modals/TransactionModal';
 import { useDateTimeFormatter, useRecentRelativeDateFormatter } from '../../utils/time';
 import { Icon } from '../../utils/icons';
 
-const LatestOperations = () => {
+export const LatestOperations = () => {
   const { t } = useTranslation('dashboard');
   const { data } = useRecentTransactionsQuery();
   const recentRelativeDateFormatter = useRecentRelativeDateFormatter();
@@ -54,4 +54,3 @@ const LatestOperations = () => {
     </>
   );
 };
-export default LatestOperations;

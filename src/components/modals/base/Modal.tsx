@@ -5,7 +5,7 @@ interface ModalProps {
   closeModal(): void;
 }
 
-const Modal = ({ children, closeModal }: PropsWithChildren<ModalProps>) => (
+export const Modal = ({ children, closeModal }: PropsWithChildren<ModalProps>) => (
   <Portal>
     <Box
       onClick={closeModal}
@@ -30,5 +30,3 @@ const Modal = ({ children, closeModal }: PropsWithChildren<ModalProps>) => (
     </Box>
   </Portal>
 );
-
-export default Modal;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, ListItem, Text } from '@chakra-ui/react';
 import { Icon } from '../../../utils/icons';
-import ItemIcon from '../../ItemIcon';
+import { ItemIcon } from '../../ItemIcon';
 
 export interface CardListItemProps {
   icon: Icon;
@@ -10,7 +10,7 @@ export interface CardListItemProps {
   date?: string;
 }
 
-const CardListItem = ({
+export const CardListItem = ({
   icon,
   iconColor,
   title,
@@ -30,5 +30,3 @@ const CardListItem = ({
     <div>{children}</div>
   </ListItem>
 );
-
-export default CardListItem;

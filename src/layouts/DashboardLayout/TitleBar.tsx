@@ -16,14 +16,14 @@ import {
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import useTranslation from 'next-translate/useTranslation';
 import { useLogoutLazyQuery, useUserQuery } from '../../generated/graphql';
-import apolloClient from '../../apolloClient';
-import LanguageSwitcher from '../../components/LanguageSwitcher';
+import { apolloClient } from '../../apolloClient';
+import { LanguageSwitcher } from '../../components/LanguageSwitcher';
 
 interface TitleBarProps {
   title: string;
 }
 
-const TitleBar = ({ title }: TitleBarProps) => {
+export const TitleBar = ({ title }: TitleBarProps) => {
   const router = useRouter();
   const { data } = useUserQuery();
   const [logout] = useLogoutLazyQuery({
@@ -61,4 +61,3 @@ const TitleBar = ({ title }: TitleBarProps) => {
     </Flex>
   );
 };
-export default TitleBar;

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import { Flex, Button, VStack, Text } from '@chakra-ui/react';
-import LanguageSwitcher from '../src/components/LanguageSwitcher';
+import { LanguageSwitcher } from '../src/components/LanguageSwitcher';
 
 const Home: NextPage = () => {
   const { t } = useTranslation('index');

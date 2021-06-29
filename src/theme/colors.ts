@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   dives: {
     lightGreen: '#70CC9E',
     red: '#FF575C',
@@ -16,5 +16,3 @@ const colors = {
   buttonOutline: 'rgba(66, 153, 225, 0.6)',
   errorRed: '#FF3D00',
 };
-
-export default colors;

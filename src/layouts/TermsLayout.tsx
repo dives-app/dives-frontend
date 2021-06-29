@@ -6,7 +6,7 @@ interface Props {
   defaultNs: string;
 }
 
-const TermsLayout = ({ children, defaultNs }: PropsWithChildren<Props>) => {
+export const TermsLayout = ({ children, defaultNs }: PropsWithChildren<Props>) => {
   const { t } = useTranslation(defaultNs);
 
   return (
@@ -28,5 +28,3 @@ const TermsLayout = ({ children, defaultNs }: PropsWithChildren<Props>) => {
     </Container>
   );
 };
-
-export default TermsLayout;

@@ -3,8 +3,8 @@ import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import { VStack } from '@chakra-ui/react';
-import DashboardLayout from '../src/layouts/DashboardLayout';
-import Card from '../src/components/cards/base/Card';
+import { DashboardLayout } from '../src/layouts/DashboardLayout';
+import { Card } from '../src/components/cards/base/Card';
 import { NextPageWithLayout } from '../src/types';
 
 const Accounts: NextPageWithLayout = () => {

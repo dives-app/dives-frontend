@@ -18,10 +18,10 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import AuthLayout, { QuestionBottom } from '../src/layouts/AuthLayout';
-import DivesLink from '../src/components/DivesLink';
+import { AuthLayout, QuestionBottom } from '../src/layouts/AuthLayout';
+import { DivesLink } from '../src/components/DivesLink';
 import { useLoginLazyQuery, useUserQuery } from '../src/generated/graphql';
-import connectionErrorToast from '../src/toast';
+import { connectionErrorToast } from '../src/toast';
 import { NextPageWithLayout } from '../src/types';
 import { emailRegex } from '../src/regexes';
 

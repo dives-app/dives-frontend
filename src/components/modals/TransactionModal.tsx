@@ -1,16 +1,16 @@
 import React from 'react';
 import { Button, Input, FormControl, FormLabel } from '@chakra-ui/react';
-import Modal from './base/Modal';
+import { Modal } from './base/Modal';
 import { useTransactionOptionsQuery, useCreateTransactionMutation } from '../../generated/graphql';
-import Select from '../Select';
+import { Select } from '../Select';
 import { Icon } from '../../utils/icons';
-import ItemIcon from '../ItemIcon';
+import { ItemIcon } from '../ItemIcon';
 
 interface TransactionModalProps {
   closeModal(): void;
 }
 
-const TransactionModal = ({ closeModal }: TransactionModalProps) => {
+export const TransactionModal = ({ closeModal }: TransactionModalProps) => {
   const { data } = useTransactionOptionsQuery();
   const [createTransaction] = useCreateTransactionMutation();
   return (
@@ -105,5 +105,3 @@ const TransactionModal = ({ closeModal }: TransactionModalProps) => {
     </Modal>
   );
 };
-
-export default TransactionModal;

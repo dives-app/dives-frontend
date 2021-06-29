@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Button, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useTranslation from 'next-translate/useTranslation';
-import Modal from './base/Modal';
+import { Modal } from './base/Modal';
 import { useCreateCategoryMutation } from '../../generated/graphql';
-import Select from '../Select';
+import { Select } from '../Select';
 import { Icon } from '../../utils/icons';
 
 interface CategoryModalProps {
@@ -18,7 +18,7 @@ interface CategoryFields {
   type: 0 | 1;
 }
 
-const CategoryModal = ({ closeModal }: CategoryModalProps) => {
+export const CategoryModal = ({ closeModal }: CategoryModalProps) => {
   const [createCategory] = useCreateCategoryMutation();
   const { t } = useTranslation();
 
@@ -106,5 +106,3 @@ const CategoryModal = ({ closeModal }: CategoryModalProps) => {
     </Modal>
   );
 };
-
-export default CategoryModal;

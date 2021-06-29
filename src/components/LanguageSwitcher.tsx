@@ -1,12 +1,12 @@
-import { chakra, Select } from '@chakra-ui/react';
 import React, { ChangeEvent } from 'react';
+import { chakra, Select } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 interface Props {
   className?: string;
 }
 
-const LanguageSwitcher = ({ className }: Props) => {
+export const LanguageSwitcher = chakra(({ className }: Props) => {
   const router = useRouter();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -26,6 +26,4 @@ const LanguageSwitcher = ({ className }: Props) => {
       <option value="pl">PL</option>
     </Select>
   );
-};
-
-export default chakra(LanguageSwitcher);
+});

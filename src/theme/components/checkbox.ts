@@ -1,4 +1,4 @@
-export default {
+export const Checkbox = {
   defaultProps: {
     colorScheme: 'green',
   },

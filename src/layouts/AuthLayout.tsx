@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Grid, Flex, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import random from 'lodash/random';
-import LanguageSwitcher from '../components/LanguageSwitcher';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 const images = [
   { src: '/auth/calc-and-calendar.svg', alt: 'Calculator and calendar' },
@@ -31,7 +31,7 @@ export const QuestionBottom = ({ children }: React.PropsWithChildren<{}>) => (
   </Text>
 );
 
-export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
+export const AuthLayout = ({ children }: React.PropsWithChildren<{}>) => {
   const randomImage = images[random(images.length - 1)];
 
   return (
@@ -75,4 +75,4 @@ export default function AuthLayout({ children }: React.PropsWithChildren<{}>) {
       </Flex>
     </Grid>
   );
-}
+};

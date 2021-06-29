@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import ActiveLink from '../../components/ActiveLink';
+import { ActiveLink } from '../../components/ActiveLink';
 
 interface MenuItemProps {
   i18nKey: string;
@@ -10,7 +10,7 @@ interface MenuItemProps {
   icon: string;
 }
 
-const MenuItem = ({ url, icon, i18nKey }: MenuItemProps) => {
+export const MenuItem = ({ url, icon, i18nKey }: MenuItemProps) => {
   const { t } = useTranslation('app');
   return (
     <ActiveLink
@@ -43,5 +43,3 @@ const MenuItem = ({ url, icon, i18nKey }: MenuItemProps) => {
     </ActiveLink>
   );
 };
-
-export default MenuItem;
