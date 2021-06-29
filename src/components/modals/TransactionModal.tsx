@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input, FormControl, FormLabel } from '@chakra-ui/react';
+import { Button, Input, FormControl, FormLabel, HStack } from '@chakra-ui/react';
 import { Modal } from './base/Modal';
 import { useTransactionOptionsQuery, useCreateTransactionMutation } from '../../generated/graphql';
 import { Select } from '../Select';
@@ -15,13 +15,15 @@ export const TransactionModal = ({ closeModal }: TransactionModalProps) => {
   const [createTransaction] = useCreateTransactionMutation();
   return (
     <Modal closeModal={closeModal}>
-      <ItemIcon color="#aaa" icon="food" />
-      <Input variant="flushed" />
-      <FormControl>
+      <HStack spacing={4} mb={8}>
+        <ItemIcon color="#aaa" icon="food" />
+        <Input variant="flushed" />
+      </HStack>
+      <FormControl mb={4}>
         <FormLabel>Price</FormLabel>
         <Input variant="flushed" />
       </FormControl>
-      <FormControl>
+      <FormControl mb={4}>
         <FormLabel>Category</FormLabel>
         {data === undefined ? (
           'Loading categories'
@@ -35,7 +37,7 @@ export const TransactionModal = ({ closeModal }: TransactionModalProps) => {
           />
         )}
       </FormControl>
-      <FormControl>
+      <FormControl mb={4}>
         <FormLabel>Account</FormLabel>
         {data === undefined ? (
           'Loading accounts'
@@ -49,7 +51,7 @@ export const TransactionModal = ({ closeModal }: TransactionModalProps) => {
           />
         )}
       </FormControl>
-      <FormControl>
+      <FormControl mb={4}>
         <FormLabel>Budget</FormLabel>
         {data === undefined ? (
           'Loading budget'
@@ -63,15 +65,15 @@ export const TransactionModal = ({ closeModal }: TransactionModalProps) => {
           />
         )}
       </FormControl>
-      <FormControl>
+      <FormControl mb={4}>
         <FormLabel>Date</FormLabel>
         <Input variant="flushed" />
       </FormControl>
-      <FormControl>
+      <FormControl mb={4}>
         <FormLabel>Description</FormLabel>
         <Input variant="flushed" />
       </FormControl>
-      <FormControl>
+      <FormControl mb={8}>
         <FormLabel>Merchant</FormLabel>
         {data === undefined ? (
           'Loading merchant'

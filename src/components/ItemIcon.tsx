@@ -9,7 +9,7 @@ interface ItemIconProps {
 }
 
 export const ItemIcon = ({ icon, color }: ItemIconProps) => (
-  <Center width={9} height={9} bgColor={color} borderRadius="xl">
+  <Center width={9} height={9} bgColor={color} borderRadius="xl" flexShrink={0}>
     <Image width={20} height={20} src={getIconUrl(icon)} />
   </Center>
 );

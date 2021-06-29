@@ -1,9 +1,11 @@
-import { Button } from './button';
-import { Input } from './input';
-import { Checkbox } from './checkbox';
+import { Button } from './Button';
+import { Input } from './Input';
+import { Checkbox } from './Checkbox';
+import { FormLabel } from './FormLabel';
 
 export const components = {
   Button,
   Input,
   Checkbox,
+  FormLabel,
 };
