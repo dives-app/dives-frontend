@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Stack } from '@chakra-ui/react';
 import useTranslation from 'next-translate/useTranslation';
 import { Card } from './base/Card';
 import { CardList } from './base/CardList';
@@ -11,8 +12,9 @@ export const Categories = () => {
   const { data } = useCategoriesQuery();
   const [openModal, setOpenModal] = useState(false);
 
-  const categories = data?.user.categories.map(({ id, name, icon, color }) => ({
+  const categories = data?.user.categories.map(({ id, name, icon, color, type }) => ({
     id,
+    type,
     icon: icon as Icon,
     iconColor: color,
     title: name,
@@ -29,7 +31,12 @@ export const Categories = () => {
           },
         }}
       >
-        {categories ? <CardList items={categories} /> : null}
+        {categories ? (
+          <Stack spacing={4}>
+            <CardList title="Expense categories" items={categories.filter(cat => cat.type === 1)} />
+            <CardList title="Income categories" items={categories.filter(cat => cat.type === 2)} />
+          </Stack>
+        ) : null}
       </Card>
       {openModal ? <CategoryModal closeModal={() => setOpenModal(false)} /> : null}
     </>

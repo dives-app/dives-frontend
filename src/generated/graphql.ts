@@ -33,6 +33,16 @@ export type Account = {
   type: Scalars['Float'];
 };
 
+export type AccountInput = {
+  id: Scalars['String'];
+};
+
+export type AddBudgetMemberInput = {
+  accessLevel?: Maybe<Scalars['String']>;
+  budgetId: Scalars['String'];
+  email: Scalars['String'];
+};
+
 export type Budget = {
   __typename?: 'Budget';
   categories: Array<Category>;
@@ -43,6 +53,10 @@ export type Budget = {
   merchants: Array<Merchant>;
   name: Scalars['String'];
   transactions: Array<Transaction>;
+};
+
+export type BudgetInput = {
+  id: Scalars['String'];
 };
 
 export type BudgetMembership = {
@@ -66,6 +80,10 @@ export type Category = {
   type: Scalars['Float'];
 };
 
+export type CategoryInput = {
+  id: Scalars['String'];
+};
+
 export type CycleTransaction = {
   __typename?: 'CycleTransaction';
   account: Account;
@@ -79,6 +97,10 @@ export type CycleTransaction = {
   merchant?: Maybe<Merchant>;
   name: Scalars['String'];
   period: Scalars['Float'];
+};
+
+export type CycleTransactionInput = {
+  id: Scalars['String'];
 };
 
 export type Debt = {
@@ -95,6 +117,10 @@ export type Debt = {
   owner: User;
 };
 
+export type DebtInput = {
+  id: Scalars['String'];
+};
+
 export type Merchant = {
   __typename?: 'Merchant';
   cycleTransactions: Array<CycleTransaction>;
@@ -103,6 +129,10 @@ export type Merchant = {
   ownerBudget?: Maybe<Budget>;
   ownerUser?: Maybe<User>;
   transactions: Array<Transaction>;
+};
+
+export type MerchantInput = {
+  id: Scalars['String'];
 };
 
 export type Mutation = {
@@ -266,156 +296,6 @@ export type MutationUpdateUserArgs = {
   options: UpdateUserInput;
 };
 
-export type Notification = {
-  __typename?: 'Notification';
-  action?: Maybe<Scalars['String']>;
-  id: Scalars['String'];
-  read: Scalars['String'];
-  text: Scalars['String'];
-  time: Scalars['String'];
-  user: User;
-};
-
-export type Plan = {
-  __typename?: 'Plan';
-  id: Scalars['String'];
-  name: Scalars['String'];
-  price: Scalars['Float'];
-  purchases: Purchase;
-};
-
-export type Purchase = {
-  __typename?: 'Purchase';
-  currency: Scalars['String'];
-  endDate: Scalars['String'];
-  id: Scalars['String'];
-  name: Scalars['String'];
-  plan: Plan;
-  price: Scalars['Float'];
-  startDate: Scalars['String'];
-  user: User;
-};
-
-export type Query = {
-  __typename?: 'Query';
-  account: Account;
-  budget: Budget;
-  category: Category;
-  cycleTransaction: CycleTransaction;
-  debt: Debt;
-  login: User;
-  logout: Scalars['Boolean'];
-  merchant: Merchant;
-  notification: Notification;
-  purchase: Purchase;
-  transaction: Transaction;
-  user: User;
-};
-
-export type QueryAccountArgs = {
-  options: AccountInput;
-};
-
-export type QueryBudgetArgs = {
-  options: BudgetInput;
-};
-
-export type QueryCategoryArgs = {
-  options: CategoryInput;
-};
-
-export type QueryCycleTransactionArgs = {
-  options: CycleTransactionInput;
-};
-
-export type QueryDebtArgs = {
-  options: DebtInput;
-};
-
-export type QueryLoginArgs = {
-  options: UserInput;
-};
-
-export type QueryMerchantArgs = {
-  options: MerchantInput;
-};
-
-export type QueryNotificationArgs = {
-  options: NotificationInput;
-};
-
-export type QueryPurchaseArgs = {
-  options: PurchaseInput;
-};
-
-export type QueryTransactionArgs = {
-  options: TransactionInput;
-};
-
-export type Transaction = {
-  __typename?: 'Transaction';
-  account: Account;
-  amount: Scalars['Float'];
-  budget?: Maybe<Budget>;
-  category: Category;
-  creator?: Maybe<User>;
-  description?: Maybe<Scalars['String']>;
-  id: Scalars['String'];
-  merchant?: Maybe<Merchant>;
-  name: Scalars['String'];
-  time: Scalars['String'];
-};
-
-export type User = {
-  __typename?: 'User';
-  accounts: Array<Account>;
-  birthDate?: Maybe<Scalars['String']>;
-  budgetMembership: Array<BudgetMembership>;
-  categories: Array<Category>;
-  country?: Maybe<Scalars['String']>;
-  cycleTransactions: Array<CycleTransaction>;
-  debts: Array<Debt>;
-  email: Scalars['String'];
-  id: Scalars['String'];
-  merchants: Array<Merchant>;
-  name: Scalars['String'];
-  notifications: Array<Notification>;
-  photoUrl?: Maybe<Scalars['String']>;
-  purchases: Array<Purchase>;
-  transactions: Array<Transaction>;
-  updatePhotoUrl?: Maybe<Scalars['String']>;
-};
-
-export type AccountInput = {
-  id: Scalars['String'];
-};
-
-export type AddBudgetMemberInput = {
-  accessLevel?: Maybe<Scalars['String']>;
-  budgetId: Scalars['String'];
-  email: Scalars['String'];
-};
-
-export type BudgetInput = {
-  id: Scalars['String'];
-};
-
-export type CategoryInput = {
-  id: Scalars['String'];
-};
-
-export type CycleTransactionInput = {
-  id: Scalars['String'];
-};
-
-export type DebtInput = {
-  id: Scalars['String'];
-};
-
-export type MerchantInput = {
-  id: Scalars['String'];
-};
-
 export type NewAccountInput = {
   balance: Scalars['Float'];
   color: Scalars['String'];
@@ -497,17 +377,117 @@ export type NewUserInput = {
   password: Scalars['String'];
 };
 
+export type Notification = {
+  __typename?: 'Notification';
+  action?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  read: Scalars['String'];
+  text: Scalars['String'];
+  time: Scalars['String'];
+  user: User;
+};
+
 export type NotificationInput = {
   id: Scalars['String'];
+};
+
+export type Plan = {
+  __typename?: 'Plan';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  purchases: Purchase;
+};
+
+export type Purchase = {
+  __typename?: 'Purchase';
+  currency: Scalars['String'];
+  endDate: Scalars['String'];
+  id: Scalars['String'];
+  name: Scalars['String'];
+  plan: Plan;
+  price: Scalars['Float'];
+  startDate: Scalars['String'];
+  user: User;
 };
 
 export type PurchaseInput = {
   id: Scalars['String'];
 };
 
+export type Query = {
+  __typename?: 'Query';
+  account: Account;
+  budget: Budget;
+  category: Category;
+  cycleTransaction: CycleTransaction;
+  debt: Debt;
+  login: User;
+  logout: Scalars['Boolean'];
+  merchant: Merchant;
+  notification: Notification;
+  purchase: Purchase;
+  transaction: Transaction;
+  user: User;
+};
+
+export type QueryAccountArgs = {
+  options: AccountInput;
+};
+
+export type QueryBudgetArgs = {
+  options: BudgetInput;
+};
+
+export type QueryCategoryArgs = {
+  options: CategoryInput;
+};
+
+export type QueryCycleTransactionArgs = {
+  options: CycleTransactionInput;
+};
+
+export type QueryDebtArgs = {
+  options: DebtInput;
+};
+
+export type QueryLoginArgs = {
+  options: UserInput;
+};
+
+export type QueryMerchantArgs = {
+  options: MerchantInput;
+};
+
+export type QueryNotificationArgs = {
+  options: NotificationInput;
+};
+
+export type QueryPurchaseArgs = {
+  options: PurchaseInput;
+};
+
+export type QueryTransactionArgs = {
+  options: TransactionInput;
+};
+
 export type RemoveBudgetMemberInput = {
   budgetId: Scalars['String'];
   userId: Scalars['String'];
+};
+
+export type Transaction = {
+  __typename?: 'Transaction';
+  account: Account;
+  amount: Scalars['Float'];
+  budget?: Maybe<Budget>;
+  category: Category;
+  creator?: Maybe<User>;
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  merchant?: Maybe<Merchant>;
+  name: Scalars['String'];
+  time: Scalars['String'];
 };
 
 export type TransactionInput = {
@@ -613,6 +593,26 @@ export type UpdateUserInput = {
   photo?: Maybe<Scalars['String']>;
 };
 
+export type User = {
+  __typename?: 'User';
+  accounts: Array<Account>;
+  birthDate?: Maybe<Scalars['String']>;
+  budgetMembership: Array<BudgetMembership>;
+  categories: Array<Category>;
+  country?: Maybe<Scalars['String']>;
+  cycleTransactions: Array<CycleTransaction>;
+  debts: Array<Debt>;
+  email: Scalars['String'];
+  id: Scalars['String'];
+  merchants: Array<Merchant>;
+  name: Scalars['String'];
+  notifications: Array<Notification>;
+  photoUrl?: Maybe<Scalars['String']>;
+  purchases: Array<Purchase>;
+  transactions: Array<Transaction>;
+  updatePhotoUrl?: Maybe<Scalars['String']>;
+};
+
 export type UserInput = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -634,9 +634,7 @@ export type CreateTransactionMutation = { __typename?: 'Mutation' } & {
   createTransaction: { __typename?: 'Transaction' } & Pick<
     Transaction,
     'id' | 'name' | 'time' | 'amount'
-  > & {
-      category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'>;
-    };
+  > & { category: { __typename?: 'Category' } & Pick<Category, 'icon' | 'color'> };
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -652,7 +650,7 @@ export type CategoriesQueryVariables = Exact<{ [key: string]: never }>;
 export type CategoriesQuery = { __typename?: 'Query' } & {
   user: { __typename?: 'User' } & Pick<User, 'id'> & {
       categories: Array<
-        { __typename?: 'Category' } & Pick<Category, 'id' | 'color' | 'icon' | 'name'>
+        { __typename?: 'Category' } & Pick<Category, 'id' | 'color' | 'icon' | 'name' | 'type'>
       >;
     };
 };
@@ -745,7 +743,6 @@ export function useCreateCategoryMutation(
     options,
   );
 }
-
 export type CreateCategoryMutationHookResult = ReturnType<typeof useCreateCategoryMutation>;
 export type CreateCategoryMutationResult = Apollo.MutationResult<CreateCategoryMutation>;
 export type CreateCategoryMutationOptions = Apollo.BaseMutationOptions<
@@ -800,7 +797,6 @@ export function useCreateTransactionMutation(
     options,
   );
 }
-
 export type CreateTransactionMutationHookResult = ReturnType<typeof useCreateTransactionMutation>;
 export type CreateTransactionMutationResult = Apollo.MutationResult<CreateTransactionMutation>;
 export type CreateTransactionMutationOptions = Apollo.BaseMutationOptions<
@@ -842,7 +838,6 @@ export function useRegisterMutation(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
 }
-
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<
@@ -858,6 +853,7 @@ export const CategoriesDocument = gql`
         color
         icon
         name
+        type
       }
     }
   }
@@ -884,7 +880,6 @@ export function useCategoriesQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
 }
-
 export function useCategoriesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<CategoriesQuery, CategoriesQueryVariables>,
 ) {
@@ -894,7 +889,6 @@ export function useCategoriesLazyQuery(
     options,
   );
 }
-
 export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
 export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
 export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
@@ -928,14 +922,12 @@ export function useLoginQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LoginQuery, LoginQueryVariables>(LoginDocument, options);
 }
-
 export function useLoginLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<LoginQuery, LoginQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<LoginQuery, LoginQueryVariables>(LoginDocument, options);
 }
-
 export type LoginQueryHookResult = ReturnType<typeof useLoginQuery>;
 export type LoginLazyQueryHookResult = ReturnType<typeof useLoginLazyQuery>;
 export type LoginQueryResult = Apollo.QueryResult<LoginQuery, LoginQueryVariables>;
@@ -966,14 +958,12 @@ export function useLogoutQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<LogoutQuery, LogoutQueryVariables>(LogoutDocument, options);
 }
-
 export function useLogoutLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<LogoutQuery, LogoutQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<LogoutQuery, LogoutQueryVariables>(LogoutDocument, options);
 }
-
 export type LogoutQueryHookResult = ReturnType<typeof useLogoutQuery>;
 export type LogoutLazyQueryHookResult = ReturnType<typeof useLogoutLazyQuery>;
 export type LogoutQueryResult = Apollo.QueryResult<LogoutQuery, LogoutQueryVariables>;
@@ -1019,7 +1009,6 @@ export function useRecentTransactionsQuery(
     options,
   );
 }
-
 export function useRecentTransactionsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     RecentTransactionsQuery,
@@ -1032,7 +1021,6 @@ export function useRecentTransactionsLazyQuery(
     options,
   );
 }
-
 export type RecentTransactionsQueryHookResult = ReturnType<typeof useRecentTransactionsQuery>;
 export type RecentTransactionsLazyQueryHookResult = ReturnType<
   typeof useRecentTransactionsLazyQuery
@@ -1095,7 +1083,6 @@ export function useTransactionOptionsQuery(
     options,
   );
 }
-
 export function useTransactionOptionsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     TransactionOptionsQuery,
@@ -1108,7 +1095,6 @@ export function useTransactionOptionsLazyQuery(
     options,
   );
 }
-
 export type TransactionOptionsQueryHookResult = ReturnType<typeof useTransactionOptionsQuery>;
 export type TransactionOptionsLazyQueryHookResult = ReturnType<
   typeof useTransactionOptionsLazyQuery
@@ -1146,14 +1132,12 @@ export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, Us
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
-
 export function useUserLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
-
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
 export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
 export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;
